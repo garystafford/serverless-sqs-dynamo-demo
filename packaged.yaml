@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'iot_dynamodb
+
+  SAM Template for iot_dynamodb
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  getMessagesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/fd9db8974a4fe2223d1df4965095a1f8
+      Handler: app.getMessages
+      Runtime: nodejs10.x
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: '*'
+      - SSMParameterReadPolicy:
+          ParameterName: sam_demo/table_name
+      Environment:
+        Variables:
+          TABLE_NAME: ${ssm:sam_demo/table_name}
+      Events:
+        getMessages:
+          Type: Api
+          Properties:
+            Path: /message
+            Method: get
+  getMessageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/fd9db8974a4fe2223d1df4965095a1f8
+      Handler: app.getMessage
+      Runtime: nodejs10.x
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: '*'
+      - SSMParameterReadPolicy:
+          ParameterName: sam_demo/table_name
+      Environment:
+        Variables:
+          TABLE_NAME: ${ssm:sam_demo/table_name}
+      Events:
+        getMessages:
+          Type: Api
+          Properties:
+            Path: /message/{id}
+            Method: get
+  postMessageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/3e62ee6b137141d2b016945997aa0863
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: '*'
+      - SSMParameterReadPolicy:
+          ParameterName: sam_demo/table_name
+      Environment:
+        Variables:
+          TABLE_NAME: ${ssm:sam_demo/table_name}
+      Events:
+        postMessage:
+          Type: Api
+          Properties:
+            Path: /message
+            Method: post
+Outputs:
+  getMessagesApi:
+    Description: API Gateway endpoint URL for Prod stage for getMessagesFunction
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
+  getMessagesFunction:
+    Description: getMessagesFunction Lambda ARN
+    Value:
+      Fn::GetAtt:
+      - getMessagesFunction
+      - Arn
+  getMessagesFunctionIamRole:
+    Description: Implicit IAM Role created for getMessagesFunction
+    Value:
+      Fn::GetAtt:
+      - getMessagesFunctionRole
+      - Arn

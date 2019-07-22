@@ -1,0 +1,87 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  iot_dynamodb
+
+  SAM Template for iot_dynamodb
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  getMessagesFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: iot_dynamodb_getMessages/
+      Handler: app.getMessages
+      Runtime: nodejs10.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: "*"
+        - SSMParameterReadPolicy:
+            ParameterName: "sam_demo/table_name"
+      Environment:
+        Variables:
+          TABLE_NAME: ${ssm:sam_demo/table_name}
+      Events:
+        getMessages:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /message
+            Method: get
+  getMessageFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: iot_dynamodb_getMessages/
+      Handler: app.getMessage
+      Runtime: nodejs10.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: "*"
+        - SSMParameterReadPolicy:
+            ParameterName: "sam_demo/table_name"
+      Environment:
+        Variables:
+          TABLE_NAME: ${ssm:sam_demo/table_name}
+      Events:
+        getMessages:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /message/{id}
+            Method: get
+  postMessageFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: iot_dynamodb_postMessage/
+      Handler: app.postMessage
+      Runtime: nodejs10.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: "*"
+        - SSMParameterReadPolicy:
+            ParameterName: "sam_demo/table_name"
+      Environment:
+        Variables:
+          TABLE_NAME: ${ssm:sam_demo/table_name}
+      Events:
+        postMessage:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /message
+            Method: post
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  getMessagesApi:
+    Description: "API Gateway endpoint URL for Prod stage for getMessagesFunction"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
+  getMessagesFunction:
+    Description: "getMessagesFunction Lambda ARN"
+    Value: !GetAtt getMessagesFunction.Arn
+  getMessagesFunctionIamRole:
+    Description: "Implicit IAM Role created for getMessagesFunction"
+    Value: !GetAtt getMessagesFunctionRole.Arn
