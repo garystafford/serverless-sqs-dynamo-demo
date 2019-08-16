@@ -1,19 +1,12 @@
 {
-  "body": "{\"message\": \"hello world\"}",
+  "body": "",
   "resource": "/",
-  "path": "/",
+  "path": "/message",
   "httpMethod": "GET",
   "isBase64Encoded": false,
-  "queryStringParameters": {
-    "foo": "bar"
-  },
-  "pathParameters": {
-    "proxy": "/getMessages",
-    "id": "2"
-  },
-  "stageVariables": {
-    "baz": "qux"
-  },
+  "queryStringParameters": {},
+  "pathParameters": {},
+  "stageVariables": {},
   "headers": {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
     "Accept-Encoding": "gzip, deflate, sdch",

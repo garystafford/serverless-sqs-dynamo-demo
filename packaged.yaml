@@ -9,80 +9,127 @@ Globals:
   Function:
     Timeout: 3
 Resources:
-  getMessagesFunction:
+  GetMessagesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://gstafford-sam-demo/fd9db8974a4fe2223d1df4965095a1f8
+      CodeUri: s3://gstafford-sam-demo/6ee6f5bd27aecf6dc57518a373e781e9
       Handler: app.getMessages
       Runtime: nodejs10.x
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: '*'
-      - SSMParameterReadPolicy:
-          ParameterName: sam_demo/table_name
+          TableName: IotDemoTable
       Environment:
         Variables:
-          TABLE_NAME: ${ssm:sam_demo/table_name}
+          TABLE_NAME:
+            Ref: IotDemoTable
       Events:
         getMessages:
           Type: Api
           Properties:
             Path: /message
             Method: get
-  getMessageFunction:
+  GetMessageFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://gstafford-sam-demo/fd9db8974a4fe2223d1df4965095a1f8
+      CodeUri: s3://gstafford-sam-demo/6ee6f5bd27aecf6dc57518a373e781e9
       Handler: app.getMessage
       Runtime: nodejs10.x
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: '*'
-      - SSMParameterReadPolicy:
-          ParameterName: sam_demo/table_name
+          TableName: IotDemoTable
       Environment:
         Variables:
-          TABLE_NAME: ${ssm:sam_demo/table_name}
+          TABLE_NAME:
+            Ref: IotDemoTable
       Events:
         getMessages:
           Type: Api
           Properties:
-            Path: /message/{id}
+            Path: /message/{timestamp}
             Method: get
-  postMessageFunction:
+  PostMessageFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://gstafford-sam-demo/3e62ee6b137141d2b016945997aa0863
-      Handler: app.lambdaHandler
+      CodeUri: s3://gstafford-sam-demo/e3c2378b11ffe5a4dbbc3cadb52a7fa1
+      Handler: app.postMessage
       Runtime: nodejs10.x
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: '*'
-      - SSMParameterReadPolicy:
-          ParameterName: sam_demo/table_name
+          TableName: IotDemoTable
       Environment:
         Variables:
-          TABLE_NAME: ${ssm:sam_demo/table_name}
+          TABLE_NAME:
+            Ref: IotDemoTable
       Events:
         postMessage:
           Type: Api
           Properties:
             Path: /message
             Method: post
+  SqsToDynamoDbFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/fce47b8dae8f8a79fc129d9fb4a006d1
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: IotDemoTable
+      Events:
+        SqsToDynamoDb:
+          Type: SQS
+          Properties:
+            Queue:
+              Fn::GetAtt:
+              - IotDemoQueue
+              - Arn
+            BatchSize: 10
+            Enabled: true
+  IotDemoTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: IotDemoTable
+      AttributeDefinitions:
+      - AttributeName: timestamp
+        AttributeType: N
+      - AttributeName: location
+        AttributeType: S
+      KeySchema:
+      - AttributeName: timestamp
+        KeyType: HASH
+      - AttributeName: location
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+  IotDemoQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: IotDemoQueue
 Outputs:
-  getMessagesApi:
-    Description: API Gateway endpoint URL for Prod stage for getMessagesFunction
+  GetMessagesApi:
+    Description: API Gateway endpoint URL for Prod stage for GetMessagesFunction
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
-  getMessagesFunction:
-    Description: getMessagesFunction Lambda ARN
+  GetMessagesFunction:
+    Description: GetMessagesFunction Lambda ARN
+    Value:
+      Ref: GetMessagesFunction
+  GetMessagesFunctionIamRole:
+    Description: Implicit IAM Role created for GetMessagesFunction
     Value:
       Fn::GetAtt:
-      - getMessagesFunction
+      - GetMessagesFunctionRole
       - Arn
-  getMessagesFunctionIamRole:
-    Description: Implicit IAM Role created for getMessagesFunction
+  SqsToDynamoDbFunction:
+    Description: SqsToDynamoDb Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - getMessagesFunctionRole
+      - SqsToDynamoDbFunction
+      - Arn
+  SqsToDynamoDbFunctionIamRole:
+    Description: Implicit IAM Role created for SqsToDynamoDb function
+    Value:
+      Fn::GetAtt:
+      - SqsToDynamoDbFunctionRole
       - Arn

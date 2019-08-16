@@ -7,7 +7,7 @@ let docClient = new AWS.DynamoDB.DocumentClient();
 let ssm = new AWS.SSM();
 let params;
 let ssm_param = {
-    Name: '/sam_demo/table_name'
+    Name: '/iot_demo/table_name'
 };
 let tableName;
 
@@ -66,10 +66,11 @@ exports.getMessage = async (event, context) => {
     params = {
         TableName: tableName.Parameter.Value,
         Key: {
-            id: parseInt(event.pathParameters.id)
+            "timestamp": parseFloat(event.pathParameters.timestamp),
+            "location": event.queryStringParameters.location
         }
     };
-    console.log("parameters:", params);
+    console.info(params.Key);
 
     return await new Promise((resolve, reject) => {
         docClient.get(params, (error, data) => {

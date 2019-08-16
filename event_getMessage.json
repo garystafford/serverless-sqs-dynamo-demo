@@ -1,12 +1,16 @@
-  {
-  "body": "{\"TableName\":\"IotDemoTable\",\"Item\":{\"timestamp\":1659040909.3853335,\"location\":\"lab-5\",\"source\":\"wireless\",\"local_dest\":\"router-1\",\"local_avg\":7.31,\"remote_dest\":\"device-1\",\"remote_avg\":14.22}}",
+{
+  "body": "",
   "resource": "/",
   "path": "/message",
-  "httpMethod": "POST",
+  "httpMethod": "GET",
   "isBase64Encoded": false,
-    "queryStringParameters": {},
-    "pathParameters": {},
-    "stageVariables": {},
+  "queryStringParameters": {
+    "location": "lab-5"
+  },
+  "pathParameters": {
+    "timestamp": 1559040909.3853335
+  },
+  "stageVariables": {},
   "headers": {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
     "Accept-Encoding": "gzip, deflate, sdch",
@@ -49,7 +53,7 @@
     },
     "path": "/",
     "resourcePath": "/",
-    "httpMethod": "POST",
+    "httpMethod": "GET",
     "apiId": "1234567890",
     "protocol": "HTTP/1.1"
   }

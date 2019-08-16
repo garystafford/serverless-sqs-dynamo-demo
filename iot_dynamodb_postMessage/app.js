@@ -7,7 +7,7 @@ let docClient = new AWS.DynamoDB.DocumentClient();
 let ssm = new AWS.SSM();
 let params;
 let ssm_param = {
-    Name: '/sam_demo/table_name'
+    Name: '/iot_demo/table_name'
 };
 let tableName;
 
