@@ -1,18 +1,15 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  iot_dynamodb
-
-  SAM Template for iot_dynamodb
-
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+  Builds serverless API with Lambda functions,
+  API Gateway, SQS Queue, and DynamoDB table.
 Globals:
   Function:
     Timeout: 3
-
 Resources:
   GetMessagesFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
+    Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
       CodeUri: iot_dynamodb_getMessages/
       Handler: app.getMessages
@@ -20,17 +17,20 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: IotDemoTable
+        - SSMParameterReadPolicy:
+            ParameterName: iot_demo/table_name
       Environment:
         Variables:
           TABLE_NAME: !Ref IotDemoTable
       Events:
         getMessages:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /message
             Method: get
   GetMessageFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
+    Description: Get one IoT message based on timestamp and location
     Properties:
       CodeUri: iot_dynamodb_getMessages/
       Handler: app.getMessage
@@ -38,17 +38,20 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: IotDemoTable
+        - SSMParameterReadPolicy:
+            ParameterName: iot_demo/table_name
       Environment:
         Variables:
           TABLE_NAME: !Ref IotDemoTable
       Events:
         getMessages:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
-            Path: /message/{timestamp}
+            Path: /message/{date}
             Method: get
   PostMessageFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
+    Description: Create new IoT message item in DynamoDB table
     Properties:
       CodeUri: iot_dynamodb_postMessage/
       Handler: app.postMessage
@@ -56,21 +59,25 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: IotDemoTable
+        - SSMParameterReadPolicy:
+            ParameterName: iot_demo/table_name
       Environment:
         Variables:
           TABLE_NAME: !Ref IotDemoTable
       Events:
         postMessage:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /message
             Method: post
   SqsToDynamoDbFunction:
     Type: AWS::Serverless::Function
+    Description: Post new IoT message to SQS
     Properties:
       CodeUri: iot_sqs_to_dynamodb/
       Handler: app.lambda_handler
       Runtime: python3.7
+      MemorySize: 256
       Policies:
         - DynamoDBCrudPolicy:
             TableName: IotDemoTable
@@ -86,14 +93,14 @@ Resources:
     Properties:
       TableName: IotDemoTable
       AttributeDefinitions:
-        - AttributeName: timestamp
-          AttributeType: N
-        - AttributeName: location
+        - AttributeName: date
+          AttributeType: S
+        - AttributeName: time
           AttributeType: S
       KeySchema:
-        - AttributeName: timestamp
+        - AttributeName: date
           KeyType: HASH
-        - AttributeName: location
+        - AttributeName: time
           KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 2
@@ -102,20 +109,19 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       QueueName: IotDemoQueue
-
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   GetMessagesApi:
     Description: "API Gateway endpoint URL for Prod stage for GetMessagesFunction"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
   GetMessagesFunction:
     Description: "GetMessagesFunction Lambda ARN"
-    Value: !Ref GetMessagesFunction
+    Value: !GetAtt GetMessagesFunction.Arn
   GetMessagesFunctionIamRole:
     Description: "Implicit IAM Role created for GetMessagesFunction"
     Value: !GetAtt GetMessagesFunctionRole.Arn
+  SqsToDynamoDbFunctionApi:
+    Description: "API Gateway endpoint URL for Prod stage for SqsToDynamoDbFunction"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
   SqsToDynamoDbFunction:
     Description: "SqsToDynamoDb Lambda Function ARN"
     Value: !GetAtt SqsToDynamoDbFunction.Arn

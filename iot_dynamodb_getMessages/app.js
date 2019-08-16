@@ -66,8 +66,8 @@ exports.getMessage = async (event, context) => {
     params = {
         TableName: tableName.Parameter.Value,
         Key: {
-            "timestamp": parseFloat(event.pathParameters.timestamp),
-            "location": event.queryStringParameters.location
+            "date": event.pathParameters.date,
+            "time": event.queryStringParameters.time
         }
     };
     console.info(params.Key);
