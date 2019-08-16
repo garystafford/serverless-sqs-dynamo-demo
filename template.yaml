@@ -11,7 +11,7 @@ Resources:
     Type: AWS::Serverless::Function
     Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
-      CodeUri: iot_dynamodb_getMessages/
+      CodeUri: iot_dynamodb_CrudMessages/
       Handler: app.getMessages
       Runtime: nodejs10.x
       Policies:
@@ -32,7 +32,7 @@ Resources:
     Type: AWS::Serverless::Function
     Description: Get one IoT message based on timestamp and location
     Properties:
-      CodeUri: iot_dynamodb_getMessages/
+      CodeUri: iot_dynamodb_CrudMessages/
       Handler: app.getMessage
       Runtime: nodejs10.x
       Policies:
@@ -53,7 +53,7 @@ Resources:
     Type: AWS::Serverless::Function
     Description: Create new IoT message item in DynamoDB table
     Properties:
-      CodeUri: iot_dynamodb_postMessage/
+      CodeUri: iot_dynamodb_CrudMessages/
       Handler: app.postMessage
       Runtime: nodejs10.x
       Policies:

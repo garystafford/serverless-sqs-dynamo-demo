@@ -12,7 +12,7 @@ Resources:
     Type: AWS::Serverless::Function
     Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
-      CodeUri: s3://gstafford-sam-demo/c6cf3adafe4d597ff046ca1fc9c996e5
+      CodeUri: s3://gstafford-sam-demo/59ff2cd816b722ebf7913cb9acf7d758
       Handler: app.getMessages
       Runtime: nodejs10.x
       Policies:
@@ -34,7 +34,7 @@ Resources:
     Type: AWS::Serverless::Function
     Description: Get one IoT message based on timestamp and location
     Properties:
-      CodeUri: s3://gstafford-sam-demo/c6cf3adafe4d597ff046ca1fc9c996e5
+      CodeUri: s3://gstafford-sam-demo/59ff2cd816b722ebf7913cb9acf7d758
       Handler: app.getMessage
       Runtime: nodejs10.x
       Policies:
@@ -56,7 +56,7 @@ Resources:
     Type: AWS::Serverless::Function
     Description: Create new IoT message item in DynamoDB table
     Properties:
-      CodeUri: s3://gstafford-sam-demo/e3c2378b11ffe5a4dbbc3cadb52a7fa1
+      CodeUri: s3://gstafford-sam-demo/59ff2cd816b722ebf7913cb9acf7d758
       Handler: app.postMessage
       Runtime: nodejs10.x
       Policies:

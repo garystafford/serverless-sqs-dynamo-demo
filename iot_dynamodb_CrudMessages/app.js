@@ -91,3 +91,39 @@ exports.getMessage = async (event, context) => {
         });
     });
 };
+
+exports.postMessage = async (event, context) => {
+    console.log("postMessage event:", event);
+
+    if (tableName == null) {
+        tableName = await getParameter(ssm_param);
+    }
+
+    let parsedBody = JSON.parse(event.body);
+
+    params = {
+        TableName: tableName.Parameter.Value,
+        Item: parsedBody.Item
+    };
+    console.log(params);
+
+    // https://techsparx.com/software-development/aws/aws-sdk-promises.html
+    return await new Promise((resolve, reject) => {
+        docClient.put(params, (error, data) => {
+            if (error) {
+                console.log(`postMessage ERROR=${error.stack}`);
+                resolve({
+                    statusCode: 400,
+                    error: `Could not get messages: ${error.stack}`
+                });
+
+            } else {
+                console.log(`postMessage data=${JSON.stringify(data)}`);
+                resolve({
+                    statusCode: 201,
+                    body: JSON.stringify(data)
+                });
+            }
+        });
+    });
+};
