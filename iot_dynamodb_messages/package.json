@@ -1,7 +1,7 @@
 {
-  "name": "get-messages",
+  "name": "iot-messages",
   "version": "1.0.0",
-  "description": "getMessages",
+  "description": "IoT Messages",
   "main": "app.js",
   "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
   "author": "SAM CLI",
@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "aws-sdk": "latest"
   }
 }

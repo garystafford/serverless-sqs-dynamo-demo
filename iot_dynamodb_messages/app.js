@@ -1,38 +1,21 @@
 'use strict';
 
-console.log('Loading function');
+console.log("Loading function");
 
 let AWS = require("aws-sdk");
 let docClient = new AWS.DynamoDB.DocumentClient();
-let ssm = new AWS.SSM();
 let params;
-let ssm_param = {
-    Name: '/iot_demo/table_name'
-};
 let tableName;
-
-async function getParameter(param) {
-    return await new Promise(function (resolve, reject) {
-        ssm.getParameter(param, function (err, data) {
-            if (err) {
-                reject(err);
-            } else {
-                console.log(data);
-                resolve(data);
-            }
-        });
-    });
-}
 
 exports.getMessages = async (event, context) => {
     console.log("getMessage event:", event);
 
     if (tableName == null) {
-        tableName = await getParameter(ssm_param);
+        tableName = process.env.TABLE_NAME;
     }
 
-    params = {
-        TableName: tableName.Parameter.Value
+    let params = {
+        TableName: tableName
     };
     console.log(params);
 
@@ -61,10 +44,10 @@ exports.getMessage = async (event, context) => {
     console.log("getMessage event:", event);
 
     if (tableName == null) {
-        tableName = await getParameter(ssm_param);
+        tableName = process.env.TABLE_NAME;
     }
     params = {
-        TableName: tableName.Parameter.Value,
+        TableName: tableName,
         Key: {
             "date": event.pathParameters.date,
             "time": event.queryStringParameters.time
@@ -96,13 +79,13 @@ exports.postMessage = async (event, context) => {
     console.log("postMessage event:", event);
 
     if (tableName == null) {
-        tableName = await getParameter(ssm_param);
+        tableName = process.env.TABLE_NAME;
     }
 
     let parsedBody = JSON.parse(event.body);
 
     params = {
-        TableName: tableName.Parameter.Value,
+        TableName: tableName,
         Item: parsedBody.Item
     };
     console.log(params);

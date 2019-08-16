@@ -6,23 +6,22 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref IotDemoTable
+        QUEUE_URL: !Ref IotDemoQueue
 Resources:
   GetMessagesFunction:
     Type: AWS::Serverless::Function
     Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
       Description: Get all IoT messages in DynamoDB table (scan)
-      CodeUri: iot_dynamodb_CrudMessages/
+      CodeUri: iot_dynamodb_messages/
       Handler: app.getMessages
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: IotDemoTable
-        - SSMParameterReadPolicy:
-            ParameterName: iot_demo/table_name
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref IotDemoTable
+            TableName: !Ref IotDemoTable
       Events:
         getMessages:
           Type: Api
@@ -34,17 +33,12 @@ Resources:
     Description: Get one IoT message based on timestamp and location
     Properties:
       Description: Get one IoT message based on timestamp and location
-      CodeUri: iot_dynamodb_CrudMessages/
+      CodeUri: iot_dynamodb_messages/
       Handler: app.getMessage
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: IotDemoTable
-        - SSMParameterReadPolicy:
-            ParameterName: iot_demo/table_name
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref IotDemoTable
+            TableName: !Ref IotDemoTable
       Events:
         getMessages:
           Type: Api
@@ -56,17 +50,12 @@ Resources:
     Description: Create new IoT message item in DynamoDB table
     Properties:
       Description: Create new IoT message item in DynamoDB table
-      CodeUri: iot_dynamodb_CrudMessages/
+      CodeUri: iot_dynamodb_messages/
       Handler: app.postMessage
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: IotDemoTable
-        - SSMParameterReadPolicy:
-            ParameterName: iot_demo/table_name
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref IotDemoTable
+            TableName: !Ref IotDemoTable
       Events:
         postMessage:
           Type: Api
@@ -84,7 +73,7 @@ Resources:
       MemorySize: 256
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: IotDemoTable
+            TableName: !Ref IotDemoTable
       Events:
         SqsToDynamoDb:
           Type: SQS
@@ -95,7 +84,6 @@ Resources:
   IotDemoTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: IotDemoTable
       AttributeDefinitions:
         - AttributeName: date
           AttributeType: S
@@ -111,24 +99,11 @@ Resources:
         WriteCapacityUnits: 2
   IotDemoQueue:
     Type: AWS::SQS::Queue
-    Properties:
-      QueueName: IotDemoQueue
 Outputs:
   GetMessagesApi:
-    Description: "API Gateway endpoint URL for Prod stage for GetMessagesFunction"
+    Description: "API Gateway endpoint URL for Prod Stage for GetMessagesFunction"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
-  GetMessagesFunction:
-    Description: "GetMessagesFunction Lambda ARN"
-    Value: !GetAtt GetMessagesFunction.Arn
-  GetMessagesFunctionIamRole:
-    Description: "Implicit IAM Role created for GetMessagesFunction"
-    Value: !GetAtt GetMessagesFunctionRole.Arn
-  SqsToDynamoDbFunctionApi:
-    Description: "API Gateway endpoint URL for Prod stage for SqsToDynamoDbFunction"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
-  SqsToDynamoDbFunction:
-    Description: "SqsToDynamoDb Lambda Function ARN"
-    Value: !GetAtt SqsToDynamoDbFunction.Arn
-  SqsToDynamoDbFunctionIamRole:
-    Description: "Implicit IAM Role created for SqsToDynamoDb function"
-    Value: !GetAtt SqsToDynamoDbFunctionRole.Arn
+  IotDemoQueueUrl:
+    Description: "URL of SQS Queue"
+    Value: !Ref IotDemoQueue
+

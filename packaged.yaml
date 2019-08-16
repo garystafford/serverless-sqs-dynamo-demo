@@ -7,23 +7,24 @@ Description: 'Builds serverless API with Lambda functions, API Gateway, SQS Queu
 Globals:
   Function:
     Timeout: 3
+    Environment:
+      Variables:
+        TABLE_NAME:
+          Ref: IotDemoTable
+        QUEUE_URL:
+          Ref: IotDemoQueue
 Resources:
   GetMessagesFunction:
     Type: AWS::Serverless::Function
     Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
       Description: Get all IoT messages in DynamoDB table (scan)
-      CodeUri: s3://gstafford-sam-demo/59ff2cd816b722ebf7913cb9acf7d758
+      CodeUri: s3://gstafford-sam-demo/7cc0d45cc8d1333a3cb8e2bcfc73efc2
       Handler: app.getMessages
       Runtime: nodejs10.x
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: IotDemoTable
-      - SSMParameterReadPolicy:
-          ParameterName: iot_demo/table_name
-      Environment:
-        Variables:
-          TABLE_NAME:
+          TableName:
             Ref: IotDemoTable
       Events:
         getMessages:
@@ -36,17 +37,12 @@ Resources:
     Description: Get one IoT message based on timestamp and location
     Properties:
       Description: Get one IoT message based on timestamp and location
-      CodeUri: s3://gstafford-sam-demo/59ff2cd816b722ebf7913cb9acf7d758
+      CodeUri: s3://gstafford-sam-demo/7cc0d45cc8d1333a3cb8e2bcfc73efc2
       Handler: app.getMessage
       Runtime: nodejs10.x
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: IotDemoTable
-      - SSMParameterReadPolicy:
-          ParameterName: iot_demo/table_name
-      Environment:
-        Variables:
-          TABLE_NAME:
+          TableName:
             Ref: IotDemoTable
       Events:
         getMessages:
@@ -59,17 +55,12 @@ Resources:
     Description: Create new IoT message item in DynamoDB table
     Properties:
       Description: Create new IoT message item in DynamoDB table
-      CodeUri: s3://gstafford-sam-demo/59ff2cd816b722ebf7913cb9acf7d758
+      CodeUri: s3://gstafford-sam-demo/7cc0d45cc8d1333a3cb8e2bcfc73efc2
       Handler: app.postMessage
       Runtime: nodejs10.x
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: IotDemoTable
-      - SSMParameterReadPolicy:
-          ParameterName: iot_demo/table_name
-      Environment:
-        Variables:
-          TABLE_NAME:
+          TableName:
             Ref: IotDemoTable
       Events:
         postMessage:
@@ -82,13 +73,14 @@ Resources:
     Description: Post new IoT message to SQS
     Properties:
       Description: Post new IoT message to SQS
-      CodeUri: s3://gstafford-sam-demo/fce47b8dae8f8a79fc129d9fb4a006d1
+      CodeUri: s3://gstafford-sam-demo/2a7d16c4ebeb6c38f80e4e7d4671bd36
       Handler: app.lambda_handler
       Runtime: python3.7
       MemorySize: 256
       Policies:
       - DynamoDBCrudPolicy:
-          TableName: IotDemoTable
+          TableName:
+            Ref: IotDemoTable
       Events:
         SqsToDynamoDb:
           Type: SQS
@@ -102,7 +94,6 @@ Resources:
   IotDemoTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: IotDemoTable
       AttributeDefinitions:
       - AttributeName: date
         AttributeType: S
@@ -118,38 +109,12 @@ Resources:
         WriteCapacityUnits: 2
   IotDemoQueue:
     Type: AWS::SQS::Queue
-    Properties:
-      QueueName: IotDemoQueue
 Outputs:
   GetMessagesApi:
-    Description: API Gateway endpoint URL for Prod stage for GetMessagesFunction
+    Description: API Gateway endpoint URL for Prod Stage for GetMessagesFunction
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
-  GetMessagesFunction:
-    Description: GetMessagesFunction Lambda ARN
+  IotDemoQueueUrl:
+    Description: URL of SQS Queue
     Value:
-      Fn::GetAtt:
-      - GetMessagesFunction
-      - Arn
-  GetMessagesFunctionIamRole:
-    Description: Implicit IAM Role created for GetMessagesFunction
-    Value:
-      Fn::GetAtt:
-      - GetMessagesFunctionRole
-      - Arn
-  SqsToDynamoDbFunctionApi:
-    Description: API Gateway endpoint URL for Prod stage for SqsToDynamoDbFunction
-    Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
-  SqsToDynamoDbFunction:
-    Description: SqsToDynamoDb Lambda Function ARN
-    Value:
-      Fn::GetAtt:
-      - SqsToDynamoDbFunction
-      - Arn
-  SqsToDynamoDbFunctionIamRole:
-    Description: Implicit IAM Role created for SqsToDynamoDb function
-    Value:
-      Fn::GetAtt:
-      - SqsToDynamoDbFunctionRole
-      - Arn
+      Ref: IotDemoQueue
