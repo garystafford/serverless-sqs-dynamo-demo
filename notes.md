@@ -27,4 +27,7 @@ sam local invoke PostMessageFunction --event event_postMessage.json
 
 export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-XYWKCFK3DC6C
 python3 ./util_scripts/send_message_sqs.py
+
+cd /iot_sqs_to_dynamodb/tests
+pytest ./test_handler.py --disable-warnings
 ```
