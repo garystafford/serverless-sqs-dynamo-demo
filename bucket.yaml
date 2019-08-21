@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  S3 Bucket
+Parameters:
+  BucketName:
+    Type: String
+    Default: gstafford-iot-data
+Resources:
+  IotDataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName

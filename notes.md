@@ -28,6 +28,15 @@ sam local invoke PostMessageFunction --event event_postMessage.json
 export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-XYWKCFK3DC6C
 python3 ./util_scripts/send_message_sqs.py
 
+export TABLE_NAME=gstafford-ml-sensor-data
+
 cd /iot_sqs_to_dynamodb/tests
 pytest ./test_handler.py --disable-warnings
+
+aws s3 cp util_scripts/iot_data.csv \
+  s3://gstafford-ml-sensor-data/iot_dynamodb_demo/
+
+aws cloudformation delete-stack --stack-name iot-dynamodb
+
+aws s3 cp iot_data.csv s3://gstafford-iot-data
 ```

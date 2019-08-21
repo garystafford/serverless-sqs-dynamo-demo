@@ -1,15 +1,17 @@
-import csv
 import datetime
 import json
 import logging
 import os
 
 import boto3
+import pandas as pd
 from botocore.exceptions import ClientError
 
 # Environment variables
+s3_bucket_path = os.getenv("S3_BUCKET")
 sqs_queue_url = os.getenv("QUEUE_URL")
 table_name = os.getenv("TABLE_NAME")
+object_path = 'iot_dynamodb_demo/iot_data.csv'
 
 # Set up logging
 logging.basicConfig(
@@ -17,26 +19,31 @@ logging.basicConfig(
     format='%(levelname)s: %(asctime)s: %(message)s'
 )
 
+# AWS clients
 sqs_client = boto3.client('sqs')
+s3_client = boto3.client('s3')
 
 
-def get_messages_csv(data_file):
+def get_messages_csv():
     """
     Read CSV file containing IoT messages.
 
-    :param data_file:
     :return:
     """
-    with open(data_file, newline='') as csv_file:
-        reader = csv.DictReader(csv_file, delimiter=',', quotechar='|')
-        for row in reader:
-            message = convert_and_send(row)
-            message = json.dumps(message, separators=(',', ':'))
-            response = send_sqs_message(message)
-            if response is not None:
-                logging.info(f'Sent SQS message ID: {response["MessageId"]}')
+    obj = s3_client.get_object(
+        Bucket=s3_bucket_path,
+        Key=object_path
+    )
 
-            send_sqs_message(message)
+    iot_messages = pd.read_csv(obj['Body'])
+    for index, row in iot_messages.iterrows():
+        message = convert_and_send(row)
+        message = json.dumps(message, separators=(',', ':'))
+        response = send_sqs_message(message)
+        if response is not None:
+            logging.info(f'Sent SQS message ID: {response["MessageId"]}')
+
+        # send_sqs_message(message)
 
 
 def convert_and_send(row):
@@ -118,7 +125,7 @@ def send_sqs_message(message):
 
 
 def main():
-    get_messages_csv('./iot_data.csv')
+    get_messages_csv()
 
 
 if __name__ == '__main__':

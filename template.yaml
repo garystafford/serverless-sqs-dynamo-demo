@@ -10,6 +10,10 @@ Globals:
       Variables:
         TABLE_NAME: !Ref IotDemoTable
         QUEUE_URL: !Ref IotDemoQueue
+Parameters:
+  IotBucketName:
+    Type: String
+    Default: gstafford-iot-data
 Resources:
   GetMessagesFunction:
     Type: AWS::Serverless::Function
@@ -81,6 +85,80 @@ Resources:
             Queue: !GetAtt IotDemoQueue.Arn
             BatchSize: 10
             Enabled: true
+  IotDataBucket:
+    Type: AWS::S3::Bucket
+    DependsOn:
+      - S3ToSQSFunctionPermission
+    Properties:
+      BucketName: !Ref IotBucketName
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt S3ToSQSFunction.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: suffix
+                    Value: .csv
+  S3ToSQSFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName: !Ref S3ToSQSFunction
+      Principal: s3.amazonaws.com
+      SourceArn: !Sub 'arn:aws:s3:::${IotBucketName}'
+      SourceAccount: !Ref AWS::AccountId
+  S3ToSQSFunctionExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: allowLogging
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:*
+                Resource: arn:aws:logs:*:*:*
+        - PolicyName: getObjects
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                Resource:  !Sub 'arn:aws:s3:::${IotBucketName}/*'
+  S3ToSQSFunction:
+    Type: AWS::Serverless::Function
+    Description: Respond to S3 Events
+#    DependsOn:
+#      - IotDataBucket
+    Properties:
+      Description: Post new IoT message to SQS
+      CodeUri: iot_s3_to_sqs/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      MemorySize: 128
+      Role: !GetAtt S3ToSQSFunctionExecutionRole.Arn
+#      Policies:
+#        - S3ReadPolicy:
+#            BucketName: !Ref IotDataBucket
+#      Events:
+#        PostNewCSVFile:
+#          Type: S3
+#          Properties:
+#            Bucket: !Ref IotDataBucket
+#            Events: s3:ObjectCreated:*
   IotDemoTable:
     Type: AWS::DynamoDB::Table
     Properties:

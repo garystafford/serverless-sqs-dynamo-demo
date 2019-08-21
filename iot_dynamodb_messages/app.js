@@ -23,14 +23,13 @@ exports.getMessages = async (event, context) => {
     return await new Promise((resolve, reject) => {
         docClient.scan(params, (error, data) => {
             if (error) {
-                console.log(`getMessage ERROR=${error.stack}`);
+                console.log(`getMessages ERROR=${error.stack}`);
                 resolve({
                     statusCode: 400,
                     error: `Could not get messages: ${error.stack}`
                 });
-
             } else {
-                console.log(`getMessage data=${JSON.stringify(data)}`);
+                console.log(`getMessages data=${JSON.stringify(data)}`);
                 resolve({
                     statusCode: 200,
                     body: JSON.stringify(data)
@@ -63,7 +62,6 @@ exports.getMessage = async (event, context) => {
                     statusCode: 400,
                     error: `Could not get messages: ${error.stack}`
                 });
-
             } else {
                 console.log(`getMessage data=${JSON.stringify(data)}`);
                 resolve({
@@ -97,9 +95,8 @@ exports.postMessage = async (event, context) => {
                 console.log(`postMessage ERROR=${error.stack}`);
                 resolve({
                     statusCode: 400,
-                    error: `Could not get messages: ${error.stack}`
+                    error: `Could not post message: ${error.stack}`
                 });
-
             } else {
                 console.log(`postMessage data=${JSON.stringify(data)}`);
                 resolve({
