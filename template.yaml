@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
   Builds serverless API with Lambda functions,
-  API Gateway, SQS Queue, and DynamoDB table.
+  API Gateway, SQS Queue, DynamoDB table, and S3 bucket.
 Globals:
   Function:
     Timeout: 3
@@ -141,8 +141,6 @@ Resources:
   S3ToSQSFunction:
     Type: AWS::Serverless::Function
     Description: Respond to S3 Events
-#    DependsOn:
-#      - IotDataBucket
     Properties:
       Description: Post new IoT message to SQS
       CodeUri: iot_s3_to_sqs/
@@ -150,15 +148,6 @@ Resources:
       Runtime: python3.7
       MemorySize: 128
       Role: !GetAtt S3ToSQSFunctionExecutionRole.Arn
-#      Policies:
-#        - S3ReadPolicy:
-#            BucketName: !Ref IotDataBucket
-#      Events:
-#        PostNewCSVFile:
-#          Type: S3
-#          Properties:
-#            Bucket: !Ref IotDataBucket
-#            Events: s3:ObjectCreated:*
   IotDemoTable:
     Type: AWS::DynamoDB::Table
     Properties:
