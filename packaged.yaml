@@ -1,192 +1,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
 Description: 'Builds serverless API with Lambda functions, API Gateway, SQS Queue,
-  and DynamoDB table.
+  DynamoDB table, and S3 bucket.
 
   '
 Globals:
   Function:
-    Timeout: 3
     Environment:
       Variables:
-        TABLE_NAME:
-          Ref: IotDemoTable
         QUEUE_URL:
           Ref: IotDemoQueue
-Parameters:
-  IotBucketName:
-    Type: String
-    Default: gstafford-iot-data
-Resources:
-  GetMessagesFunction:
-    Type: AWS::Serverless::Function
-    Description: Get all IoT messages in DynamoDB table (scan)
-    Properties:
-      Description: Get all IoT messages in DynamoDB table (scan)
-      CodeUri: s3://gstafford-sam-demo/84cd7d9fded494ddca20656fefcdc212
-      Handler: app.getMessages
-      Runtime: nodejs10.x
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: IotDemoTable
-      Events:
-        getMessages:
-          Type: Api
-          Properties:
-            Path: /message
-            Method: get
-  GetMessageFunction:
-    Type: AWS::Serverless::Function
-    Description: Get one IoT message based on timestamp and location
-    Properties:
-      Description: Get one IoT message based on timestamp and location
-      CodeUri: s3://gstafford-sam-demo/84cd7d9fded494ddca20656fefcdc212
-      Handler: app.getMessage
-      Runtime: nodejs10.x
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: IotDemoTable
-      Events:
-        getMessages:
-          Type: Api
-          Properties:
-            Path: /message/{date}
-            Method: get
-  PostMessageFunction:
-    Type: AWS::Serverless::Function
-    Description: Create new IoT message item in DynamoDB table
-    Properties:
-      Description: Create new IoT message item in DynamoDB table
-      CodeUri: s3://gstafford-sam-demo/84cd7d9fded494ddca20656fefcdc212
-      Handler: app.postMessage
-      Runtime: nodejs10.x
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: IotDemoTable
-      Events:
-        postMessage:
-          Type: Api
-          Properties:
-            Path: /message
-            Method: post
-  SqsToDynamoDbFunction:
-    Type: AWS::Serverless::Function
-    Description: Post new IoT message to SQS
-    Properties:
-      Description: Post new IoT message to SQS
-      CodeUri: s3://gstafford-sam-demo/a63037e6c8ea29c1fba6cbb3485904d7
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      MemorySize: 256
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: IotDemoTable
-      Events:
-        SqsToDynamoDb:
-          Type: SQS
-          Properties:
-            Queue:
-              Fn::GetAtt:
-              - IotDemoQueue
-              - Arn
-            BatchSize: 10
-            Enabled: true
-  IotDataBucket:
-    Type: AWS::S3::Bucket
-    DependsOn:
-    - S3ToSQSFunctionPermission
-    Properties:
-      BucketName:
-        Ref: IotBucketName
-      NotificationConfiguration:
-        LambdaConfigurations:
-        - Event: s3:ObjectCreated:*
-          Function:
-            Fn::GetAtt:
-            - S3ToSQSFunction
-            - Arn
-          Filter:
-            S3Key:
-              Rules:
-              - Name: suffix
-                Value: .csv
-  S3ToSQSFunctionPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName:
-        Ref: S3ToSQSFunction
-      Principal: s3.amazonaws.com
-      SourceArn:
-        Fn::Sub: arn:aws:s3:::${IotBucketName}
-      SourceAccount:
-        Ref: AWS::AccountId
-  S3ToSQSFunctionExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Principal:
-            Service:
-            - lambda.amazonaws.com
-          Action:
-          - sts:AssumeRole
-      Policies:
-      - PolicyName: allowLogging
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action:
-            - logs:*
-            Resource: arn:aws:logs:*:*:*
-      - PolicyName: getObjects
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action:
-            - s3:GetObject
-            - s3:PutObject
-            Resource:
-              Fn::Sub: arn:aws:s3:::${IotBucketName}/*
-  S3ToSQSFunction:
-    Type: AWS::Serverless::Function
-    Description: Respond to S3 Events
-    Properties:
-      Description: Post new IoT message to SQS
-      CodeUri: s3://gstafford-sam-demo/6ebce42397d480ef92deda7b73f361a3
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      MemorySize: 128
-      Role:
-        Fn::GetAtt:
-        - S3ToSQSFunctionExecutionRole
-        - Arn
-  IotDemoTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-      - AttributeName: date
-        AttributeType: S
-      - AttributeName: time
-        AttributeType: S
-      KeySchema:
-      - AttributeName: date
-        KeyType: HASH
-      - AttributeName: time
-        KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 2
-        WriteCapacityUnits: 2
-  IotDemoQueue:
-    Type: AWS::SQS::Queue
+        TABLE_NAME:
+          Ref: IotDemoTable
+    Timeout: 3
 Outputs:
   GetMessagesApi:
     Description: API Gateway endpoint URL for Prod Stage for GetMessagesFunction
@@ -196,3 +21,189 @@ Outputs:
     Description: URL of SQS Queue
     Value:
       Ref: IotDemoQueue
+Parameters:
+  IotBucketName:
+    Default: gstafford-iot-data
+    Type: String
+Resources:
+  GetMessageFunction:
+    Description: Get one IoT message based on timestamp and location
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/88f5606e9d08dbdb6a5b47162fcdd363
+      Description: Get one IoT message based on timestamp and location
+      Events:
+        getMessages:
+          Properties:
+            Method: get
+            Path: /message/{date}
+          Type: Api
+      Handler: app.getMessage
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: IotDemoTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
+  GetMessagesFunction:
+    Description: Get all IoT messages in DynamoDB table (scan)
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/88f5606e9d08dbdb6a5b47162fcdd363
+      Description: Get all IoT messages in DynamoDB table (scan)
+      Events:
+        getMessages:
+          Properties:
+            Method: get
+            Path: /message
+          Type: Api
+      Handler: app.getMessages
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: IotDemoTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
+  IotDataBucket:
+    DependsOn:
+    - S3ToSQSFunctionPermission
+    Properties:
+      BucketName:
+        Ref: IotBucketName
+      NotificationConfiguration:
+        LambdaConfigurations:
+        - Event: s3:ObjectCreated:*
+          Filter:
+            S3Key:
+              Rules:
+              - Name: suffix
+                Value: .csv
+          Function:
+            Fn::GetAtt:
+            - S3ToSQSFunction
+            - Arn
+    Type: AWS::S3::Bucket
+  IotDemoQueue:
+    Type: AWS::SQS::Queue
+  IotDemoTable:
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: date
+        AttributeType: S
+      - AttributeName: time
+        AttributeType: S
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+      - AttributeName: date
+        KeyType: HASH
+      - AttributeName: time
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+    Type: AWS::DynamoDB::Table
+  PostMessageFunction:
+    Description: Create new IoT message item in DynamoDB table
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/88f5606e9d08dbdb6a5b47162fcdd363
+      Description: Create new IoT message item in DynamoDB table
+      Events:
+        postMessage:
+          Properties:
+            Method: post
+            Path: /message
+          Type: Api
+      Handler: app.postMessage
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: IotDemoTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
+  S3ToSQSFunction:
+    Description: Respond to S3 Events
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/4c7ccf308e3d11b66527eb35383f79bd
+      Description: Post new IoT message to SQS
+      Handler: app.lambda_handler
+      MemorySize: 256
+      Role:
+        Fn::GetAtt:
+        - S3ToSQSFunctionExecutionRole
+        - Arn
+      Runtime: python3.7
+    Type: AWS::Serverless::Function
+  S3ToSQSFunctionExecutionRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action:
+            - logs:*
+            Effect: Allow
+            Resource: arn:aws:logs:*:*:*
+          Version: '2012-10-17'
+        PolicyName: allowLogging
+      - PolicyDocument:
+          Statement:
+          - Action:
+            - s3:GetObject
+            Effect: Allow
+            Resource:
+              Fn::Sub: arn:aws:s3:::${IotBucketName}/*
+          Version: '2012-10-17'
+        PolicyName: getObjects
+      - PolicyDocument:
+          Statement:
+          - Action:
+            - sqs:SendMessage
+            Effect: Allow
+            Resource:
+              Fn::GetAtt:
+              - IotDemoQueue
+              - Arn
+          Version: '2012-10-17'
+        PolicyName: produceToQueue
+    Type: AWS::IAM::Role
+  S3ToSQSFunctionPermission:
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: S3ToSQSFunction
+      Principal: s3.amazonaws.com
+      SourceAccount:
+        Ref: AWS::AccountId
+      SourceArn:
+        Fn::Sub: arn:aws:s3:::${IotBucketName}
+    Type: AWS::Lambda::Permission
+  SqsToDynamoDbFunction:
+    Description: Post new IoT message to SQS
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/82952a020cba97f9808172886b6147af
+      Description: Post new IoT message to SQS
+      Events:
+        SqsToDynamoDb:
+          Properties:
+            BatchSize: 10
+            Enabled: true
+            Queue:
+              Fn::GetAtt:
+              - IotDemoQueue
+              - Arn
+          Type: SQS
+      Handler: app.lambda_handler
+      MemorySize: 256
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: IotDemoTable
+      Runtime: python3.7
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

@@ -136,21 +136,29 @@ Resources:
               - Effect: Allow
                 Action:
                   - s3:GetObject
-                  - s3:PutObject
-                Resource:  !Sub 'arn:aws:s3:::${IotBucketName}/*'
+                Resource: !Sub 'arn:aws:s3:::${IotBucketName}/*'
+        - PolicyName: produceToQueue
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sqs:SendMessage
+                Resource: !GetAtt IotDemoQueue.Arn
   S3ToSQSFunction:
     Type: AWS::Serverless::Function
     Description: Respond to S3 Events
     Properties:
       Description: Post new IoT message to SQS
-      CodeUri: iot_s3_to_sqs/
+      CodeUri: iot_s3_to_sqs_v2/
       Handler: app.lambda_handler
       Runtime: python3.7
-      MemorySize: 128
+      MemorySize: 256
       Role: !GetAtt S3ToSQSFunctionExecutionRole.Arn
   IotDemoTable:
     Type: AWS::DynamoDB::Table
     Properties:
+      BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: date
           AttributeType: S

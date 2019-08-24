@@ -1,0 +1,10 @@
+  {
+  "body": "{\"TableName\":\"iot-dynamodb-IotDemoTable-1E1VFYADYIPIL\",\"Item\":{\"date\":\"2019-05-28\",\"time\":\"06:47:45.128341\",\"location\":\"lab-5\",\"source\":\"wireless\",\"local_dest\":\"router-1\",\"local_avg\":7.31,\"remote_dest\":\"device-1\",\"remote_avg\":14.22}}",
+  "resource": "/",
+  "path": "/message",
+  "httpMethod": "POST",
+  "isBase64Encoded": true,
+    "queryStringParameters": {},
+    "pathParameters": {},
+    "stageVariables": {}
+}

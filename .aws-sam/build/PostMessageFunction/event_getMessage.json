@@ -1,0 +1,14 @@
+{
+  "body": "",
+  "resource": "/",
+  "path": "/message",
+  "httpMethod": "GET",
+  "isBase64Encoded": false,
+  "queryStringParameters": {
+    "time": "06:45:43.128341"
+  },
+  "pathParameters": {
+    "date": "2019-05-28"
+  },
+  "stageVariables": {}
+}

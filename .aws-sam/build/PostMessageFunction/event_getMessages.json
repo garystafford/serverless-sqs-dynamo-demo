@@ -1,0 +1,10 @@
+{
+  "body": "",
+  "resource": "/",
+  "path": "/message",
+  "httpMethod": "GET",
+  "isBase64Encoded": false,
+  "queryStringParameters": {},
+  "pathParameters": {},
+  "stageVariables": {}
+}

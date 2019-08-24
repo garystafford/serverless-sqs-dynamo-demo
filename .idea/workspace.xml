@@ -2,16 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fe0462d-aa4b-4cf0-8bf9-f491dca3d61e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v1/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v1/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v1/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v2/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v2/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v2/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v2/tests/unit/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v2/tests/unit/test_handler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_sqs_to_dynamodb/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iot_sqs_to_dynamodb/tests/unit/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util_scripts/sqs_send_csv_messages_s3_no_pandas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/iot-dynamo-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iot-dynamo-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bucket.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_getMessage.json" beforeDir="false" afterPath="$PROJECT_DIR$/iot_dynamodb_messages/event_getMessage.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_getMessages.json" beforeDir="false" afterPath="$PROJECT_DIR$/iot_dynamodb_messages/event_getMessages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_postMessage.json" beforeDir="false" afterPath="$PROJECT_DIR$/iot_dynamodb_messages/event_postMessage.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_dynamodb_messages/.npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/iot_dynamodb_messages/.npmignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_s3_to_sqs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v1/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_s3_to_sqs/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_s3_to_sqs/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_s3_to_sqs/tests/unit/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v1/tests/unit/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_s3_to_sqs/tests/unit/test_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v1/tests/unit/test_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_sqs_to_dynamodb/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/iot_sqs_to_dynamodb/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_sqs_to_dynamodb/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/iot_sqs_to_dynamodb/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_sqs_to_dynamodb/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/iot_s3_to_sqs_v2/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot_sqs_to_dynamodb/tests/test_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/iot_sqs_to_dynamodb/tests/unit/test_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes.md" beforeDir="false" afterPath="$PROJECT_DIR$/notes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packaged.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packaged.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/template.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util_scripts/sqs_send_csv_messages_s3.py" beforeDir="false" afterPath="$PROJECT_DIR$/util_scripts/sqs_send_csv_messages_s3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util_scripts/sqs_send_message.py" beforeDir="false" afterPath="$PROJECT_DIR$/util_scripts/sqs_send_message.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +41,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>}</find>
-      <find>hell</find>
-    </findStrings>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,15 +76,20 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/iot_sqs_to_dynamodb/tests/unit" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/iot_dynamodb_messages" />
       <recent name="$PROJECT_DIR$/iot_dynamodb_getMessage" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/util_scripts" />
+      <recent name="$PROJECT_DIR$/iot_sqs_to_dynamodb" />
       <recent name="$PROJECT_DIR$/iot_dynamodb_getMessage" />
       <recent name="$PROJECT_DIR$/iot_dynamodb_getMessage/iot_dynamodb_getMessage" />
     </key>
@@ -78,6 +106,35 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="sqs_send_csv_messages_s3_no_pandas" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="iot-dynamo-api" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/util_scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util_scripts/sqs_send_csv_messages_s3_no_pandas.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.sqs_send_csv_messages_s3_no_pandas" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -89,7 +146,7 @@
       <option name="presentableId" value="Default" />
       <updated>1563668061555</updated>
       <workItem from="1563668065165" duration="5823000" />
-      <workItem from="1566392477846" duration="1597000" />
+      <workItem from="1566392477846" duration="28969000" />
     </task>
     <servers />
   </component>
@@ -111,5 +168,8 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/iot_dynamo_serverless$sqs_send_csv_messages_s3_no_pandas.coverage" NAME="sqs_send_csv_messages_s3_no_pandas Coverage Results" MODIFIED="1566498996498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util_scripts" />
   </component>
 </project>
