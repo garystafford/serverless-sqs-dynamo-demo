@@ -28,9 +28,9 @@ sam deploy --template-file packaged.yaml \
 
 # local testing
 export TABLE_NAME=iot-dynamodb-IotDemoTable-1E1VFYADYIPIL
+sam local invoke PostMessageFunction --event iot_dynamodb_messages/event_postMessage.json
 sam local invoke GetMessageFunction --event iot_dynamodb_messages/event_getMessage.json
 sam local invoke GetMessagesFunction --event iot_dynamodb_messages/event_getMessages.json
-sam local invoke PostMessageFunction --event iot_dynamodb_messages/event_postMessage.json
 
 export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-PBICA74HO9GA
 python3 ./util_scripts/send_message_sqs.py
