@@ -5,7 +5,7 @@
   "httpMethod": "GET",
   "isBase64Encoded": false,
   "queryStringParameters": {
-    "time": "06:45:43.128341"
+    "time": "06:45:43"
   },
   "pathParameters": {
     "date": "2000-01-01"
