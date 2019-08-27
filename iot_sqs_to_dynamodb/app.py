@@ -27,5 +27,7 @@ def lambda_handler(event, context):
         if operation in operations:
             operations[operation](dynamo_client, payload)
             logging.info('{} successful'.format(operation))
+            return 0
         else:
             logging.error('Unsupported method \'{}\''.format(operation))
+            return -1

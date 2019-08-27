@@ -37,7 +37,7 @@ python3 ./util_scripts/send_message_sqs.py
 
 export TABLE_NAME=gstafford-ml-sensor-data
 
-cd /iot_sqs_to_dynamodb/tests/unit/
+cd iot_sqs_to_dynamodb/tests/unit
 pytest test_handler.py --disable-warnings
 
 # write to s3

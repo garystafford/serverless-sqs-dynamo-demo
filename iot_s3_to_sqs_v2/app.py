@@ -25,14 +25,14 @@ s3_client = boto3.client('s3')
 
 
 def lambda_handler(event, context):
-    # logging.debug("Received event: " + json.dumps(event, indent=2))
+    # logging.debug('Received event: ' + json.dumps(event, indent=2))
 
     # Get the object from the event and show its content type
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
     try:
         response = s3_client.get_object(Bucket=bucket, Key=key)
-        logging.debug("CONTENT TYPE: " + response['ContentType'])
+        logging.debug('CONTENT TYPE: ' + response['ContentType'])
         if response['ContentType'] == 'text/csv':
             get_messages_csv(response)
     except Exception as e:
@@ -58,7 +58,7 @@ def get_messages_csv(response):
         logging.debug(message)
         response = send_sqs_message(message)
         if response is not None:
-            logging.info(f'Sent SQS message ID: {response["MessageId"]}')
+            logging.info('Sent SQS message ID: ' + response['MessageId'])
 
 
 def convert_message(message):
