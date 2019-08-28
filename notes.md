@@ -40,6 +40,11 @@ export TABLE_NAME=gstafford-ml-sensor-data
 cd iot_sqs_to_dynamodb/tests/unit
 pytest test_handler.py --disable-warnings
 
+pytest test_handler.py \
+  --disable-warnings  --log-level debug \
+  --log-file=./log.txt  --verbose
+cat log.txt
+
 # write to s3
 aws sqs purge-queue --queue-url $QUEUE_URL
 aws s3 cp util_scripts/iot_data.csv s3://gstafford-iot-data

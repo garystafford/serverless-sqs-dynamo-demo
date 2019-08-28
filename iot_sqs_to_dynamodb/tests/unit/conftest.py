@@ -85,3 +85,28 @@ def delete_event():
             }
         ]
     }
+
+
+@pytest.fixture(scope="module")
+def get_event():
+    """ Generates API GW Event"""
+    get_body = "{\"TableName\": \"iot-dynamodb-IotDemoTable-1N4QFAHEDD96E\", " + \
+               "\"Key\": {\"date\": {\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"}}}"
+    return {
+        "Records": [
+            {
+                "body": get_body,
+                "messageAttributes": {
+                    "Method": {
+                        "stringValue": "GET",
+                        "stringListValues": [],
+                        "binaryListValues": [],
+                        "dataType": "String"
+                    },
+                    "eventSource": "aws:sqs",
+                    "eventSourceARN": SQS_QUEUE,
+                    "awsRegion": AWS_REGION
+                }
+            }
+        ]
+    }

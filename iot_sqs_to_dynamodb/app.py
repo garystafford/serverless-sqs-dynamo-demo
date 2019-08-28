@@ -19,13 +19,14 @@ def lambda_handler(event, context):
         'DELETE': lambda dynamo, x: dynamo.delete_item(**x),
         'POST': lambda dynamo, x: dynamo.put_item(**x),
         'PUT': lambda dynamo, x: dynamo.update_item(**x),
+        'GET': lambda dynamo, x: dynamo.get_item(**x),
     }
 
     for record in event['Records']:
         payload = loads(record['body'], parse_float=str)
         operation = record['messageAttributes']['Method']['stringValue']
         if operation in operations:
-            operations[operation](dynamo_client, payload)
+            logging.debug(operations[operation](dynamo_client, payload))
             logging.info('{} successful'.format(operation))
             return 0
         else:

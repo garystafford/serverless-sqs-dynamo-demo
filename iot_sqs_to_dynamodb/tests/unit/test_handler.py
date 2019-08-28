@@ -11,6 +11,11 @@ def test_lambda_handler_put(put_event):
     assert ret == 0
 
 
+def test_lambda_handler_get(get_event):
+    ret = app.lambda_handler(get_event, None)
+    assert ret == 0
+
+
 def test_lambda_handler_delete(delete_event):
     ret = app.lambda_handler(delete_event, None)
     assert ret == 0
