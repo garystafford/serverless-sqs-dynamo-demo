@@ -26,8 +26,12 @@ sam deploy --template-file packaged.yaml \
   --stack-name iot-dynamodb \
   --capabilities CAPABILITY_IAM
 
-# local testing
-export TABLE_NAME=iot-dynamodb-IotDemoTable-1E1VFYADYIPIL
+export AWS_REGION=us-east-1
+export SQS_QUEUE=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-PBICA74HO9GA
+export TABLE_NAME=iot-dynamodb-IotDemoTable-1N4QFAHEDD96E
+export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-PBICA74HO9GA
+
+# local testing (All CRUD functions)
 sam local invoke PostMessageFunction \
   --event iot_dynamodb_messages/event_postMessage.json
 sam local invoke GetMessageFunction \
@@ -38,11 +42,6 @@ sam local invoke PutMessageFunction \
   --event iot_dynamodb_messages/event_putMessage.json
 sam local invoke DeleteMessageFunction \
   --event iot_dynamodb_messages/event_deleteMessage.json
-
-export AWS_REGION=us-east-1
-export SQS_QUEUE=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-PBICA74HO9GA
-export TABLE_NAME=iot-dynamodb-IotDemoTable-1N4QFAHEDD96E
-export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-PBICA74HO9GA
 
 python3 ./util_scripts/send_message_sqs.py
 

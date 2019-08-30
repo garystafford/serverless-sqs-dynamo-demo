@@ -67,7 +67,7 @@ def put_event():
 @pytest.fixture(scope="module")
 def delete_event():
     """ Generates DELETE API GW Event"""
-    delete_body = "{\"TableName\": \"iot-dynamodb-IotDemoTable-1N4QFAHEDD96E\", " + \
+    delete_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
                   "\"Key\": {\"date\": {\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"}}}"
     return {
         "Records": [
@@ -92,7 +92,7 @@ def delete_event():
 @pytest.fixture(scope="module")
 def get_event():
     """ Generates GET API GW Event"""
-    get_body = "{\"TableName\": \"iot-dynamodb-IotDemoTable-1N4QFAHEDD96E\", " + \
+    get_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
                "\"Key\": {\"date\": {\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"}}}"
     return {
         "Records": [
@@ -101,6 +101,30 @@ def get_event():
                 "messageAttributes": {
                     "Method": {
                         "stringValue": "GET",
+                        "stringListValues": [],
+                        "binaryListValues": [],
+                        "dataType": "String"
+                    },
+                    "eventSource": "aws:sqs",
+                    "eventSourceARN": SQS_QUEUE,
+                    "awsRegion": AWS_REGION
+                }
+            }
+        ]
+    }
+
+
+@pytest.fixture(scope="module")
+def get_all_event():
+    """ Generates GET (SCAN) API GW Event"""
+    get_all_body = "{\"TableName\": \"" + TABLE_NAME + "\"}"
+    return {
+        "Records": [
+            {
+                "body": get_all_body,
+                "messageAttributes": {
+                    "Method": {
+                        "stringValue": "SCAN",
                         "stringListValues": [],
                         "binaryListValues": [],
                         "dataType": "String"

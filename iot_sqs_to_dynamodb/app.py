@@ -20,6 +20,7 @@ def lambda_handler(event, context):
         'POST': lambda dynamo, x: dynamo.put_item(**x),
         'PUT': lambda dynamo, x: dynamo.update_item(**x),
         'GET': lambda dynamo, x: dynamo.get_item(**x),
+        'SCAN': lambda dynamo, x: dynamo.scan(**x),
     }
 
     for record in event['Records']:

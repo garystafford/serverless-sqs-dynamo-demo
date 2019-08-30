@@ -2,7 +2,7 @@
   "body": "",
   "resource": "/",
   "path": "/message",
-  "httpMethod": "GET",
+  "httpMethod": "SCAN",
   "isBase64Encoded": false,
   "queryStringParameters": {},
   "pathParameters": {},

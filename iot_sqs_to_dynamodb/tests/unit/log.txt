@@ -1,9 +1,9 @@
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function generate_idempotent_uuid at 0x1083f09d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function block_endpoint_discovery_required_operations at 0x1083c7840>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.PutItem: calling handler <function inject_api_version_header_if_needed at 0x1083f3400>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=PutItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.PutItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Item": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}, "location": {"S": "lab-5"}, "source": {"S": "wireless"}, "local_dest": {"S": "router-1"}, "local_avg": {"N": "5.32"}, "remote_dest": {"S": "device-1"}, "remote_avg": {"N": "11.01"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10915b3c8>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10915b390>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1083f08c8>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function generate_idempotent_uuid at 0x104442bf8>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function block_endpoint_discovery_required_operations at 0x104418a60>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.PutItem: calling handler <function inject_api_version_header_if_needed at 0x104446620>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=PutItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.PutItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Item": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}, "location": {"S": "lab-5"}, "source": {"S": "wireless"}, "local_dest": {"S": "router-1"}, "local_avg": {"N": "5.32"}, "remote_dest": {"S": "device-1"}, "remote_avg": {"N": "11.01"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10519b6a0>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10519b668>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x104442ae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -11,35 +11,35 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T002155Z
+x-amz-date:20190830T211618Z
 x-amz-target:DynamoDB_20120810.PutItem
 
 content-type;host;x-amz-date;x-amz-target
 c2e0205e3d648759ef83c3f25a70888a2747456bf8f2754c0ac2f9a15d936a9c
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T002155Z
+20190830T211618Z
 20190830/us-east-1/dynamodb/aws4_request
-22665e94951ecd8903ca7c37d34de7b7dfe44280ff50f4d7f81d79c0a7d426e3
+6cc18914ebb12de82ddfa3b30da850aa9bbb05341b8ccd64b47e3b7f7d309e9e
 DEBUG    botocore.auth:auth.py:369 Signature:
-ab564b4274d9a44011514d61eaaa8a88424634c62a62f977d7b1ac0ddf55c1d0
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T002155Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=ab564b4274d9a44011514d61eaaa8a88424634c62a62f977d7b1ac0ddf55c1d0', 'Content-Length': '304'}>
+c83b80f1c52dc2921ee367a4eac7680359190f1f78f44e9791d8e75c7b1a49e3
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211618Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=c83b80f1c52dc2921ee367a4eac7680359190f1f78f44e9791d8e75c7b1a49e3', 'Content-Length': '304'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
 DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (1): dynamodb.us-east-1.amazonaws.com:443
 DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'OIGVKF6J3648L05L5EE74S7R83VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': '9NBGEHT5H4G2SR32RM5U8A94NNVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
 DEBUG    botocore.parsers:parsers.py:235 Response body:
 b'{}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10915b7b8>
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10519ba90>
 DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:29 {'ResponseMetadata': {'RequestId': 'OIGVKF6J3648L05L5EE74S7R83VV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'OIGVKF6J3648L05L5EE74S7R83VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
-INFO     root:app.py:30 POST successful
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function generate_idempotent_uuid at 0x1083f09d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function block_endpoint_discovery_required_operations at 0x1083c7840>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.UpdateItem: calling handler <function inject_api_version_header_if_needed at 0x1083f3400>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=UpdateItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.UpdateItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}, "UpdateExpression": "set remote_avg = :val1", "ExpressionAttributeValues": {":val1": {"N": "9.00"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10915b3c8>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.UpdateItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10915b390>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.UpdateItem: calling handler <function set_operation_specific_signer at 0x1083f08c8>
+DEBUG    root:app.py:30 {'ResponseMetadata': {'RequestId': '9NBGEHT5H4G2SR32RM5U8A94NNVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': '9NBGEHT5H4G2SR32RM5U8A94NNVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
+INFO     root:app.py:31 POST successful
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function generate_idempotent_uuid at 0x104442bf8>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function block_endpoint_discovery_required_operations at 0x104418a60>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.UpdateItem: calling handler <function inject_api_version_header_if_needed at 0x104446620>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=UpdateItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.UpdateItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}, "UpdateExpression": "set remote_avg = :val1", "ExpressionAttributeValues": {":val1": {"N": "9.00"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10519b6a0>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.UpdateItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10519b668>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.UpdateItem: calling handler <function set_operation_specific_signer at 0x104442ae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -47,34 +47,34 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T002156Z
+x-amz-date:20190830T211618Z
 x-amz-target:DynamoDB_20120810.UpdateItem
 
 content-type;host;x-amz-date;x-amz-target
 4dbcddbfb04903fe2a95fbf8660236f1e798b971c2d0af23d01164bbe945b9bf
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T002156Z
+20190830T211618Z
 20190830/us-east-1/dynamodb/aws4_request
-40f461d690a26467b5df5465b3c0a74f072cf5a883012db57e22699220879f1b
+3dc01d4258908764ea4416173e412714104335d52a86ccf7d75c49210cf77fcb
 DEBUG    botocore.auth:auth.py:369 Signature:
-76dd583fb54888c0532e2609d7ddb65f4dd5005a9f39adf6a9bdfc2c88466bad
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.UpdateItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T002156Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=76dd583fb54888c0532e2609d7ddb65f4dd5005a9f39adf6a9bdfc2c88466bad', 'Content-Length': '222'}>
+6b2f43f865219c38c4871c0e7ea7701b6da0e948a68dd79f93b6d8f30e3c3e9e
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.UpdateItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211618Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=6b2f43f865219c38c4871c0e7ea7701b6da0e948a68dd79f93b6d8f30e3c3e9e', 'Content-Length': '222'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
 DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'B0OM38S94LUT65MG7NMCF3S1J7VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'QPFLGR0OKR2MP21J4BBEP6C7URVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
 DEBUG    botocore.parsers:parsers.py:235 Response body:
 b'{}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.UpdateItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10915b7b8>
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.UpdateItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10519ba90>
 DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:29 {'ResponseMetadata': {'RequestId': 'B0OM38S94LUT65MG7NMCF3S1J7VV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'B0OM38S94LUT65MG7NMCF3S1J7VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
-INFO     root:app.py:30 PUT successful
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function generate_idempotent_uuid at 0x1083f09d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function block_endpoint_discovery_required_operations at 0x1083c7840>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.GetItem: calling handler <function inject_api_version_header_if_needed at 0x1083f3400>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=GetItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.GetItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10915b3c8>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.GetItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10915b390>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.GetItem: calling handler <function set_operation_specific_signer at 0x1083f08c8>
+DEBUG    root:app.py:30 {'ResponseMetadata': {'RequestId': 'QPFLGR0OKR2MP21J4BBEP6C7URVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'QPFLGR0OKR2MP21J4BBEP6C7URVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
+INFO     root:app.py:31 PUT successful
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function generate_idempotent_uuid at 0x104442bf8>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function block_endpoint_discovery_required_operations at 0x104418a60>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.GetItem: calling handler <function inject_api_version_header_if_needed at 0x104446620>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=GetItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.GetItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10519b6a0>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.GetItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10519b668>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.GetItem: calling handler <function set_operation_specific_signer at 0x104442ae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -82,34 +82,34 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T002156Z
+x-amz-date:20190830T211618Z
 x-amz-target:DynamoDB_20120810.GetItem
 
 content-type;host;x-amz-date;x-amz-target
 d87bf451055d3994922912396b7a311abe0112aac7d50d08837cfdbe2770d2f8
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T002156Z
+20190830T211618Z
 20190830/us-east-1/dynamodb/aws4_request
-0ca434ab3fe580479834388caa552ab3497002c2056158d6f30223920fee0ba6
+fe736dd091af57c6f728301d3efd151f1f0e7d06669d2a3da12c6eb394bffb0a
 DEBUG    botocore.auth:auth.py:369 Signature:
-236b29cf440c00dc6b5fbf892a3a3d868e5f9d9ee623c08b6dbc9e192120fcb3
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.GetItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T002156Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=236b29cf440c00dc6b5fbf892a3a3d868e5f9d9ee623c08b6dbc9e192120fcb3', 'Content-Length': '121'}>
+9654431fe7b7a9bf504cf0716e7b2ee39e7d205ffea97e5bd2b7c0adf1448048
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.GetItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211618Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=9654431fe7b7a9bf504cf0716e7b2ee39e7d205ffea97e5bd2b7c0adf1448048', 'Content-Length': '121'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
 DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 220
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '220', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'JQS9V0PLUSD1UA5V7FC3PL3L13VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3490813162'}
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '220', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'UL8H1ANOKQFTSFL3C32CFAO0AJVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3490813162'}
 DEBUG    botocore.parsers:parsers.py:235 Response body:
 b'{"Item":{"remote_avg":{"N":"9"},"date":{"S":"2000-01-01"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"5.32"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"06:45:43"}}}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.GetItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10915b7b8>
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.GetItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10519ba90>
 DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:29 {'Item': {'remote_avg': {'N': '9'}, 'date': {'S': '2000-01-01'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '5.32'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '06:45:43'}}, 'ResponseMetadata': {'RequestId': 'JQS9V0PLUSD1UA5V7FC3PL3L13VV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '220', 'connection': 'keep-alive', 'x-amzn-requestid': 'JQS9V0PLUSD1UA5V7FC3PL3L13VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3490813162'}, 'RetryAttempts': 0}}
-INFO     root:app.py:30 GET successful
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function generate_idempotent_uuid at 0x1083f09d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function block_endpoint_discovery_required_operations at 0x1083c7840>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.DeleteItem: calling handler <function inject_api_version_header_if_needed at 0x1083f3400>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=DeleteItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.DeleteItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10915b3c8>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.DeleteItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10915b390>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.DeleteItem: calling handler <function set_operation_specific_signer at 0x1083f08c8>
+DEBUG    root:app.py:30 {'Item': {'remote_avg': {'N': '9'}, 'date': {'S': '2000-01-01'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '5.32'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '06:45:43'}}, 'ResponseMetadata': {'RequestId': 'UL8H1ANOKQFTSFL3C32CFAO0AJVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '220', 'connection': 'keep-alive', 'x-amzn-requestid': 'UL8H1ANOKQFTSFL3C32CFAO0AJVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3490813162'}, 'RetryAttempts': 0}}
+INFO     root:app.py:31 GET successful
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.Scan: calling handler <function generate_idempotent_uuid at 0x104442bf8>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.Scan: calling handler <function block_endpoint_discovery_required_operations at 0x104418a60>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.Scan: calling handler <function inject_api_version_header_if_needed at 0x104446620>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=Scan) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.Scan', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E"}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10519b6a0>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.Scan: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10519b668>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.Scan: calling handler <function set_operation_specific_signer at 0x104442ae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -117,25 +117,60 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T002156Z
+x-amz-date:20190830T211618Z
+x-amz-target:DynamoDB_20120810.Scan
+
+content-type;host;x-amz-date;x-amz-target
+aaadb42528a5062c31af9f665880d214adab83f9e50b8b310efe7f89e5aad682
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190830T211618Z
+20190830/us-east-1/dynamodb/aws4_request
+45458725fb30898592f9f267d6140ffebf79a5579e9f2c60c11c01eb592ceb45
+DEBUG    botocore.auth:auth.py:369 Signature:
+335581797699ad1a5d24f15061d509f1c7f275ae097d0b1718f274038b4c6407
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.Scan', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211618Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=335581797699ad1a5d24f15061d509f1c7f275ae097d0b1718f274038b4c6407', 'Content-Length': '56'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 5411
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '5411', 'Connection': 'keep-alive', 'x-amzn-RequestId': '042LAD2ATA61S1TBR4PC8RTIH3VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '1367643085'}
+DEBUG    botocore.parsers:parsers.py:235 Response body:
+b'{"Count":25,"Items":[{"remote_avg":{"N":"9"},"date":{"S":"2000-01-01"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"5.32"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"06:45:43"}},{"remote_avg":{"N":"9.09"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"4.39"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:09"}},{"remote_avg":{"N":"16.75"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.49"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:19"}},{"remote_avg":{"N":"8.31"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.56"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:29"}},{"remote_avg":{"N":"9.4"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.64"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:39"}},{"remote_avg":{"N":"9.07"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.18"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:49"}},{"remote_avg":{"N":"8.4"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.42"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:00"}},{"remote_avg":{"N":"8.66"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.73"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:10"}},{"remote_avg":{"N":"8.61"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.67"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:20"}},{"remote_avg":{"N":"10.87"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.27"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:30"}},{"remote_avg":{"N":"10.08"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.63"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:40"}},{"remote_avg":{"N":"8.07"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"3.17"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:50"}},{"remote_avg":{"N":"8.7"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.34"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:00"}},{"remote_avg":{"N":"11.63"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.56"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:10"}},{"remote_avg":{"N":"9.56"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.01"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:20"}},{"remote_avg":{"N":"9.26"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.14"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:31"}},{"remote_avg":{"N":"8.36"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.9"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:41"}},{"remote_avg":{"N":"16.86"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.38"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:51"}},{"remote_avg":{"N":"9.73"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.76"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:01"}},{"remote_avg":{"N":"10.4"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.19"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:11"}},{"remote_avg":{"N":"9.14"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"3.22"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:21"}},{"remote_avg":{"N":"8.25"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.71"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:31"}},{"remote_avg":{"N":"9.53"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.9"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:41"}},{"remote_avg":{"N":"11.6"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.52"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:52"}},{"remote_avg":{"N":"8.11"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"2.4"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:59:02"}}],"ScannedCount":25}'
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.Scan: calling handler <botocore.retryhandler.RetryHandler object at 0x10519ba90>
+DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
+DEBUG    root:app.py:30 {'Items': [{'remote_avg': {'N': '9'}, 'date': {'S': '2000-01-01'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '5.32'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '06:45:43'}}, {'remote_avg': {'N': '9.09'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '4.39'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:09'}}, {'remote_avg': {'N': '16.75'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.49'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:19'}}, {'remote_avg': {'N': '8.31'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.56'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:29'}}, {'remote_avg': {'N': '9.4'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.64'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:39'}}, {'remote_avg': {'N': '9.07'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.18'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:49'}}, {'remote_avg': {'N': '8.4'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.42'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:00'}}, {'remote_avg': {'N': '8.66'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.73'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:10'}}, {'remote_avg': {'N': '8.61'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.67'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:20'}}, {'remote_avg': {'N': '10.87'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.27'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:30'}}, {'remote_avg': {'N': '10.08'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.63'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:40'}}, {'remote_avg': {'N': '8.07'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '3.17'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:50'}}, {'remote_avg': {'N': '8.7'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.34'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:00'}}, {'remote_avg': {'N': '11.63'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.56'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:10'}}, {'remote_avg': {'N': '9.56'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.01'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:20'}}, {'remote_avg': {'N': '9.26'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.14'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:31'}}, {'remote_avg': {'N': '8.36'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.9'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:41'}}, {'remote_avg': {'N': '16.86'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.38'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:51'}}, {'remote_avg': {'N': '9.73'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.76'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:01'}}, {'remote_avg': {'N': '10.4'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.19'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:11'}}, {'remote_avg': {'N': '9.14'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '3.22'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:21'}}, {'remote_avg': {'N': '8.25'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.71'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:31'}}, {'remote_avg': {'N': '9.53'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.9'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:41'}}, {'remote_avg': {'N': '11.6'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.52'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:52'}}, {'remote_avg': {'N': '8.11'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '2.4'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:59:02'}}], 'Count': 25, 'ScannedCount': 25, 'ResponseMetadata': {'RequestId': '042LAD2ATA61S1TBR4PC8RTIH3VV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '5411', 'connection': 'keep-alive', 'x-amzn-requestid': '042LAD2ATA61S1TBR4PC8RTIH3VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '1367643085'}, 'RetryAttempts': 0}}
+INFO     root:app.py:31 SCAN successful
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function generate_idempotent_uuid at 0x104442bf8>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function block_endpoint_discovery_required_operations at 0x104418a60>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.DeleteItem: calling handler <function inject_api_version_header_if_needed at 0x104446620>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=DeleteItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.DeleteItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x10519b6a0>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.DeleteItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x10519b668>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.DeleteItem: calling handler <function set_operation_specific_signer at 0x104442ae8>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190830T211619Z
 x-amz-target:DynamoDB_20120810.DeleteItem
 
 content-type;host;x-amz-date;x-amz-target
 d87bf451055d3994922912396b7a311abe0112aac7d50d08837cfdbe2770d2f8
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T002156Z
+20190830T211619Z
 20190830/us-east-1/dynamodb/aws4_request
-e3aaec248415c9fe35bf3a1fb63ec14c5853d073d8693b3a47c6d4113fdbdc08
+e2b7a407f9375178a98c0bb03a90acfedb25710f89dd3cec4e945939f58e0e90
 DEBUG    botocore.auth:auth.py:369 Signature:
-d12d09f14e81bf6da6451aa939e334531db7138b1824504557545330b237cf66
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.DeleteItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T002156Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=d12d09f14e81bf6da6451aa939e334531db7138b1824504557545330b237cf66', 'Content-Length': '121'}>
+00f5821a047696ddb6b2897aa13972475c4f89d5fdfa215841fbb95fe4165297
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.DeleteItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211619Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=00f5821a047696ddb6b2897aa13972475c4f89d5fdfa215841fbb95fe4165297', 'Content-Length': '121'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
 DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'H9L9Q7TS6Q7ASDM4EBJ0TL8ITJVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': '0T76QFCPAA9RBSVLAHCRAUBTNNVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
 DEBUG    botocore.parsers:parsers.py:235 Response body:
 b'{}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.DeleteItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10915b7b8>
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.DeleteItem: calling handler <botocore.retryhandler.RetryHandler object at 0x10519ba90>
 DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:29 {'ResponseMetadata': {'RequestId': 'H9L9Q7TS6Q7ASDM4EBJ0TL8ITJVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 00:23:29 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'H9L9Q7TS6Q7ASDM4EBJ0TL8ITJVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
-INFO     root:app.py:30 DELETE successful
+DEBUG    root:app.py:30 {'ResponseMetadata': {'RequestId': '0T76QFCPAA9RBSVLAHCRAUBTNNVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:17:52 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': '0T76QFCPAA9RBSVLAHCRAUBTNNVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
+INFO     root:app.py:31 DELETE successful
