@@ -116,7 +116,7 @@ def get_event():
 
 @pytest.fixture(scope="module")
 def get_all_event():
-    """ Generates GET (SCAN) API GW Event"""
+    """ Generates GET_ALL (SCAN) API GW Event"""
     get_all_body = "{\"TableName\": \"" + TABLE_NAME + "\"}"
     return {
         "Records": [
@@ -124,7 +124,7 @@ def get_all_event():
                 "body": get_all_body,
                 "messageAttributes": {
                     "Method": {
-                        "stringValue": "SCAN",
+                        "stringValue": "GET_ALL",
                         "stringListValues": [],
                         "binaryListValues": [],
                         "dataType": "String"
