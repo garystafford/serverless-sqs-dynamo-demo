@@ -1,10 +1,10 @@
-  {
+{
   "body": "{\"Item\":{\"date\":\"2000-01-01\",\"time\":\"06:45:43\",\"location\":\"lab-5\",\"source\":\"wireless\",\"local_dest\":\"router-1\",\"local_avg\":7.31,\"remote_dest\":\"device-1\",\"remote_avg\":14.22}}",
   "resource": "/",
   "path": "/message",
   "httpMethod": "POST",
   "isBase64Encoded": true,
-    "queryStringParameters": {},
-    "pathParameters": {},
-    "stageVariables": {}
+  "queryStringParameters": {},
+  "pathParameters": {},
+  "stageVariables": {}
 }

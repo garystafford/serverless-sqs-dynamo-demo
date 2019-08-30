@@ -8,7 +8,7 @@ let params;
 let tableName;
 
 exports.getMessages = async (event, context) => {
-    console.log("getMessage event:", event);
+    console.debug("getMessage event:", event);
 
     if (tableName == null) {
         tableName = process.env.TABLE_NAME;
@@ -17,19 +17,19 @@ exports.getMessages = async (event, context) => {
     let params = {
         TableName: tableName
     };
-    console.log(params);
+    console.debug(params);
 
     // https://techsparx.com/software-development/aws/aws-sdk-promises.html
     return await new Promise((resolve, reject) => {
         docClient.scan(params, (error, data) => {
             if (error) {
-                console.log(`getMessages ERROR=${error.stack}`);
+                console.error(`getMessages ERROR=${error.stack}`);
                 resolve({
                     statusCode: 400,
                     error: `Could not get messages: ${error.stack}`
                 });
             } else {
-                console.log(`getMessages data=${JSON.stringify(data)}`);
+                console.info(`getMessages data=${JSON.stringify(data)}`);
                 resolve({
                     statusCode: 200,
                     body: JSON.stringify(data)
@@ -40,7 +40,7 @@ exports.getMessages = async (event, context) => {
 };
 
 exports.getMessage = async (event, context) => {
-    console.log("getMessage event:", event);
+    console.debug("getMessage event:", event);
 
     if (tableName == null) {
         tableName = process.env.TABLE_NAME;
@@ -52,18 +52,18 @@ exports.getMessage = async (event, context) => {
             "time": event.queryStringParameters.time
         }
     };
-    console.info(params.Key);
+    console.debug(params.Key);
 
     return await new Promise((resolve, reject) => {
         docClient.get(params, (error, data) => {
             if (error) {
-                console.log(`getMessage ERROR=${error.stack}`);
+                console.error(`getMessage ERROR=${error.stack}`);
                 resolve({
                     statusCode: 400,
                     error: `Could not get messages: ${error.stack}`
                 });
             } else {
-                console.log(`getMessage data=${JSON.stringify(data)}`);
+                console.info(`getMessage data=${JSON.stringify(data)}`);
                 resolve({
                     statusCode: 200,
                     body: JSON.stringify(data)
@@ -74,7 +74,7 @@ exports.getMessage = async (event, context) => {
 };
 
 exports.postMessage = async (event, context) => {
-    console.log("postMessage event:", event);
+    console.debug("postMessage event:", event);
 
     if (tableName == null) {
         tableName = process.env.TABLE_NAME;
@@ -86,18 +86,18 @@ exports.postMessage = async (event, context) => {
         TableName: tableName,
         Item: parsedBody.Item
     };
-    console.log(params);
+    console.debug(params);
 
     return await new Promise((resolve, reject) => {
         docClient.put(params, (error, data) => {
             if (error) {
-                console.log(`postMessage ERROR=${error.stack}`);
+                console.error(`postMessage ERROR=${error.stack}`);
                 resolve({
                     statusCode: 400,
                     error: `Could not post message: ${error.stack}`
                 });
             } else {
-                console.log(`postMessage data=${JSON.stringify(data)}`);
+                console.info(`postMessage data=${JSON.stringify(data)}`);
                 resolve({
                     statusCode: 201,
                     body: JSON.stringify(data)
@@ -108,7 +108,7 @@ exports.postMessage = async (event, context) => {
 };
 
 exports.putMessage = async (event, context) => {
-    console.log("putMessage event:", event);
+    console.debug("putMessage event:", event);
 
     if (tableName == null) {
         tableName = process.env.TABLE_NAME;
@@ -119,25 +119,25 @@ exports.putMessage = async (event, context) => {
     params = {
         TableName: tableName,
         Key: {
-            "date": parsedBody.Key.date,
-            "time": parsedBody.Key.time
+            "date": event.pathParameters.date,
+            "time": event.queryStringParameters.time
         },
         UpdateExpression: parsedBody.UpdateExpression,
         ExpressionAttributeValues: parsedBody.ExpressionAttributeValues
 
     };
-    console.log(params);
+    console.debug(params);
 
     return await new Promise((resolve, reject) => {
         docClient.update(params, (error, data) => {
             if (error) {
-                console.log(`putMessage ERROR=${error.stack}`);
+                console.error(`putMessage ERROR=${error.stack}`);
                 resolve({
                     statusCode: 400,
                     error: `Could not update message: ${error.stack}`
                 });
             } else {
-                console.log(`putMessage data=${JSON.stringify(data)}`);
+                console.info(`putMessage data=${JSON.stringify(data)}`);
                 resolve({
                     statusCode: 204,
                     body: JSON.stringify(data)
@@ -148,7 +148,7 @@ exports.putMessage = async (event, context) => {
 };
 
 exports.deleteMessage = async (event, context) => {
-    console.log("deleteMessage event:", event);
+    console.debug("deleteMessage event:", event);
 
     if (tableName == null) {
         tableName = process.env.TABLE_NAME;
@@ -160,18 +160,18 @@ exports.deleteMessage = async (event, context) => {
             "time": event.queryStringParameters.time
         }
     };
-    console.info(params.Key);
+    console.debug(params.Key);
 
     return await new Promise((resolve, reject) => {
         docClient.delete(params, (error, data) => {
             if (error) {
-                console.log(`deleteMessage ERROR=${error.stack}`);
+                console.error(`deleteMessage ERROR=${error.stack}`);
                 resolve({
                     statusCode: 400,
                     error: `Could not delete messages: ${error.stack}`
                 });
             } else {
-                console.log(`deleteMessage data=${JSON.stringify(data)}`);
+                console.info(`deleteMessage data=${JSON.stringify(data)}`);
                 resolve({
                     statusCode: 200,
                     body: JSON.stringify(data)
