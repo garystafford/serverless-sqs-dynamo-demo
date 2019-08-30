@@ -66,6 +66,23 @@ Resources:
           Properties:
             Path: /message
             Method: post
+  PutMessageFunction:
+    Type: AWS::Serverless::Function
+    Description: Modify IoT message item in DynamoDB table
+    Properties:
+      Description: Modify new IoT message item in DynamoDB table
+      CodeUri: iot_dynamodb_messages/
+      Handler: app.putMessage
+      Runtime: nodejs10.x
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref IotDemoTable
+      Events:
+        putMessage:
+          Type: Api
+          Properties:
+            Path: /message
+            Method: put
   SqsToDynamoDbFunction:
     Type: AWS::Serverless::Function
     Description: Post new IoT message to SQS

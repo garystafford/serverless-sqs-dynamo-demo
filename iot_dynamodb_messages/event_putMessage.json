@@ -1,0 +1,10 @@
+  {
+  "body": "{\"Key\": {\"date\": \"2000-01-01\", \"time\": \"06:45:43\"}, \"UpdateExpression\": \"set remote_avg = :val1\", \"ExpressionAttributeValues\": {\":val1\": \"9.00\"}}",
+  "resource": "/",
+  "path": "/message",
+  "httpMethod": "PUT",
+  "isBase64Encoded": true,
+    "queryStringParameters": {},
+    "pathParameters": {},
+    "stageVariables": {}
+}

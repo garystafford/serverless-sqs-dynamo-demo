@@ -34,6 +34,8 @@ sam local invoke GetMessageFunction \
   --event iot_dynamodb_messages/event_getMessage.json
 sam local invoke GetMessagesFunction \
   --event iot_dynamodb_messages/event_getMessages.json
+sam local invoke PutMessageFunction \
+  --event iot_dynamodb_messages/event_putMessage.json
 
 export AWS_REGION=us-east-1
 export SQS_QUEUE=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-PBICA74HO9GA

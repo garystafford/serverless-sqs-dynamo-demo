@@ -29,7 +29,7 @@ Resources:
   GetMessageFunction:
     Description: Get one IoT message based on timestamp and location
     Properties:
-      CodeUri: s3://gstafford-sam-demo/88f5606e9d08dbdb6a5b47162fcdd363
+      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
       Description: Get one IoT message based on timestamp and location
       Events:
         getMessages:
@@ -47,7 +47,7 @@ Resources:
   GetMessagesFunction:
     Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
-      CodeUri: s3://gstafford-sam-demo/88f5606e9d08dbdb6a5b47162fcdd363
+      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
       Description: Get all IoT messages in DynamoDB table (scan)
       Events:
         getMessages:
@@ -103,7 +103,7 @@ Resources:
   PostMessageFunction:
     Description: Create new IoT message item in DynamoDB table
     Properties:
-      CodeUri: s3://gstafford-sam-demo/88f5606e9d08dbdb6a5b47162fcdd363
+      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
       Description: Create new IoT message item in DynamoDB table
       Events:
         postMessage:
@@ -118,10 +118,28 @@ Resources:
             Ref: IotDemoTable
       Runtime: nodejs10.x
     Type: AWS::Serverless::Function
+  PutMessageFunction:
+    Description: Modify IoT message item in DynamoDB table
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
+      Description: Modify new IoT message item in DynamoDB table
+      Events:
+        putMessage:
+          Properties:
+            Method: put
+            Path: /message
+          Type: Api
+      Handler: app.putMessage
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: IotDemoTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
   S3ToSQSFunction:
     Description: Respond to S3 Events
     Properties:
-      CodeUri: s3://gstafford-sam-demo/4c7ccf308e3d11b66527eb35383f79bd
+      CodeUri: s3://gstafford-sam-demo/bee28601ef49c097e11fac808fd8dbb5
       Description: Post new IoT message to SQS
       Handler: app.lambda_handler
       MemorySize: 256
@@ -186,7 +204,7 @@ Resources:
   SqsToDynamoDbFunction:
     Description: Post new IoT message to SQS
     Properties:
-      CodeUri: s3://gstafford-sam-demo/82952a020cba97f9808172886b6147af
+      CodeUri: s3://gstafford-sam-demo/a3d1993c1bd5bd2ddcb6be699867090e
       Description: Post new IoT message to SQS
       Events:
         SqsToDynamoDb:

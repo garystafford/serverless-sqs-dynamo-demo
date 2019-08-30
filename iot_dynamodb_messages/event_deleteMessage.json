@@ -1,0 +1,14 @@
+{
+  "body": "",
+  "resource": "/",
+  "path": "/message",
+  "httpMethod": "DELETE",
+  "isBase64Encoded": false,
+  "queryStringParameters": {
+    "time": "06:45:43"
+  },
+  "pathParameters": {
+    "date": "2000-01-01"
+  },
+  "stageVariables": {}
+}
