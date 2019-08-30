@@ -1,8 +1,8 @@
 ```bash
 # initiate
-sam init --runtime nodejs10.x --name iot_dynamodb_getMessage
+sam init --runtime nodejs10.x --name iot_dynamodb_messages
 
-# parameter store
+# parameter store (unused)
 aws ssm put-parameter \
   --name /iot_demo/table_name \
   --type String \
@@ -28,14 +28,19 @@ sam deploy --template-file packaged.yaml \
 
 # local testing
 export TABLE_NAME=iot-dynamodb-IotDemoTable-1E1VFYADYIPIL
-sam local invoke PostMessageFunction --event iot_dynamodb_messages/event_postMessage.json
-sam local invoke GetMessageFunction --event iot_dynamodb_messages/event_getMessage.json
-sam local invoke GetMessagesFunction --event iot_dynamodb_messages/event_getMessages.json
+sam local invoke PostMessageFunction \
+  --event iot_dynamodb_messages/event_postMessage.json
+sam local invoke GetMessageFunction \
+  --event iot_dynamodb_messages/event_getMessage.json
+sam local invoke GetMessagesFunction \
+  --event iot_dynamodb_messages/event_getMessages.json
 
+export AWS_REGION=us-east-1
+export SQS_QUEUE=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-PBICA74HO9GA
+export TABLE_NAME=iot-dynamodb-IotDemoTable-1N4QFAHEDD96E
 export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-PBICA74HO9GA
-python3 ./util_scripts/send_message_sqs.py
 
-export TABLE_NAME=gstafford-ml-sensor-data
+python3 ./util_scripts/send_message_sqs.py
 
 cd iot_sqs_to_dynamodb/tests/unit
 pytest test_handler.py --disable-warnings
