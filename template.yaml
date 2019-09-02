@@ -14,7 +14,16 @@ Parameters:
   IotBucketName:
     Type: String
     Default: gstafford-iot-data
+  DomainName:
+    Type: String
+    Default: api.example-api.com
 Resources:
+  IotDynamoApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Auth:
+        DefaultAuthorizer: NONE
   GetMessagesFunction:
     Type: AWS::Serverless::Function
     Description: Get all IoT messages in DynamoDB table (scan)
@@ -32,6 +41,7 @@ Resources:
           Properties:
             Path: /message
             Method: get
+            RestApiId: !Ref IotDynamoApi
   GetMessageFunction:
     Type: AWS::Serverless::Function
     Description: Get one IoT message based on timestamp and location
@@ -49,6 +59,7 @@ Resources:
           Properties:
             Path: /message/{date}
             Method: get
+            RestApiId: !Ref IotDynamoApi
   PostMessageFunction:
     Type: AWS::Serverless::Function
     Description: Create new IoT message item in DynamoDB table
@@ -66,6 +77,7 @@ Resources:
           Properties:
             Path: /message
             Method: post
+            RestApiId: !Ref IotDynamoApi
   PutMessageFunction:
     Type: AWS::Serverless::Function
     Description: Update IoT message item in DynamoDB table
@@ -83,6 +95,7 @@ Resources:
           Properties:
             Path: /message/{date}
             Method: put
+            RestApiId: !Ref IotDynamoApi
   DeleteMessageFunction:
     Type: AWS::Serverless::Function
     Description: Delete IoT message item in DynamoDB table
@@ -100,6 +113,7 @@ Resources:
           Properties:
             Path: /message/{date}
             Method: delete
+            RestApiId: !Ref IotDynamoApi
   SqsToDynamoDbFunction:
     Type: AWS::Serverless::Function
     Description: Post new IoT message to SQS
@@ -203,16 +217,27 @@ Resources:
           KeyType: HASH
         - AttributeName: time
           KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 2
-        WriteCapacityUnits: 2
+#      ProvisionedThroughput:
+#        ReadCapacityUnits: 2
+#        WriteCapacityUnits: 2
   IotDemoQueue:
     Type: AWS::SQS::Queue
+  ApiGatewayDeployment:
+    Type: "AWS::ApiGateway::Deployment"
+    Properties:
+      RestApiId: !Ref IotDynamoApi
+      StageName: Prod
+  ApiMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    DependsOn: ApiGatewayDeployment
+    Properties:
+      DomainName: !Ref DomainName
+      RestApiId: !Ref IotDynamoApi
+      Stage: Prod
 Outputs:
   GetMessagesApi:
-    Description: "API Gateway endpoint URL for Prod Stage for GetMessagesFunction"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
+    Description: 'API Gateway endpoint URL for Prod Stage for GetMessagesFunction'
+    Value: !Sub "https://${IotDynamoApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
   IotDemoQueueUrl:
-    Description: "URL of SQS Queue"
+    Description: 'URL of SQS Queue'
     Value: !Ref IotDemoQueue
-

@@ -26,6 +26,10 @@ sam deploy --template-file packaged.yaml \
   --stack-name iot-dynamodb \
   --capabilities CAPABILITY_IAM
 
+aws cloudformation create-stack \
+  --template-body file://api_dns.yaml \
+  --stack-name iot-dynamodb-dns
+
 export AWS_REGION=us-east-1
 export SQS_QUEUE=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-PBICA74HO9GA
 export TABLE_NAME=iot-dynamodb-IotDemoTable-1N4QFAHEDD96E
@@ -59,4 +63,5 @@ aws s3 cp util_scripts/iot_data.csv s3://gstafford-iot-data
 
 # delete stack
 aws cloudformation delete-stack --stack-name iot-dynamodb
+aws cloudformation delete-stack --stack-name iot-dynamodb-dns
 ```

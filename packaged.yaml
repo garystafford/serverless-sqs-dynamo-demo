@@ -16,26 +16,66 @@ Outputs:
   GetMessagesApi:
     Description: API Gateway endpoint URL for Prod Stage for GetMessagesFunction
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
+      Fn::Sub: https://${IotDynamoApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
   IotDemoQueueUrl:
     Description: URL of SQS Queue
     Value:
       Ref: IotDemoQueue
 Parameters:
+  DomainName:
+    Default: api.example-api.com
+    Type: String
   IotBucketName:
     Default: gstafford-iot-data
     Type: String
 Resources:
+  ApiGatewayDeployment:
+    Properties:
+      RestApiId:
+        Ref: IotDynamoApi
+      StageName: Prod
+    Type: AWS::ApiGateway::Deployment
+  ApiMapping:
+    DependsOn: ApiGatewayDeployment
+    Properties:
+      DomainName:
+        Ref: DomainName
+      RestApiId:
+        Ref: IotDynamoApi
+      Stage: Prod
+    Type: AWS::ApiGateway::BasePathMapping
+  DeleteMessageFunction:
+    Description: Delete IoT message item in DynamoDB table
+    Properties:
+      CodeUri: s3://gstafford-sam-demo/6718a914e1cb7c34fba58bb8a3a52d79
+      Description: Delete IoT message item in DynamoDB table
+      Events:
+        deleteMessage:
+          Properties:
+            Method: delete
+            Path: /message/{date}
+            RestApiId:
+              Ref: IotDynamoApi
+          Type: Api
+      Handler: app.deleteMessage
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: IotDemoTable
+      Runtime: nodejs10.x
+    Type: AWS::Serverless::Function
   GetMessageFunction:
     Description: Get one IoT message based on timestamp and location
     Properties:
-      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
+      CodeUri: s3://gstafford-sam-demo/6718a914e1cb7c34fba58bb8a3a52d79
       Description: Get one IoT message based on timestamp and location
       Events:
         getMessages:
           Properties:
             Method: get
             Path: /message/{date}
+            RestApiId:
+              Ref: IotDynamoApi
           Type: Api
       Handler: app.getMessage
       Policies:
@@ -47,13 +87,15 @@ Resources:
   GetMessagesFunction:
     Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
-      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
+      CodeUri: s3://gstafford-sam-demo/6718a914e1cb7c34fba58bb8a3a52d79
       Description: Get all IoT messages in DynamoDB table (scan)
       Events:
         getMessages:
           Properties:
             Method: get
             Path: /message
+            RestApiId:
+              Ref: IotDynamoApi
           Type: Api
       Handler: app.getMessages
       Policies:
@@ -96,20 +138,25 @@ Resources:
         KeyType: HASH
       - AttributeName: time
         KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 2
-        WriteCapacityUnits: 2
     Type: AWS::DynamoDB::Table
+  IotDynamoApi:
+    Properties:
+      Auth:
+        DefaultAuthorizer: NONE
+      StageName: Prod
+    Type: AWS::Serverless::Api
   PostMessageFunction:
     Description: Create new IoT message item in DynamoDB table
     Properties:
-      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
+      CodeUri: s3://gstafford-sam-demo/6718a914e1cb7c34fba58bb8a3a52d79
       Description: Create new IoT message item in DynamoDB table
       Events:
         postMessage:
           Properties:
             Method: post
             Path: /message
+            RestApiId:
+              Ref: IotDynamoApi
           Type: Api
       Handler: app.postMessage
       Policies:
@@ -119,15 +166,17 @@ Resources:
       Runtime: nodejs10.x
     Type: AWS::Serverless::Function
   PutMessageFunction:
-    Description: Modify IoT message item in DynamoDB table
+    Description: Update IoT message item in DynamoDB table
     Properties:
-      CodeUri: s3://gstafford-sam-demo/1b22a8dbb540ec45046b242577fa2ad9
-      Description: Modify new IoT message item in DynamoDB table
+      CodeUri: s3://gstafford-sam-demo/6718a914e1cb7c34fba58bb8a3a52d79
+      Description: Update IoT message item in DynamoDB table
       Events:
         putMessage:
           Properties:
             Method: put
-            Path: /message
+            Path: /message/{date}
+            RestApiId:
+              Ref: IotDynamoApi
           Type: Api
       Handler: app.putMessage
       Policies:
@@ -139,7 +188,7 @@ Resources:
   S3ToSQSFunction:
     Description: Respond to S3 Events
     Properties:
-      CodeUri: s3://gstafford-sam-demo/bee28601ef49c097e11fac808fd8dbb5
+      CodeUri: s3://gstafford-sam-demo/6748c14c7b45555621a129ef0cae341c
       Description: Post new IoT message to SQS
       Handler: app.lambda_handler
       MemorySize: 256
@@ -204,7 +253,7 @@ Resources:
   SqsToDynamoDbFunction:
     Description: Post new IoT message to SQS
     Properties:
-      CodeUri: s3://gstafford-sam-demo/a3d1993c1bd5bd2ddcb6be699867090e
+      CodeUri: s3://gstafford-sam-demo/5b570116aafbab648e0f73e6e504f849
       Description: Post new IoT message to SQS
       Events:
         SqsToDynamoDb:

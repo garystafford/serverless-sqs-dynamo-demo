@@ -25,7 +25,7 @@ s3_client = boto3.client('s3')
 
 
 def lambda_handler(event, context):
-    # logging.debug('Received event: ' + json.dumps(event, indent=2))
+    logging.debug('Received event: ' + json.dumps(event, indent=2))
 
     # Get the object from the event and show its content type
     bucket = event['Records'][0]['s3']['bucket']['name']
@@ -35,6 +35,7 @@ def lambda_handler(event, context):
         logging.debug('CONTENT TYPE: ' + response['ContentType'])
         if response['ContentType'] == 'text/csv':
             get_messages_csv(response)
+        return 0
     except Exception as e:
         logging.error(e)
         logging.error('Error getting object {} from bucket {}. '
@@ -50,7 +51,7 @@ def get_messages_csv(response):
     :return:
     """
     iot_messages = response['Body'].read().decode('utf-8').split()
-    iot_messages.pop(0)
+    iot_messages.pop(0)  # remove header row
     for row in iot_messages:
         message = row.split(',')
         message = convert_message(message)

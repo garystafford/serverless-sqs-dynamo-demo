@@ -1,0 +1,2 @@
+timestamp,location,source,local_dest,local_avg,remote_dest,remote_avg
+1559040909.3853335,lab-5,wireless,router-1,4.44,device-1,8.88
