@@ -16,32 +16,55 @@ Outputs:
   GetMessagesApi:
     Description: API Gateway endpoint URL for Prod Stage for GetMessagesFunction
     Value:
-      Fn::Sub: https://${IotDynamoApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
+      Fn::Sub: https://${IotServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/
   IotDemoQueueUrl:
     Description: URL of SQS Queue
     Value:
       Ref: IotDemoQueue
 Parameters:
+  CertificateArn:
+    Default: arn:aws:acm:us-east-1:931066906971:certificate/57fd98d2-a4ee-410a-9d5c-a755192f0fe6
+    Type: String
   DomainName:
     Default: api.example-api.com
+    Type: String
+  HostedZoneName:
+    Default: example-api.com.
     Type: String
   IotBucketName:
     Default: gstafford-iot-data
     Type: String
 Resources:
-  ApiGatewayDeployment:
+  APIDomain:
     Properties:
-      RestApiId:
-        Ref: IotDynamoApi
-      StageName: Prod
-    Type: AWS::ApiGateway::Deployment
+      HostedZoneName:
+        Ref: HostedZoneName
+      RecordSets:
+      - AliasTarget:
+          DNSName:
+            Fn::GetAtt:
+            - ApiDomainName
+            - DistributionDomainName
+          HostedZoneId: Z2FDTNDATAQYW2
+        Name:
+          Ref: DomainName
+        Type: A
+    Type: AWS::Route53::RecordSetGroup
+  ApiDomainName:
+    DependsOn: IotServerlessApi
+    Properties:
+      CertificateArn:
+        Ref: CertificateArn
+      DomainName:
+        Ref: DomainName
+    Type: AWS::ApiGateway::DomainName
   ApiMapping:
-    DependsOn: ApiGatewayDeployment
+    DependsOn: IotServerlessApiProdStage
     Properties:
       DomainName:
         Ref: DomainName
       RestApiId:
-        Ref: IotDynamoApi
+        Ref: IotServerlessApi
       Stage: Prod
     Type: AWS::ApiGateway::BasePathMapping
   DeleteMessageFunction:
@@ -55,7 +78,7 @@ Resources:
             Method: delete
             Path: /message/{date}
             RestApiId:
-              Ref: IotDynamoApi
+              Ref: IotServerlessApi
           Type: Api
       Handler: app.deleteMessage
       Policies:
@@ -75,7 +98,7 @@ Resources:
             Method: get
             Path: /message/{date}
             RestApiId:
-              Ref: IotDynamoApi
+              Ref: IotServerlessApi
           Type: Api
       Handler: app.getMessage
       Policies:
@@ -95,7 +118,7 @@ Resources:
             Method: get
             Path: /message
             RestApiId:
-              Ref: IotDynamoApi
+              Ref: IotServerlessApi
           Type: Api
       Handler: app.getMessages
       Policies:
@@ -139,7 +162,7 @@ Resources:
       - AttributeName: time
         KeyType: RANGE
     Type: AWS::DynamoDB::Table
-  IotDynamoApi:
+  IotServerlessApi:
     Properties:
       Auth:
         DefaultAuthorizer: NONE
@@ -156,7 +179,7 @@ Resources:
             Method: post
             Path: /message
             RestApiId:
-              Ref: IotDynamoApi
+              Ref: IotServerlessApi
           Type: Api
       Handler: app.postMessage
       Policies:
@@ -176,7 +199,7 @@ Resources:
             Method: put
             Path: /message/{date}
             RestApiId:
-              Ref: IotDynamoApi
+              Ref: IotServerlessApi
           Type: Api
       Handler: app.putMessage
       Policies:

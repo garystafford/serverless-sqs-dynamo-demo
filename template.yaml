@@ -17,13 +17,25 @@ Parameters:
   DomainName:
     Type: String
     Default: api.example-api.com
+  CertificateArn:
+    Type: String
+    Default: arn:aws:acm:us-east-1:931066906971:certificate/57fd98d2-a4ee-410a-9d5c-a755192f0fe6
+  HostedZoneName:
+    Type: String
+    Default: example-api.com. # don't miss the  dot at the end
 Resources:
-  IotDynamoApi:
+  IotServerlessApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
       Auth:
         DefaultAuthorizer: NONE
+  ApiDomainName:
+    Type: AWS::ApiGateway::DomainName
+    Properties:
+      DomainName: !Ref DomainName
+      CertificateArn: !Ref CertificateArn
+    DependsOn: IotServerlessApi
   GetMessagesFunction:
     Type: AWS::Serverless::Function
     Description: Get all IoT messages in DynamoDB table (scan)
@@ -41,7 +53,7 @@ Resources:
           Properties:
             Path: /message
             Method: get
-            RestApiId: !Ref IotDynamoApi
+            RestApiId: !Ref IotServerlessApi
   GetMessageFunction:
     Type: AWS::Serverless::Function
     Description: Get one IoT message based on timestamp and location
@@ -59,7 +71,7 @@ Resources:
           Properties:
             Path: /message/{date}
             Method: get
-            RestApiId: !Ref IotDynamoApi
+            RestApiId: !Ref IotServerlessApi
   PostMessageFunction:
     Type: AWS::Serverless::Function
     Description: Create new IoT message item in DynamoDB table
@@ -77,7 +89,7 @@ Resources:
           Properties:
             Path: /message
             Method: post
-            RestApiId: !Ref IotDynamoApi
+            RestApiId: !Ref IotServerlessApi
   PutMessageFunction:
     Type: AWS::Serverless::Function
     Description: Update IoT message item in DynamoDB table
@@ -95,7 +107,7 @@ Resources:
           Properties:
             Path: /message/{date}
             Method: put
-            RestApiId: !Ref IotDynamoApi
+            RestApiId: !Ref IotServerlessApi
   DeleteMessageFunction:
     Type: AWS::Serverless::Function
     Description: Delete IoT message item in DynamoDB table
@@ -113,7 +125,7 @@ Resources:
           Properties:
             Path: /message/{date}
             Method: delete
-            RestApiId: !Ref IotDynamoApi
+            RestApiId: !Ref IotServerlessApi
   SqsToDynamoDbFunction:
     Type: AWS::Serverless::Function
     Description: Post new IoT message to SQS
@@ -222,22 +234,33 @@ Resources:
 #        WriteCapacityUnits: 2
   IotDemoQueue:
     Type: AWS::SQS::Queue
-  ApiGatewayDeployment:
-    Type: "AWS::ApiGateway::Deployment"
-    Properties:
-      RestApiId: !Ref IotDynamoApi
-      StageName: Prod
+#  ApiGatewayDeployment:
+#    Type: AWS::ApiGateway::Deployment
+#    Properties:
+#      RestApiId: !Ref IotServerlessApi
+#      StageName: Prod
   ApiMapping:
     Type: AWS::ApiGateway::BasePathMapping
-    DependsOn: ApiGatewayDeployment
     Properties:
       DomainName: !Ref DomainName
-      RestApiId: !Ref IotDynamoApi
+      RestApiId: !Ref IotServerlessApi
       Stage: Prod
+    DependsOn: IotServerlessApiProdStage # logical id of API GW stage created by SAM
+  APIDomain:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneName: !Ref HostedZoneName
+      RecordSets:
+      - Name: !Ref DomainName
+        Type: A
+        AliasTarget:
+          DNSName: !GetAtt ApiDomainName.DistributionDomainName
+          HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
+
 Outputs:
   GetMessagesApi:
     Description: 'API Gateway endpoint URL for Prod Stage for GetMessagesFunction'
-    Value: !Sub "https://${IotDynamoApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
+    Value: !Sub "https://${IotServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
   IotDemoQueueUrl:
     Description: 'URL of SQS Queue'
     Value: !Ref IotDemoQueue
