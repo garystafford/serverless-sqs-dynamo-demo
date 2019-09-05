@@ -19,7 +19,3 @@ timestamp,location,source,local_dest,local_avg,remote_dest,remote_avg
 1559041081.5039854,lab-5,wireless,router-1,0.76,device-1,9.73
 1559041091.6253936,lab-5,wireless,router-1,0.19,device-1,10.4
 1559041101.75318,lab-5,wireless,router-1,3.22,device-1,9.14
-1559041111.8725379,lab-5,wireless,router-1,0.71,device-1,8.25
-1559041121.99573,lab-5,wireless,router-1,1.9,device-1,9.53
-1559041132.1242085,lab-5,wireless,router-1,0.52,device-1,11.6
-1559041142.2455835,lab-5,wireless,router-1,2.4,device-1,8.11

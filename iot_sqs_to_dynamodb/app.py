@@ -4,12 +4,10 @@ from json import loads
 import boto3
 
 # Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(levelname)s: %(asctime)s: %(message)s'
-)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
-logging.info('Loading function')
+logger.info('Loading function')
 
 dynamo_client = boto3.client('dynamodb')
 
@@ -27,9 +25,13 @@ def lambda_handler(event, context):
         payload = loads(record['body'], parse_float=str)
         operation = record['messageAttributes']['Method']['stringValue']
         if operation in operations:
-            logging.debug(operations[operation](dynamo_client, payload))
-            logging.info('{} successful'.format(operation))
-            return 0
+            try:
+                operations[operation](dynamo_client, payload)
+                logger.info('{} successful'.format(operation))
+                return 0
+            except Exception as e:
+                logger.error(e)
+                return -1
         else:
-            logging.error('Unsupported method \'{}\''.format(operation))
+            logger.error('Unsupported method \'{}\''.format(operation))
             return -1

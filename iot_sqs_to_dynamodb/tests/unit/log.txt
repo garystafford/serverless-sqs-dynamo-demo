@@ -1,9 +1,9 @@
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function generate_idempotent_uuid at 0x107f30b70>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function block_endpoint_discovery_required_operations at 0x107f079d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.PutItem: calling handler <function inject_api_version_header_if_needed at 0x107f33598>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=PutItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.PutItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Item": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}, "location": {"S": "lab-5"}, "source": {"S": "wireless"}, "local_dest": {"S": "router-1"}, "local_avg": {"N": "5.32"}, "remote_dest": {"S": "device-1"}, "remote_avg": {"N": "11.01"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x108c9c710>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108c9c6d8>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x107f30a60>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function generate_idempotent_uuid at 0x1076ffbf8>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function block_endpoint_discovery_required_operations at 0x1076d4a60>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.PutItem: calling handler <function inject_api_version_header_if_needed at 0x107704620>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=PutItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.PutItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-DBSDROSJ2FKQ", "Item": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}, "location": {"S": "lab-5"}, "source": {"S": "wireless"}, "local_dest": {"S": "router-1"}, "local_avg": {"N": "5.32"}, "remote_dest": {"S": "device-1"}, "remote_avg": {"N": "11.01"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x108449278>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -11,35 +11,120 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T211843Z
+x-amz-date:20190904T164909Z
 x-amz-target:DynamoDB_20120810.PutItem
 
 content-type;host;x-amz-date;x-amz-target
-c2e0205e3d648759ef83c3f25a70888a2747456bf8f2754c0ac2f9a15d936a9c
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T211843Z
-20190830/us-east-1/dynamodb/aws4_request
-1d2135175c56717b8a7b54b477e9a57925f5a9ee4cf9459e457886141aa49698
+20190904T164909Z
+20190904/us-east-1/dynamodb/aws4_request
+de0487818908954f0dbd753f1aa3de796fdc70aa4a70f1bb6b09565b663e639b
 DEBUG    botocore.auth:auth.py:369 Signature:
-b7d7f10ebfa1120a9f146b34fd241d5adad065eed2850270024ef2226e8e1f8e
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211843Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=b7d7f10ebfa1120a9f146b34fd241d5adad065eed2850270024ef2226e8e1f8e', 'Content-Length': '304'}>
+5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164909Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213', 'Content-Length': '303'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
 DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (1): dynamodb.us-east-1.amazonaws.com:443
-DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:20:17 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'HGQ7TBGE2B27L96B6FSORNEV0BVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
-DEBUG    botocore.parsers:parsers.py:235 Response body:
-b'{}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108c9cb00>
-DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:30 {'ResponseMetadata': {'RequestId': 'HGQ7TBGE2B27L96B6FSORNEV0BVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:20:17 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'HGQ7TBGE2B27L96B6FSORNEV0BVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
-INFO     root:app.py:31 POST successful
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function generate_idempotent_uuid at 0x107f30b70>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function block_endpoint_discovery_required_operations at 0x107f079d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.UpdateItem: calling handler <function inject_api_version_header_if_needed at 0x107f33598>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=UpdateItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.UpdateItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}, "UpdateExpression": "set remote_avg = :val1", "ExpressionAttributeValues": {":val1": {"N": "9.00"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x108c9c710>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.UpdateItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108c9c6d8>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.UpdateItem: calling handler <function set_operation_specific_signer at 0x107f30a60>
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x1084d0278>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x1084d0278>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 0.05
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 0.05 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -47,34 +132,120 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T211844Z
-x-amz-target:DynamoDB_20120810.UpdateItem
+x-amz-date:20190904T164909Z
+x-amz-target:DynamoDB_20120810.PutItem
 
 content-type;host;x-amz-date;x-amz-target
-4dbcddbfb04903fe2a95fbf8660236f1e798b971c2d0af23d01164bbe945b9bf
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T211844Z
-20190830/us-east-1/dynamodb/aws4_request
-4665bd6a05b0148ddb30b617c9c1f3fd6a117b14a59ce7338ee54e9f20a0d392
+20190904T164909Z
+20190904/us-east-1/dynamodb/aws4_request
+de0487818908954f0dbd753f1aa3de796fdc70aa4a70f1bb6b09565b663e639b
 DEBUG    botocore.auth:auth.py:369 Signature:
-9ec47caf4d8044cc71ba8f86906d9f7974761a8a3883532ccf78a29951b42f4c
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.UpdateItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211844Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=9ec47caf4d8044cc71ba8f86906d9f7974761a8a3883532ccf78a29951b42f4c', 'Content-Length': '222'}>
+5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164909Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213', 'Content-Length': '303'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
-DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:20:17 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'ATGR628SFFJE3854ASIRBFCR1JVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
-DEBUG    botocore.parsers:parsers.py:235 Response body:
-b'{}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.UpdateItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108c9cb00>
-DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:30 {'ResponseMetadata': {'RequestId': 'ATGR628SFFJE3854ASIRBFCR1JVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:20:17 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'ATGR628SFFJE3854ASIRBFCR1JVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
-INFO     root:app.py:31 PUT successful
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function generate_idempotent_uuid at 0x107f30b70>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function block_endpoint_discovery_required_operations at 0x107f079d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.GetItem: calling handler <function inject_api_version_header_if_needed at 0x107f33598>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=GetItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.GetItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x108c9c710>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.GetItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108c9c6d8>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.GetItem: calling handler <function set_operation_specific_signer at 0x107f30a60>
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (2): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10851dd68>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10851dd68>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 0.1
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 0.1 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -82,34 +253,120 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T211844Z
-x-amz-target:DynamoDB_20120810.GetItem
+x-amz-date:20190904T164909Z
+x-amz-target:DynamoDB_20120810.PutItem
 
 content-type;host;x-amz-date;x-amz-target
-d87bf451055d3994922912396b7a311abe0112aac7d50d08837cfdbe2770d2f8
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T211844Z
-20190830/us-east-1/dynamodb/aws4_request
-83fbb554ed37117c3f83296091710c338219f7dd631487c892258effa8d487a8
+20190904T164909Z
+20190904/us-east-1/dynamodb/aws4_request
+de0487818908954f0dbd753f1aa3de796fdc70aa4a70f1bb6b09565b663e639b
 DEBUG    botocore.auth:auth.py:369 Signature:
-edf5781adabae4fc8f940ae21228a3b96fad3e6b38994054c90da4390e3dc51f
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.GetItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211844Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=edf5781adabae4fc8f940ae21228a3b96fad3e6b38994054c90da4390e3dc51f', 'Content-Length': '121'}>
+5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164909Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213', 'Content-Length': '303'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
-DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 220
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:20:17 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '220', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'L6QFULGMECAH3T0Q4ASKNL8E73VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3490813162'}
-DEBUG    botocore.parsers:parsers.py:235 Response body:
-b'{"Item":{"remote_avg":{"N":"9"},"date":{"S":"2000-01-01"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"5.32"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"06:45:43"}}}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.GetItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108c9cb00>
-DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:30 {'Item': {'remote_avg': {'N': '9'}, 'date': {'S': '2000-01-01'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '5.32'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '06:45:43'}}, 'ResponseMetadata': {'RequestId': 'L6QFULGMECAH3T0Q4ASKNL8E73VV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:20:17 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '220', 'connection': 'keep-alive', 'x-amzn-requestid': 'L6QFULGMECAH3T0Q4ASKNL8E73VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3490813162'}, 'RetryAttempts': 0}}
-INFO     root:app.py:31 GET successful
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.Scan: calling handler <function generate_idempotent_uuid at 0x107f30b70>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.Scan: calling handler <function block_endpoint_discovery_required_operations at 0x107f079d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.Scan: calling handler <function inject_api_version_header_if_needed at 0x107f33598>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=Scan) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.Scan', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E"}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x108c9c710>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.Scan: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108c9c6d8>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.Scan: calling handler <function set_operation_specific_signer at 0x107f30a60>
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (3): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x1085526a0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x1085526a0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 0.2
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 0.2 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -117,34 +374,120 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T211844Z
-x-amz-target:DynamoDB_20120810.Scan
+x-amz-date:20190904T164909Z
+x-amz-target:DynamoDB_20120810.PutItem
 
 content-type;host;x-amz-date;x-amz-target
-aaadb42528a5062c31af9f665880d214adab83f9e50b8b310efe7f89e5aad682
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T211844Z
-20190830/us-east-1/dynamodb/aws4_request
-9ffb7852f0f5ea63ca6ac4b4e2f0aa92ee46c41bb8c3e2daa319be864d48ed96
+20190904T164909Z
+20190904/us-east-1/dynamodb/aws4_request
+de0487818908954f0dbd753f1aa3de796fdc70aa4a70f1bb6b09565b663e639b
 DEBUG    botocore.auth:auth.py:369 Signature:
-608b7d0d136280c3568782910032129ef00368a0a9f86c2cc3e457f6f4556036
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.Scan', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211844Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=608b7d0d136280c3568782910032129ef00368a0a9f86c2cc3e457f6f4556036', 'Content-Length': '56'}>
+5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164909Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=5c412158568aba2262cbc49fb3eaf9efe8b0a1b2548c1b562c6f76ab6ef13213', 'Content-Length': '303'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
-DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 5411
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:20:18 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '5411', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'K3JI7H5KFKATJ574C82N5P3D8BVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '1367643085'}
-DEBUG    botocore.parsers:parsers.py:235 Response body:
-b'{"Count":25,"Items":[{"remote_avg":{"N":"9"},"date":{"S":"2000-01-01"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"5.32"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"06:45:43"}},{"remote_avg":{"N":"9.09"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"4.39"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:09"}},{"remote_avg":{"N":"16.75"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.49"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:19"}},{"remote_avg":{"N":"8.31"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.56"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:29"}},{"remote_avg":{"N":"9.4"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.64"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:39"}},{"remote_avg":{"N":"9.07"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.18"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:55:49"}},{"remote_avg":{"N":"8.4"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.42"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:00"}},{"remote_avg":{"N":"8.66"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.73"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:10"}},{"remote_avg":{"N":"8.61"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.67"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:20"}},{"remote_avg":{"N":"10.87"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.27"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:30"}},{"remote_avg":{"N":"10.08"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.63"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:40"}},{"remote_avg":{"N":"8.07"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"3.17"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:56:50"}},{"remote_avg":{"N":"8.7"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.34"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:00"}},{"remote_avg":{"N":"11.63"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.56"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:10"}},{"remote_avg":{"N":"9.56"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.01"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:20"}},{"remote_avg":{"N":"9.26"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.14"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:31"}},{"remote_avg":{"N":"8.36"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.9"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:41"}},{"remote_avg":{"N":"16.86"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.38"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:57:51"}},{"remote_avg":{"N":"9.73"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.76"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:01"}},{"remote_avg":{"N":"10.4"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.19"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:11"}},{"remote_avg":{"N":"9.14"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"3.22"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:21"}},{"remote_avg":{"N":"8.25"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.71"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:31"}},{"remote_avg":{"N":"9.53"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"1.9"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:41"}},{"remote_avg":{"N":"11.6"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"0.52"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:58:52"}},{"remote_avg":{"N":"8.11"},"date":{"S":"2019-05-28"},"location":{"S":"lab-5"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"2.4"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"10:59:02"}}],"ScannedCount":25}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.Scan: calling handler <botocore.retryhandler.RetryHandler object at 0x108c9cb00>
-DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:30 {'Items': [{'remote_avg': {'N': '9'}, 'date': {'S': '2000-01-01'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '5.32'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '06:45:43'}}, {'remote_avg': {'N': '9.09'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '4.39'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:09'}}, {'remote_avg': {'N': '16.75'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.49'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:19'}}, {'remote_avg': {'N': '8.31'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.56'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:29'}}, {'remote_avg': {'N': '9.4'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.64'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:39'}}, {'remote_avg': {'N': '9.07'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.18'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:55:49'}}, {'remote_avg': {'N': '8.4'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.42'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:00'}}, {'remote_avg': {'N': '8.66'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.73'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:10'}}, {'remote_avg': {'N': '8.61'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.67'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:20'}}, {'remote_avg': {'N': '10.87'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.27'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:30'}}, {'remote_avg': {'N': '10.08'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.63'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:40'}}, {'remote_avg': {'N': '8.07'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '3.17'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:56:50'}}, {'remote_avg': {'N': '8.7'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.34'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:00'}}, {'remote_avg': {'N': '11.63'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.56'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:10'}}, {'remote_avg': {'N': '9.56'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.01'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:20'}}, {'remote_avg': {'N': '9.26'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.14'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:31'}}, {'remote_avg': {'N': '8.36'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.9'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:41'}}, {'remote_avg': {'N': '16.86'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.38'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:57:51'}}, {'remote_avg': {'N': '9.73'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.76'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:01'}}, {'remote_avg': {'N': '10.4'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.19'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:11'}}, {'remote_avg': {'N': '9.14'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '3.22'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:21'}}, {'remote_avg': {'N': '8.25'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.71'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:31'}}, {'remote_avg': {'N': '9.53'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '1.9'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:41'}}, {'remote_avg': {'N': '11.6'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '0.52'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:58:52'}}, {'remote_avg': {'N': '8.11'}, 'date': {'S': '2019-05-28'}, 'location': {'S': 'lab-5'}, 'remote_dest': {'S': 'device-1'}, 'local_avg': {'N': '2.4'}, 'local_dest': {'S': 'router-1'}, 'source': {'S': 'wireless'}, 'time': {'S': '10:59:02'}}], 'Count': 25, 'ScannedCount': 25, 'ResponseMetadata': {'RequestId': 'K3JI7H5KFKATJ574C82N5P3D8BVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:20:18 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '5411', 'connection': 'keep-alive', 'x-amzn-requestid': 'K3JI7H5KFKATJ574C82N5P3D8BVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '1367643085'}, 'RetryAttempts': 0}}
-INFO     root:app.py:31 GET_ALL successful
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function generate_idempotent_uuid at 0x107f30b70>
-DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function block_endpoint_discovery_required_operations at 0x107f079d8>
-DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.DeleteItem: calling handler <function inject_api_version_header_if_needed at 0x107f33598>
-DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=DeleteItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.DeleteItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213'}, 'body': b'{"TableName": "iot-dynamodb-IotDemoTable-1N4QFAHEDD96E", "Key": {"date": {"S": "2000-01-01"}, "time": {"S": "06:45:43"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x108c9c710>, 'has_streaming_input': False, 'auth_type': None}}
-DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.DeleteItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108c9c6d8>>
-DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.DeleteItem: calling handler <function set_operation_specific_signer at 0x107f30a60>
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (4): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10855a048>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10855a048>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 0.4
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 0.4 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
 DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
 DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
 POST
@@ -152,25 +495,599 @@ POST
 
 content-type:application/x-amz-json-1.0
 host:dynamodb.us-east-1.amazonaws.com
-x-amz-date:20190830T211844Z
-x-amz-target:DynamoDB_20120810.DeleteItem
+x-amz-date:20190904T164910Z
+x-amz-target:DynamoDB_20120810.PutItem
 
 content-type;host;x-amz-date;x-amz-target
-d87bf451055d3994922912396b7a311abe0112aac7d50d08837cfdbe2770d2f8
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
 DEBUG    botocore.auth:auth.py:367 StringToSign:
 AWS4-HMAC-SHA256
-20190830T211844Z
-20190830/us-east-1/dynamodb/aws4_request
-812f585d78d467a8991904c57f288bb1d4456334d22b3eebf94f921c97da2b77
+20190904T164910Z
+20190904/us-east-1/dynamodb/aws4_request
+5f61b2fa4d253d720415cccdb3a02af8779c5de927bbbf3f0266af46a291bd42
 DEBUG    botocore.auth:auth.py:369 Signature:
-c08a746e0bc7f71b4353ce150d85ea2fc904b1171c24f3a613eb659b429a2c87
-DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.DeleteItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190830T211844Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190830/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=c08a746e0bc7f71b4353ce150d85ea2fc904b1171c24f3a613eb659b429a2c87', 'Content-Length': '121'}>
+91d6711fa82dadbecb82be6307fdf2d5c8923dccfa17334f59d08176b15e1aeb
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164910Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=91d6711fa82dadbecb82be6307fdf2d5c8923dccfa17334f59d08176b15e1aeb', 'Content-Length': '303'}>
 DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
-DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
-DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Fri, 30 Aug 2019 21:20:18 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'D93GL603L587D47B247BTF2ADRVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
-DEBUG    botocore.parsers:parsers.py:235 Response body:
-b'{}'
-DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.DeleteItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108c9cb00>
-DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
-DEBUG    root:app.py:30 {'ResponseMetadata': {'RequestId': 'D93GL603L587D47B247BTF2ADRVV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Fri, 30 Aug 2019 21:20:18 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'D93GL603L587D47B247BTF2ADRVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
-INFO     root:app.py:31 DELETE successful
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (5): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10855ab00>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10855ab00>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 0.8
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 0.8 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190904T164910Z
+x-amz-target:DynamoDB_20120810.PutItem
+
+content-type;host;x-amz-date;x-amz-target
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190904T164910Z
+20190904/us-east-1/dynamodb/aws4_request
+5f61b2fa4d253d720415cccdb3a02af8779c5de927bbbf3f0266af46a291bd42
+DEBUG    botocore.auth:auth.py:369 Signature:
+91d6711fa82dadbecb82be6307fdf2d5c8923dccfa17334f59d08176b15e1aeb
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164910Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=91d6711fa82dadbecb82be6307fdf2d5c8923dccfa17334f59d08176b15e1aeb', 'Content-Length': '303'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (6): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x1085655f8>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x1085655f8>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 1.6
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 1.6 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190904T164912Z
+x-amz-target:DynamoDB_20120810.PutItem
+
+content-type;host;x-amz-date;x-amz-target
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190904T164912Z
+20190904/us-east-1/dynamodb/aws4_request
+364da9dcf43e936088ba52b37c47064493ca98c440ca97bb8cbd2dd0e4a34421
+DEBUG    botocore.auth:auth.py:369 Signature:
+9d3a6f67c95232356050fad260b41e8351ce6df7b9cb83d5c36cb38852938b12
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164912Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=9d3a6f67c95232356050fad260b41e8351ce6df7b9cb83d5c36cb38852938b12', 'Content-Length': '303'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (7): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10856b0f0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10856b0f0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 3.2
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 3.2 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190904T164915Z
+x-amz-target:DynamoDB_20120810.PutItem
+
+content-type;host;x-amz-date;x-amz-target
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190904T164915Z
+20190904/us-east-1/dynamodb/aws4_request
+6116b28a9cb74bc246777defe674784e018eecc60f0ee24ff6e105a3ec5bfcdc
+DEBUG    botocore.auth:auth.py:369 Signature:
+969e05959b75d07ff3a91a34792459027e926f69f2fc7bca1d085af0bfe24f32
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164915Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=969e05959b75d07ff3a91a34792459027e926f69f2fc7bca1d085af0bfe24f32', 'Content-Length': '303'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (8): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10856bba8>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10856bba8>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 6.4
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 6.4 seconds
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x108449240>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x1076ffae8>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190904T164922Z
+x-amz-target:DynamoDB_20120810.PutItem
+
+content-type;host;x-amz-date;x-amz-target
+f7e44a43d150c8527b020229e6080c6a2fec4e99d61525c9cbee1289cc820b7a
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190904T164922Z
+20190904/us-east-1/dynamodb/aws4_request
+4a98e517fb7efba8c19fd9cb2bab002ca6f973727d307e4bbfed6a6857953f8f
+DEBUG    botocore.auth:auth.py:369 Signature:
+8fa8a62ae05bfa4aad7339a7b2cb05429df9071cd83d33e4d44e5c9959e99567
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.3 Darwin/18.6.0 Botocore/1.12.213', 'X-Amz-Date': b'20190904T164922Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190904/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=8fa8a62ae05bfa4aad7339a7b2cb05429df9071cd83d33e4d44e5c9959e99567', 'Content-Length': '303'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (9): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    botocore.endpoint:endpoint.py:205 Exception received when sending HTTP request.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10857a6a0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x108449630>
+DEBUG    botocore.retryhandler:retryhandler.py:272 retry needed, retryable exception caught: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py", line 748, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 262, in send
+    chunked=self._chunked(request.headers),
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 343, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 686, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <botocore.awsrequest.AWSHTTPSConnection object at 0x10857a6a0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 269, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 317, in __call__
+    caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 223, in __call__
+    attempt_number, caught_exception)
+  File "/usr/local/lib/python3.7/site-packages/botocore/retryhandler.py", line 359, in _check_caught_exception
+    raise caught_exception
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 200, in _do_get_response
+    http_response = self._send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/endpoint.py", line 244, in _send
+    return self.http_session.send(request)
+  File "/usr/local/lib/python3.7/site-packages/botocore/httpsession.py", line 282, in send
+    raise EndpointConnectionError(endpoint_url=request.url, error=e)
+botocore.exceptions.EndpointConnectionError: Could not connect to the endpoint URL: "https://dynamodb.us-east-1.amazonaws.com/"
+DEBUG    botocore.retryhandler:retryhandler.py:185 Retry needed, action of: 12.8
+DEBUG    botocore.endpoint:endpoint.py:239 Response received to retry, sleeping for 12.8 seconds

@@ -8,12 +8,10 @@ import boto3
 from botocore.exceptions import ClientError
 
 # Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(levelname)s: %(asctime)s: %(message)s'
-)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
-logging.info('Loading function')
+logger.info('Loading function')
 
 # Environment variables (set by SAM template)
 sqs_queue_url = os.getenv("QUEUE_URL")
@@ -25,49 +23,66 @@ s3_client = boto3.client('s3')
 
 
 def lambda_handler(event, context):
-    logging.debug('Received event: ' + json.dumps(event, indent=2))
+    logger.debug('Received event: ' + json.dumps(event, indent=2))
 
     # Get the object from the event and show its content type
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+    messages = read_csv_file(bucket, key)
+    process_messages(messages)
+
+
+def read_csv_file(bucket, key):
+    """
+    Read messages from CSV file.
+
+    :param bucket: S3 Bucket Name
+    :param key: CSV file name
+    :return: messages
+    """
     try:
         response = s3_client.get_object(Bucket=bucket, Key=key)
-        logging.debug('CONTENT TYPE: ' + response['ContentType'])
+        logger.debug('CONTENT TYPE: ' + response['ContentType'])
         if response['ContentType'] == 'text/csv':
-            get_messages_csv(response)
-        return 0
+            messages = response['Body'].read().decode('utf-8').split()
+            messages.pop(0)  # remove header row
+            return messages
     except Exception as e:
-        logging.error(e)
-        logging.error('Error getting object {} from bucket {}. '
-                      'Make sure they exist and your bucket is in the same region as this function.'
-                      .format(key, bucket))
+        logger.error(e)
+        logger.error('Error getting object {} from bucket {}. '
+                     'Make sure they exist and your bucket is in the same region as this function.'
+                     .format(key, bucket))
         raise e
 
 
-def get_messages_csv(response):
+def process_messages(messages):
     """
-    Read CSV file containing IoT messages.
+    Process messages.
 
-    :return:
+    :param messages: Messages from CSV file
+    :return: 0 or -1
     """
-    iot_messages = response['Body'].read().decode('utf-8').split()
-    iot_messages.pop(0)  # remove header row
-    for row in iot_messages:
-        message = row.split(',')
-        message = convert_message(message)
-        message = json.dumps(message, separators=(',', ':'))
-        logging.debug(message)
-        response = send_sqs_message(message)
-        if response is not None:
-            logging.info('Sent SQS message ID: ' + response['MessageId'])
+    try:
+        for row in messages:
+            message = row.split(',')
+            message = convert_message(message)
+            message = json.dumps(message, separators=(',', ':'))
+            logger.debug(message)
+            response = send_sqs_message(message)
+            if response is not None:
+                logger.info('Sent SQS message ID: ' + response['MessageId'])
+        return 0
+    except Exception as e:
+        logger.error(e)
+        return -1
 
 
 def convert_message(message):
     """
-    Convert CSV file row to IoT message dictionary object.
+    Convert CSV file row to message dictionary object.
     Drop millisecond precision from timestamp conversion.
 
-    :param message: CSV file row containing an IoT message
+    :param message: CSV file row containing a message
     :return: Message dictionary object
     """
     converted_ts = datetime.datetime.fromtimestamp(float(message[0]))
@@ -114,16 +129,15 @@ def convert_message(message):
 
 def send_sqs_message(message):
     """
-    Send JSON-format IoT message to SQS.
+    Send JSON-format message to SQS.
 
-    :param message: String message body
+    :param message: Dictionary message object
     :return: Dictionary containing information about the sent message. If
         error, returns None.
     """
 
-    # Send the SQS message
     try:
-        msg = sqs_client.send_message(
+        response = sqs_client.send_message(
             QueueUrl=sqs_queue_url,
             MessageBody=message,
             DelaySeconds=0,
@@ -134,7 +148,7 @@ def send_sqs_message(message):
                 }
             }
         )
+        return response
     except ClientError as e:
-        logging.error(e)
+        logger.error(e)
         return None
-    return msg

@@ -128,13 +128,13 @@ Resources:
             RestApiId: !Ref IotServerlessApi
   SqsToDynamoDbFunction:
     Type: AWS::Serverless::Function
-    Description: Post new IoT message to SQS
+    Description: Responds to SQS Event - Sends to Dynamodb
     Properties:
       Description: Post new IoT message to SQS
       CodeUri: iot_sqs_to_dynamodb/
       Handler: app.lambda_handler
       Runtime: python3.7
-      MemorySize: 256
+      MemorySize: 128
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref IotDemoTable
@@ -209,11 +209,11 @@ Resources:
     Type: AWS::Serverless::Function
     Description: Respond to S3 Events
     Properties:
-      Description: Post new IoT message to SQS
+      Description: Responds to S3 Event - Sends to SQS
       CodeUri: iot_s3_to_sqs_v2/
       Handler: app.lambda_handler
       Runtime: python3.7
-      MemorySize: 256
+      MemorySize: 128
       Role: !GetAtt S3ToSQSFunctionExecutionRole.Arn
   IotDemoTable:
     Type: AWS::DynamoDB::Table
@@ -261,6 +261,12 @@ Outputs:
   GetMessagesApi:
     Description: 'API Gateway endpoint URL for Prod Stage for GetMessagesFunction'
     Value: !Sub "https://${IotServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
+  IotDemoTable:
+    Description: 'Name of DynamoDB Table'
+    Value: !Ref IotDemoTable
   IotDemoQueueUrl:
     Description: 'URL of SQS Queue'
     Value: !Ref IotDemoQueue
+  IotDemoQueueArn:
+    Description: 'Arn of SQS Queue'
+    Value: !GetAtt IotDemoQueue.Arn
