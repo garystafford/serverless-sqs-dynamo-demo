@@ -1,56 +1,49 @@
-import datetime
 import os
 
 import pytest
 
-AWS_REGION = os.getenv("AWS_REGION")
-SQS_QUEUE = os.getenv("SQS_QUEUE")
-TABLE_NAME = os.getenv("TABLE_NAME")
+AWS_REGION = os.getenv('AWS_REGION')
+SQS_QUEUE = os.getenv('SQS_QUEUE')
+TABLE_NAME = os.getenv('TABLE_NAME')
+S3_BUCKET = os.getenv('S3_BUCKET')
 
-date_time = datetime.date
+cvs_file_name = 'iot_data.csv'
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope='module')
 def messages():
-    return 'timestamp,location,source,local_dest,local_avg,remote_dest,remote_avg\n' \
-           '1559040909.3853335,lab-5,wireless,router-1,4.39,device-1,9.09\n' \
-           '1559040919.5273902,lab-5,wireless,router-1,0.49,device-1,16.75'
+    return [
+        '978339661,lab-5,wireless,router-1,1.11,device-1,8.88',
+        '978339662,lab-5,wireless,router-1,2.22,device-1,9.99'
+    ]
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope='module')
 def message_string():
-    return '1559040909.3853335,lab-5,wireless,router-1,4.39,device-1,9.09'
+    return '978339663,lab-5,wireless,router-1,3.33,device-1,7.77'
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope='module')
 def message_json():
     return "{\"TableName\":\"" + TABLE_NAME + "\",\"Item\":{\"date\": " + \
-           "{\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"},\"location\": {\"S\": \"lab-5\"}, " + \
+           "{\"S\": \"2001-01-01\"}, \"time\": {\"S\": \"01:01:04\"},\"location\": {\"S\": \"lab-5\"}, " + \
            "\"source\": {\"S\":\"wireless\"}, \"local_dest\": {\"S\": \"router-1\"}, \"local_avg\": " + \
-           "{\"N\": \"5.32\"}, \"remote_dest\": {\"S\": \"device-1\"}, \"remote_avg\": {\"N\": \"11.01\"}}}"
+           "{\"N\": \"5.55\"}, \"remote_dest\": {\"S\": \"device-1\"}, \"remote_avg\": {\"N\": \"11.11\"}}}"
 
 
-@pytest.fixture(scope="module")
-def apigw_event():
-    """ Generates POST API GW Event"""
-    post_body = "{\"TableName\":\"" + TABLE_NAME + "\",\"Item\":{\"date\": " + \
-                "{\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"},\"location\": {\"S\": \"lab-5\"}, " + \
-                "\"source\": {\"S\":\"wireless\"}, \"local_dest\": {\"S\": \"router-1\"}, \"local_avg\": " + \
-                "{\"N\": \"5.32\"}, \"remote_dest\": {\"S\": \"device-1\"}, \"remote_avg\": {\"N\": \"11.01\"}}}"
+@pytest.fixture(scope='module')
+def post_event():
+    """ Generates S3 Event"""
     return {
         "Records": [
             {
-                "body": post_body,
-                "messageAttributes": {
-                    "Method": {
-                        "stringValue": "POST",
-                        "stringListValues": [],
-                        "binaryListValues": [],
-                        "dataType": "String"
+                "s3": {
+                    "bucket": {
+                        "name": S3_BUCKET,
                     },
-                    "eventSource": "aws:sqs",
-                    "eventSourceARN": SQS_QUEUE,
-                    "awsRegion": AWS_REGION
+                    "object": {
+                        "key": cvs_file_name,
+                    }
                 }
             }
         ]
