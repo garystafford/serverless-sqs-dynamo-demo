@@ -11,9 +11,16 @@ aws cloudformation validate-template \
 time sam build
 
 time sam package \
-    --output-template-file packaged.yaml \
-    --s3-bucket gstafford-sam-demo
+  --output-template-file packaged.yaml \
+  --s3-bucket gstafford-sam-demo
 
-time sam deploy --template-file packaged.yaml \
+time aws sam deploy \
+  --template-file packaged.yaml \
   --stack-name iot-dynamodb \
   --capabilities CAPABILITY_IAM
+
+if [ "$?" -eq 255 ]
+then
+    echo "No changes to deploy."
+    true
+fi
