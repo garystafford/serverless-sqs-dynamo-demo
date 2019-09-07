@@ -174,8 +174,6 @@ Resources:
     Type: AWS::DynamoDB::Table
   IotServerlessApi:
     Properties:
-      Auth:
-        DefaultAuthorizer: NONE
       StageName: Prod
     Type: AWS::Serverless::Api
   PostMessageFunction:
@@ -221,7 +219,7 @@ Resources:
   S3ToSQSFunction:
     Description: Respond to S3 Events
     Properties:
-      CodeUri: s3://gstafford-sam-demo/4c348ce4989de30099e414f27a1ee64b
+      CodeUri: s3://gstafford-sam-demo/f8d4cce943f0883158d09294a6df1fa4
       Description: Responds to S3 Event - Sends to SQS
       Handler: app.lambda_handler
       MemorySize: 128
@@ -286,7 +284,7 @@ Resources:
   SqsToDynamoDbFunction:
     Description: Responds to SQS Event - Sends to Dynamodb
     Properties:
-      CodeUri: s3://gstafford-sam-demo/0f6ee961de7ae658ae47312d580ff706
+      CodeUri: s3://gstafford-sam-demo/1b72c8a83bfa91090826d34e5195f40a
       Description: Post new IoT message to SQS
       Events:
         SqsToDynamoDb:
