@@ -28,8 +28,8 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-      Auth:
-        DefaultAuthorizer: NONE
+#      Auth:
+#        DefaultAuthorizer: NONE
   ApiDomainName:
     Type: AWS::ApiGateway::DomainName
     Properties:
