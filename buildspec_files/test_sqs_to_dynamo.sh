@@ -8,7 +8,9 @@ export AWS_REGION
 export TABLE_NAME
 export SQS_QUEUE
 
-pushd ../iot_sqs_to_dynamodb/tests/unit || exit
+ls -alh
+
+pushd iot_sqs_to_dynamodb/tests/unit || exit
 
 ls -alh
 
