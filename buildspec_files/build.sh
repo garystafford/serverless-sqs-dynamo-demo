@@ -14,7 +14,7 @@ time sam package \
   --output-template-file packaged.yaml \
   --s3-bucket gstafford-sam-demo
 
-time aws sam deploy \
+time sam deploy \
   --template-file packaged.yaml \
   --stack-name iot-dynamodb \
   --capabilities CAPABILITY_IAM
