@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build, package, deploy sam template
+# Build, package, deploy sam template containing all resources
 
 #set -x
 
@@ -24,7 +24,7 @@ time sam deploy \
   --capabilities CAPABILITY_IAM
 
 # catch error - cloudformation returns code 255
-# (exit non-zero) if stack exists
+# (exit non-zero) if stack exists and no updates
 if [ "$?" -eq 255 ]
 then
     echo "No changes to deploy."
