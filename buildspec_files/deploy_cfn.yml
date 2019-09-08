@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+      BUCKET_NAME: "gstafford-sam-demo"
+
 phases:
   install:
     runtime-versions:
