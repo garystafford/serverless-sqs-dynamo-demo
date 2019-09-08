@@ -4,7 +4,7 @@
 
 #set -x
 
-export BUCKET_NAME
+export S3_BUCKET_BUILD
 
 # validate
 sam validate --template template.yaml
@@ -16,7 +16,7 @@ time sam build
 
 time sam package \
   --output-template-file packaged.yaml \
-  --s3-bucket "${BUCKET_NAME}"
+  --s3-bucket "${S3_BUCKET_BUILD}"
 
 time sam deploy \
   --template-file packaged.yaml \

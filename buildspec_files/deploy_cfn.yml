@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-      BUCKET_NAME: "gstafford-sam-demo"
+      S3_BUCKET_BUILD: "gstafford-sam-demo"
 
 phases:
   install:
@@ -10,4 +10,4 @@ phases:
       python: 3.7
   build:
     commands:
-      - sh buildspec_files/build.sh
+      - sh buildspec_files/deploy_cfn.sh
