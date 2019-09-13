@@ -416,3 +416,5 @@ dmypy.json
 .pyre/
 
 .aws-sam/
+
+packaged.yaml
