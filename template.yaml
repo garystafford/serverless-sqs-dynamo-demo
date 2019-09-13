@@ -234,6 +234,11 @@ Resources:
 #        WriteCapacityUnits: 2
   IotDemoQueue:
     Type: AWS::SQS::Queue
+    Properties:
+      RedrivePolicy:
+        deadLetterTargetArn:!GetAtt DeadLetterQueue.Arn
+  DeadLetterQueue:
+    Type: AWS::SQS::Queue
 #  ApiGatewayDeployment:
 #    Type: AWS::ApiGateway::Deployment
 #    Properties:
@@ -270,3 +275,6 @@ Outputs:
   IotDemoQueueArn:
     Description: 'Arn of SQS Queue'
     Value: !GetAtt IotDemoQueue.Arn
+  DeadLetterQueueURL:
+    Description: "URL of DLQ"
+    Value: !Ref DeadLetterQueue
