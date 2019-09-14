@@ -12,7 +12,7 @@ date_time = datetime.date
 
 @pytest.fixture(scope="module")
 def post_event():
-    """ Generates POST API GW Event"""
+    """ Generates SQS event containing POST"""
     post_body = "{\"TableName\":\"" + TABLE_NAME + "\",\"Item\":{\"date\": " + \
                 "{\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"},\"location\": {\"S\": \"lab-5\"}, " + \
                 "\"source\": {\"S\":\"wireless\"}, \"local_dest\": {\"S\": \"router-1\"}, \"local_avg\": " + \
@@ -39,7 +39,7 @@ def post_event():
 
 @pytest.fixture(scope="module")
 def put_event():
-    """ Generates PUT API GW Event"""
+    """ Generates SQS event containing PUT"""
     put_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
                "\"Key\": {\"date\": {\"S\": \"2000-01-01\"},\"time\": {\"S\": \"06:45:43\"}}, " + \
                "\"UpdateExpression\": \"set remote_avg = :val1\", " + \
@@ -66,7 +66,7 @@ def put_event():
 
 @pytest.fixture(scope="module")
 def delete_event():
-    """ Generates DELETE API GW Event"""
+    """ Generates SQS event containing DELETE"""
     delete_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
                   "\"Key\": {\"date\": {\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"}}}"
     return {
@@ -91,7 +91,7 @@ def delete_event():
 
 @pytest.fixture(scope="module")
 def get_event():
-    """ Generates GET API GW Event"""
+    """ Generates SQS event containing GET"""
     get_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
                "\"Key\": {\"date\": {\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"}}}"
     return {
@@ -116,7 +116,7 @@ def get_event():
 
 @pytest.fixture(scope="module")
 def get_all_event():
-    """ Generates GET_ALL (SCAN) API GW Event"""
+    """ Generates SQS event containing GET_ALL (SCAN)"""
     get_all_body = "{\"TableName\": \"" + TABLE_NAME + "\"}"
     return {
         "Records": [

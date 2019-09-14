@@ -18,8 +18,6 @@ time sam package \
   --output-template-file packaged.yaml \
   --s3-bucket "${S3_BUCKET_BUILD}"
 
-ls -alh
-
 time sam deploy \
   --template-file packaged.yaml \
   --stack-name iot-dynamodb \

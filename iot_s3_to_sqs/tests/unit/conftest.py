@@ -2,8 +2,6 @@ import os
 
 import pytest
 
-AWS_REGION = os.getenv('AWS_REGION')
-SQS_QUEUE = os.getenv('SQS_QUEUE')
 TABLE_NAME = os.getenv('TABLE_NAME')
 S3_BUCKET = os.getenv('S3_BUCKET')
 

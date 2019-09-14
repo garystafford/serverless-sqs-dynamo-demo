@@ -3,8 +3,8 @@ import os
 from ... import app
 
 
-def test_lambda_handler_returns_0(post_event, mocker):
-    ret = app.lambda_handler(post_event, "")
+def test_lambda_handler_returns_0(post_event):
+    ret = app.lambda_handler(post_event, None)
     assert ret == 0
 
 
