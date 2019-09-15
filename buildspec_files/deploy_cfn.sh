@@ -2,7 +2,7 @@
 
 # Build, package, deploy sam template containing all resources
 
-#set -x
+set -x
 
 export S3_BUCKET_BUILD
 
@@ -21,7 +21,8 @@ time sam package \
 time sam deploy \
   --template-file packaged.yaml \
   --stack-name iot-dynamodb \
-  --capabilities CAPABILITY_IAM
+  --capabilities CAPABILITY_IAM \
+  --debug
 
 # catch error - cloudformation returns code 255
 # (exit non-zero) if stack exists and no updates
