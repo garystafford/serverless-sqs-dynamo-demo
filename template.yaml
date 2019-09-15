@@ -256,18 +256,15 @@ Resources:
             DNSName: !GetAtt ApiDomainName.DistributionDomainName
             HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
 Outputs:
-  GetMessagesApi:
-    Description: 'API Gateway endpoint URL for Prod Stage for GetMessagesFunction'
-    Value: !Sub "https://${IotServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
+  IotBucketName:
+    Description: 'Name of S3 Bucket where CSV files are uploaded'
+    Value: !Ref IotBucketName
   IotDemoTable:
     Description: 'Name of DynamoDB Table'
     Value: !Ref IotDemoTable
-  IotDemoQueueUrl:
-    Description: 'URL of SQS Queue'
-    Value: !Ref IotDemoQueue
   IotDemoQueueArn:
     Description: 'Arn of SQS Queue'
     Value: !GetAtt IotDemoQueue.Arn
-  DeadLetterQueueURL:
-    Description: "URL of DLQ"
-    Value: !Ref DeadLetterQueue
+  GetMessagesApi:
+    Description: 'Example API Gateway endpoint URL for Prod Stage: GetMessagesFunction'
+    Value: !Sub "https://${IotServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"

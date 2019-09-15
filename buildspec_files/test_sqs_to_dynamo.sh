@@ -7,7 +7,7 @@
 
 export AWS_REGION
 export TABLE_NAME
-export SQS_QUEUE
+export SQS_QUEUE_ARN
 
 pushd iot_sqs_to_dynamodb/tests/unit || exit
 

@@ -4,7 +4,7 @@
 
 #set -x
 
-export S3_BUCKET_BUILD="gstafford-sam-demo"
+export S3_BUCKET_BUILD
 
 # validate
 sam validate --template template.yaml

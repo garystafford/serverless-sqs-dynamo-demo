@@ -29,7 +29,7 @@ time sam deploy --template-file packaged.yaml \
 export AWS_REGION=us-east-1
 export S3_BUCKET=gstafford-iot-data
 export TABLE_NAME=iot-dynamodb-IotDemoTable-DBSDROSJ2FKQ
-export SQS_QUEUE=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-13GR2RRF67YD0
+export SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-13GR2RRF67YD0
 export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-13GR2RRF67YD0
 
 # local testing (All CRUD functions)

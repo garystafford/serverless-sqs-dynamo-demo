@@ -4,7 +4,7 @@ import os
 import pytest
 
 AWS_REGION = os.getenv("AWS_REGION")
-SQS_QUEUE = os.getenv("SQS_QUEUE")
+SQS_QUEUE_ARN = os.getenv("SQS_QUEUE_ARN")
 TABLE_NAME = os.getenv("TABLE_NAME")
 
 date_time = datetime.date
@@ -29,7 +29,7 @@ def post_event():
                         "dataType": "String"
                     },
                     "eventSource": "aws:sqs",
-                    "eventSourceARN": SQS_QUEUE,
+                    "eventSourceARN": SQS_QUEUE_ARN,
                     "awsRegion": AWS_REGION
                 }
             }
@@ -56,7 +56,7 @@ def put_event():
                         "dataType": "String"
                     },
                     "eventSource": "aws:sqs",
-                    "eventSourceARN": SQS_QUEUE,
+                    "eventSourceARN": SQS_QUEUE_ARN,
                     "awsRegion": AWS_REGION
                 }
             }
@@ -81,7 +81,7 @@ def delete_event():
                         "dataType": "String"
                     },
                     "eventSource": "aws:sqs",
-                    "eventSourceARN": SQS_QUEUE,
+                    "eventSourceARN": SQS_QUEUE_ARN,
                     "awsRegion": AWS_REGION
                 }
             }
@@ -106,7 +106,7 @@ def get_event():
                         "dataType": "String"
                     },
                     "eventSource": "aws:sqs",
-                    "eventSourceARN": SQS_QUEUE,
+                    "eventSourceARN": SQS_QUEUE_ARN,
                     "awsRegion": AWS_REGION
                 }
             }
@@ -130,7 +130,7 @@ def get_all_event():
                         "dataType": "String"
                     },
                     "eventSource": "aws:sqs",
-                    "eventSourceARN": SQS_QUEUE,
+                    "eventSourceARN": SQS_QUEUE_ARN,
                     "awsRegion": AWS_REGION
                 }
             }
