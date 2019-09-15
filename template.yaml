@@ -22,14 +22,12 @@ Parameters:
     Default: arn:aws:acm:us-east-1:931066906971:certificate/57fd98d2-a4ee-410a-9d5c-a755192f0fe6
   HostedZoneName:
     Type: String
-    Default: example-api.com. # don't miss the  dot at the end
+    Default: example-api.com. # don't miss the dot at the end
 Resources:
   IotServerlessApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-#      Auth:
-#        DefaultAuthorizer: NONE
   ApiDomainName:
     Type: AWS::ApiGateway::DomainName
     Properties:
@@ -229,9 +227,6 @@ Resources:
           KeyType: HASH
         - AttributeName: time
           KeyType: RANGE
-#      ProvisionedThroughput:
-#        ReadCapacityUnits: 2
-#        WriteCapacityUnits: 2
   IotDemoQueue:
     Type: AWS::SQS::Queue
     Properties:
@@ -239,11 +234,6 @@ Resources:
         deadLetterTargetArn:!GetAtt DeadLetterQueue.Arn
   DeadLetterQueue:
     Type: AWS::SQS::Queue
-#  ApiGatewayDeployment:
-#    Type: AWS::ApiGateway::Deployment
-#    Properties:
-#      RestApiId: !Ref IotServerlessApi
-#      StageName: Prod
   ApiMapping:
     Type: AWS::ApiGateway::BasePathMapping
     Properties:
@@ -256,12 +246,11 @@ Resources:
     Properties:
       HostedZoneName: !Ref HostedZoneName
       RecordSets:
-      - Name: !Ref DomainName
-        Type: A
-        AliasTarget:
-          DNSName: !GetAtt ApiDomainName.DistributionDomainName
-          HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
-
+        - Name: !Ref DomainName
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt ApiDomainName.DistributionDomainName
+            HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
 Outputs:
   GetMessagesApi:
     Description: 'API Gateway endpoint URL for Prod Stage for GetMessagesFunction'
