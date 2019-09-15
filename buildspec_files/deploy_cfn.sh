@@ -2,9 +2,9 @@
 
 # Build, package, deploy sam template containing all resources
 
-set -x
+#set -x
 
-export S3_BUCKET_BUILD
+export S3_BUCKET_BUILD="gstafford-sam-demo"
 
 # validate
 sam validate --template template.yaml

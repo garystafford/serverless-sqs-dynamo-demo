@@ -231,7 +231,11 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       RedrivePolicy:
-        deadLetterTargetArn:!GetAtt DeadLetterQueue.Arn
+        deadLetterTargetArn:
+          Fn::GetAtt:
+            - "DeadLetterQueue"
+            - "Arn"
+        maxReceiveCount: 5
   DeadLetterQueue:
     Type: AWS::SQS::Queue
   ApiMapping:
