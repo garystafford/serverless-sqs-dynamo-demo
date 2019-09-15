@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-      TABLE_NAME: "iot-dynamodb-IotDemoTable-DBSDROSJ2FKQ"
+      TABLE_NAME: "iot-dynamodb-IotDemoTable-1096ZA2SMLFQC"
       S3_BUCKET: "gstafford-iot-data"
 
 phases:

@@ -6,7 +6,7 @@ from botocore.exceptions import ClientError
 
 sqs_client = boto3.client('sqs')
 
-sqs_queue_url = os.getenv("QUEUE_URL")
+sqs_queue_url = os.getenv("SQS_QUEUE_URL")
 table_name = os.getenv("TABLE_NAME")
 
 

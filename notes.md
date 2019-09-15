@@ -28,9 +28,9 @@ time sam deploy --template-file packaged.yaml \
 
 export AWS_REGION=us-east-1
 export S3_BUCKET=gstafford-iot-data
-export TABLE_NAME=iot-dynamodb-IotDemoTable-DBSDROSJ2FKQ
-export SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-13GR2RRF67YD0
-export QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-13GR2RRF67YD0
+export TABLE_NAME=iot-dynamodb-IotDemoTable-1096ZA2SMLFQC
+export SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-1WY8QV5BPVQF9
+export SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-13GR2RRF67YD0
 
 # local testing (All CRUD functions)
 sam local invoke PostMessageFunction \

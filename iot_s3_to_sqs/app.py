@@ -14,7 +14,7 @@ logger.setLevel(logging.INFO)
 logger.info('Loading function')
 
 # Environment variables (set by SAM template)
-sqs_queue_url = os.getenv("QUEUE_URL")
+sqs_queue_url = os.getenv("SQS_QUEUE_URL")
 table_name = os.getenv("TABLE_NAME")
 
 # AWS clients

@@ -9,7 +9,7 @@ from botocore.exceptions import ClientError
 
 # Environment variables
 s3_bucket_path = os.getenv("S3_BUCKET")
-sqs_queue_url = os.getenv("QUEUE_URL")
+sqs_queue_url = os.getenv("SQS_QUEUE_URL")
 table_name = os.getenv("TABLE_NAME")
 object_path = 'iot_data.csv'
 

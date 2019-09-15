@@ -3,8 +3,8 @@ version: 0.2
 env:
   variables:
       AWS_REGION: "us-east-1"
-      TABLE_NAME: "iot-dynamodb-IotDemoTable-DBSDROSJ2FKQ"
-      SQS_QUEUE_ARN: "arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-13GR2RRF67YD0"
+      TABLE_NAME: "iot-dynamodb-IotDemoTable-1096ZA2SMLFQC"
+      SQS_QUEUE_ARN: "arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-1WY8QV5BPVQF9"
 
 phases:
   install:

@@ -11,7 +11,7 @@ from botocore.exceptions import ClientError
 print('Loading function')
 
 # Environment variables
-sqs_queue_url = os.getenv("QUEUE_URL")
+sqs_queue_url = os.getenv("SQS_QUEUE_URL")
 table_name = os.getenv("TABLE_NAME")
 
 # Set up logging
