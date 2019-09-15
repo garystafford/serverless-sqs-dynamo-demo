@@ -208,7 +208,7 @@ Resources:
     Description: Respond to S3 Events
     Properties:
       Description: Responds to S3 Event - Sends to SQS
-      CodeUri: iot_s3_to_sqs_v2/
+      CodeUri: iot_s3_to_sqs/
       Handler: app.lambda_handler
       Runtime: python3.7
       MemorySize: 128
