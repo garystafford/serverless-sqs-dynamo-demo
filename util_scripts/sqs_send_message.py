@@ -46,7 +46,7 @@ def main():
                         format='%(levelname)s: %(asctime)s: %(message)s')
 
     # timestamp,location,source,local_dest,local_avg,remote_dest,remote_avg
-    # 1559040909.3853335,lab-5,wireless,router-1,4.39,device-1,9.09
+    # 1559040909.3853335,location-03,wireless,router-1,4.39,device-1,9.09
 
     message = {
         'TableName': table_name,
@@ -62,7 +62,7 @@ def main():
                     },
                 'location':
                     {
-                        'S': 'lab-5'
+                        'S': 'location-03'
                     },
                 'source':
                     {

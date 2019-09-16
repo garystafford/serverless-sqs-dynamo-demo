@@ -43,7 +43,7 @@ def read_csv_file(bucket, key):
     """
     try:
         response = s3_client.get_object(Bucket=bucket, Key=key)
-        logger.debug('CONTENT TYPE: ' + response['ContentType'])
+        logger.debug('CONTENT TYPE: {}'.format(response['ContentType']))
         if response['ContentType'] == 'text/csv':
             messages = response['Body'].read().decode('utf-8').split()
             messages.pop(0)  # remove header row
@@ -71,7 +71,7 @@ def process_messages(messages):
             logger.debug(message)
             response = send_sqs_message(message)
             if response is not None:
-                logger.info('Sent SQS message ID: ' + response['MessageId'])
+                logger.info('Sent SQS message ID: {}'.format(response['MessageId']))
         return 0
     except Exception as e:
         logger.error(e)

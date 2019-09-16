@@ -4,7 +4,7 @@ import boto3
 dynamodb = boto3.resource('dynamodb')
 
 # timestamp,location,source,local_dest,local_avg,remote_dest,remote_avg
-# 1559040909.3853335,lab-5,wireless,router-1,4.39,device-1,9.09
+# 1559040909.3853335,location-03,wireless,router-1,4.39,device-1,9.09
 
 table_name = 'IotData'
 
