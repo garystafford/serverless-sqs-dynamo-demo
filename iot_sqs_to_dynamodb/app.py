@@ -19,6 +19,7 @@ def lambda_handler(event, context):
         'PUT': lambda dynamo, x: dynamo.update_item(**x),
         'GET': lambda dynamo, x: dynamo.get_item(**x),
         'GET_ALL': lambda dynamo, x: dynamo.scan(**x),
+        'BATCH_WRITE': lambda dynamo, x: dynamo.batch_write_item(**x),
     }
 
     for record in event['Records']:
@@ -28,10 +29,10 @@ def lambda_handler(event, context):
             try:
                 operations[operation](dynamo_client, payload)
                 logger.info('{} successful'.format(operation))
-                return 0
             except Exception as e:
                 logger.error(e)
-                return -1
+                # return -1
         else:
             logger.error('Unsupported method \'{}\''.format(operation))
-            return -1
+            # return -1
+    return 0
