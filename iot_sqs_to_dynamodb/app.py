@@ -5,7 +5,7 @@ import boto3
 
 # Set up logging
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 logger.info('Loading function')
 
@@ -13,6 +13,7 @@ dynamo_client = boto3.client('dynamodb')
 
 
 def lambda_handler(event, context):
+    logger.debug('Received event: {}'.format(event))
     operations = {
         'DELETE': lambda dynamo, x: dynamo.delete_item(**x),
         'POST': lambda dynamo, x: dynamo.put_item(**x),

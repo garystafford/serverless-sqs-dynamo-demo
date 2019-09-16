@@ -9,7 +9,7 @@ from botocore.exceptions import ClientError
 
 # Set up logging
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 logger.info('Loading function')
 
@@ -23,7 +23,7 @@ s3_client = boto3.client('s3')
 
 
 def lambda_handler(event, context):
-    logger.debug('Received event: ' + json.dumps(event, indent=2))
+    logger.debug('Received event: {}'.format(event))
 
     # Get the object from the event and show its content type
     bucket = event['Records'][0]['s3']['bucket']['name']
