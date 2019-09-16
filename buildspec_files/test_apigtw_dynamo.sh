@@ -5,7 +5,7 @@
 
 #set -x
 
-pushd iot_dynamodb_messages/events || exit
+pushd iot_api_to_dynamodb/events || exit
 
 # local testing (All CRUD functions)
 sam local invoke PostMessageFunction \
