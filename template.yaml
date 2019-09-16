@@ -39,7 +39,7 @@ Resources:
     Description: Get all IoT messages in DynamoDB table (scan)
     Properties:
       Description: Get all IoT messages in DynamoDB table (scan)
-      CodeUri: iot_dynamodb_messages/
+      CodeUri: iot_api_to_dynamodb/
       Handler: app.getMessages
       Runtime: nodejs10.x
       Policies:
@@ -57,7 +57,7 @@ Resources:
     Description: Get one IoT message based on timestamp and location
     Properties:
       Description: Get one IoT message based on timestamp and location
-      CodeUri: iot_dynamodb_messages/
+      CodeUri: iot_api_to_dynamodb/
       Handler: app.getMessage
       Runtime: nodejs10.x
       Policies:
@@ -75,7 +75,7 @@ Resources:
     Description: Create new IoT message item in DynamoDB table
     Properties:
       Description: Create new IoT message item in DynamoDB table
-      CodeUri: iot_dynamodb_messages/
+      CodeUri: iot_api_to_dynamodb/
       Handler: app.postMessage
       Runtime: nodejs10.x
       Policies:
@@ -93,7 +93,7 @@ Resources:
     Description: Update IoT message item in DynamoDB table
     Properties:
       Description: Update IoT message item in DynamoDB table
-      CodeUri: iot_dynamodb_messages/
+      CodeUri: iot_api_to_dynamodb/
       Handler: app.putMessage
       Runtime: nodejs10.x
       Policies:
@@ -111,7 +111,7 @@ Resources:
     Description: Delete IoT message item in DynamoDB table
     Properties:
       Description: Delete IoT message item in DynamoDB table
-      CodeUri: iot_dynamodb_messages/
+      CodeUri: iot_api_to_dynamodb/
       Handler: app.deleteMessage
       Runtime: nodejs10.x
       Policies:
