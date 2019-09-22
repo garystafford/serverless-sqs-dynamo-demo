@@ -35,9 +35,9 @@ Resources:
   ApiDomainName:
     Type: AWS::ApiGateway::DomainName
     Properties:
-      DomainName: "SubdomainName"
+      DomainName: !Ref SubdomainName
       CertificateArn: !Ref CertificateArn
-    DependsOn: "DemoServerlessApi"
+    DependsOn: DemoServerlessApi
   GetMessagesFunction:
     Type: AWS::Serverless::Function
     Description: Get all messages in DynamoDB table (scan)
@@ -48,14 +48,14 @@ Resources:
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: "DemoTable"
+            TableName: !Ref DemoTable
       Events:
         getMessages:
           Type: Api
           Properties:
             Path: /message
             Method: get
-            RestApiId: "DemoServerlessApi"
+            RestApiId: !Ref DemoServerlessApi
   GetMessageFunction:
     Type: AWS::Serverless::Function
     Description: Get single message based on timestamp and location
@@ -66,14 +66,14 @@ Resources:
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: "DemoTable"
+            TableName: !Ref DemoTable
       Events:
         getMessages:
           Type: Api
           Properties:
             Path: /message/{date}
             Method: get
-            RestApiId: "DemoServerlessApi"
+            RestApiId: !Ref DemoServerlessApi
   PostMessageFunction:
     Type: AWS::Serverless::Function
     Description: Create new message item in DynamoDB table
@@ -84,14 +84,14 @@ Resources:
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: "DemoTable"
+            TableName: !Ref DemoTable
       Events:
         postMessage:
           Type: Api
           Properties:
             Path: /message
             Method: post
-            RestApiId: "DemoServerlessApi"
+            RestApiId: !Ref DemoServerlessApi
   PutMessageFunction:
     Type: AWS::Serverless::Function
     Description: Update message item in DynamoDB table
@@ -102,14 +102,14 @@ Resources:
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: "DemoTable"
+            TableName: !Ref DemoTable
       Events:
         putMessage:
           Type: Api
           Properties:
             Path: /message/{date}
             Method: put
-            RestApiId: "DemoServerlessApi"
+            RestApiId: !Ref DemoServerlessApi
   DeleteMessageFunction:
     Type: AWS::Serverless::Function
     Description: Delete message item in DynamoDB table
@@ -120,14 +120,14 @@ Resources:
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: "DemoTable"
+            TableName: !Ref DemoTable
       Events:
         deleteMessage:
           Type: Api
           Properties:
             Path: /message/{date}
             Method: delete
-            RestApiId: "DemoServerlessApi"
+            RestApiId: !Ref DemoServerlessApi
   SqsToDynamoDbFunction:
     Type: AWS::Serverless::Function
     Description: Responds to SQS Event - Sends to Dynamodb
@@ -139,12 +139,12 @@ Resources:
       MemorySize: 128
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: "DemoTable"
+            TableName: !Ref DemoTable
       Events:
         SqsToDynamoDb:
           Type: SQS
           Properties:
-            Queue: "DemoQueue"
+            Queue: !GetAtt DemoQueue.Arn
             BatchSize: 10
             Enabled: true
   DemoDataBucket:
@@ -152,7 +152,7 @@ Resources:
     DependsOn:
       - S3ToSQSFunctionPermission
     Properties:
-      BucketName: "DataBucketName"
+      BucketName: !Ref DataBucketName
       NotificationConfiguration:
         LambdaConfigurations:
           - Event: s3:ObjectCreated:*
@@ -206,7 +206,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - sqs:SendMessage
-                Resource: "DemoQueue"
+                Resource: !GetAtt DemoQueue.Arn
   S3ToSQSFunction:
     Type: AWS::Serverless::Function
     Description: Respond to S3 Events
@@ -245,8 +245,8 @@ Resources:
   ApiMapping:
     Type: AWS::ApiGateway::BasePathMapping
     Properties:
-      DomainName: "SubdomainName"
-      RestApiId: "DemoServerlessApi"
+      DomainName: !Ref SubdomainName
+      RestApiId: !Ref DemoServerlessApi
       Stage: Prod
     DependsOn: DemoServerlessApiProdStage # logical id of API GW stage created by SAM
   APIDomain:
@@ -254,7 +254,7 @@ Resources:
     Properties:
       HostedZoneName: !Ref HostedZoneName
       RecordSets:
-        - Name: "SubdomainName"
+        - Name: !Ref SubdomainName
           Type: A
           AliasTarget:
             DNSName: !GetAtt ApiDomainName.DistributionDomainName
@@ -265,16 +265,16 @@ Outputs:
     Value: !Ref AWS::Region
   DemoBucket:
     Description: 'S3 bucket where CSV files are placed'
-    Value: "DataBucketName"
+    Value: !Ref DataBucketName
   DemoTable:
     Description: 'Name of DynamoDB table'
-    Value: "DemoTable"
+    Value: !Ref DemoTable
   DemoQueueArn:
     Description: 'Arn of SQS Queue'
-    Value: "DemoQueue"
+    Value: !GetAtt DemoQueue.Arn
   DemoQueueUrl:
     Description: 'URL of SQS Queue'
-    Value: "DemoQueue"
+    Value: !Ref DemoQueue
   GetMessagesApi:
     Description: 'Example API Gateway endpoint: GetMessagesFunction'
     Value: !Sub "https://${DemoServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
