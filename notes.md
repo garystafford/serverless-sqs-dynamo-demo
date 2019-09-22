@@ -63,11 +63,14 @@ python3 ./util_scripts/send_message_sqs.py
 
 # write to s3
 aws sqs purge-queue --queue-url $QUEUE_URL
-aws s3 cp sample_data/data.csv s3://S3_DATA_BUCKET
+aws s3 cp sample_data/data.csv s3://$S3_DATA_BUCKET
 
 # delete stack
-aws cloudformation delete-stack --stack-name iot-dynamodb
+aws s3 rm s3://$S3_DATA_BUCKET/data.csv
+aws cloudformation delete-stack \
+  --stack-name serverless-sqs-dynamo-demo
 ```
+
 ```text
 .
 ├── README.md

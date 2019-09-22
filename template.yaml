@@ -259,6 +259,47 @@ Resources:
           AliasTarget:
             DNSName: !GetAtt ApiDomainName.DistributionDomainName
             HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
+#  DeploymentStageProd:
+#    Type: AWS::ApiGateway::Stage
+#    Properties:
+#      StageName: Prod
+#      Description: Prod Stage
+#      RestApiId: !Ref DemoServerlessApi
+#      DeploymentId: !Ref ApiGatewayDeployment
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      RestApiId: !Ref DemoServerlessApi
+      StageName: Prod
+  ApiKey:
+    Type: 'AWS::ApiGateway::ApiKey'
+    DependsOn:
+      - DemoServerlessApi
+    Properties:
+      Name: TestApiKey
+      Enabled: 'true'
+      StageKeys:
+        - RestApiId: !Ref DemoServerlessApi
+          StageName: Prod
+  UsagePlan:
+    Type: 'AWS::ApiGateway::UsagePlan'
+    Properties:
+      ApiStages:
+        - ApiId: !Ref DemoServerlessApi
+          Stage: 'Prod' #!Ref DeploymentStageProd
+      Quota:
+        Limit: 5000
+        Period: MONTH
+      Throttle:
+        BurstLimit: 200
+        RateLimit: 100
+      UsagePlanName: DemoUsagePlan
+  UsagePlanKey:
+    Type: 'AWS::ApiGateway::UsagePlanKey'
+    Properties:
+      KeyId: !Ref ApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref UsagePlan
 Outputs:
   MyStacksRegion:
     Description: 'Region where cfn stack is located'
