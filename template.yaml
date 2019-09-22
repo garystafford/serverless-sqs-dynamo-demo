@@ -8,7 +8,7 @@ Globals:
     Timeout: 3
     Environment:
       Variables:
-        TABLE_NAME: !Ref DemoDemoTable
+        TABLE_NAME: !Ref DemoTable
         SQS_QUEUE_URL: !Ref DemoQueue
 Parameters:
   DataBucketName:
