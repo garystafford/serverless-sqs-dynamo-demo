@@ -23,7 +23,7 @@ time sam package \
     --s3-bucket gstafford-sam-demo
 
 time sam deploy --template-file packaged.yaml \
-  --stack-name iot-dynamodb \
+  --stack-name serverless-sam-demo \
   --capabilities CAPABILITY_IAM
 
 export AWS_REGION=us-east-1
