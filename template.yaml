@@ -1,154 +1,158 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Builds serverless API with Lambda functions,
+  Builds serverless API, complete with Lambda functions,
   API Gateway, SQS Queues, DynamoDB table, and an S3 bucket.
 Globals:
   Function:
     Timeout: 3
     Environment:
       Variables:
-        TABLE_NAME: !Ref IotDemoTable
-        SQS_QUEUE_URL: !Ref IotDemoQueue
+        TABLE_NAME: !Ref DemoDemoTable
+        SQS_QUEUE_URL: !Ref DemoQueue
 Parameters:
-  IotBucketName:
+  DataBucketName:
     Type: String
-    Default: gstafford-iot-data
-  DomainName:
+    Description: S3 bucket where CSV files are placed
+    Default: gstafford-demo-data
+  SubdomainName:
     Type: String
+    Description: Domain or subdomain name referenced by the API
     Default: api.example-api.com
   CertificateArn:
     Type: String
+    Description: Arn of domain's public wildcard TLS certificate
     Default: arn:aws:acm:us-east-1:931066906971:certificate/57fd98d2-a4ee-410a-9d5c-a755192f0fe6
   HostedZoneName:
     Type: String
+    Description: Route53's Hosted Zone name
     Default: example-api.com. # don't miss the dot at the end
 Resources:
-  IotServerlessApi:
+  DemoServerlessApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
   ApiDomainName:
     Type: AWS::ApiGateway::DomainName
     Properties:
-      DomainName: !Ref DomainName
+      DomainName: "SubdomainName"
       CertificateArn: !Ref CertificateArn
-    DependsOn: IotServerlessApi
+    DependsOn: "DemoServerlessApi"
   GetMessagesFunction:
     Type: AWS::Serverless::Function
-    Description: Get all IoT messages in DynamoDB table (scan)
+    Description: Get all messages in DynamoDB table (scan)
     Properties:
-      Description: Get all IoT messages in DynamoDB table (scan)
-      CodeUri: iot_api_to_dynamodb/
+      Description: Get all messages in DynamoDB table (scan)
+      CodeUri: lambda_apigtw_to_dynamodb/
       Handler: app.getMessages
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref IotDemoTable
+            TableName: "DemoTable"
       Events:
         getMessages:
           Type: Api
           Properties:
             Path: /message
             Method: get
-            RestApiId: !Ref IotServerlessApi
+            RestApiId: "DemoServerlessApi"
   GetMessageFunction:
     Type: AWS::Serverless::Function
-    Description: Get one IoT message based on timestamp and location
+    Description: Get single message based on timestamp and location
     Properties:
-      Description: Get one IoT message based on timestamp and location
-      CodeUri: iot_api_to_dynamodb/
+      Description: Get single message based on timestamp and location
+      CodeUri: lambda_apigtw_to_dynamodb/
       Handler: app.getMessage
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref IotDemoTable
+            TableName: "DemoTable"
       Events:
         getMessages:
           Type: Api
           Properties:
             Path: /message/{date}
             Method: get
-            RestApiId: !Ref IotServerlessApi
+            RestApiId: "DemoServerlessApi"
   PostMessageFunction:
     Type: AWS::Serverless::Function
-    Description: Create new IoT message item in DynamoDB table
+    Description: Create new message item in DynamoDB table
     Properties:
-      Description: Create new IoT message item in DynamoDB table
-      CodeUri: iot_api_to_dynamodb/
+      Description: Create new message item in DynamoDB table
+      CodeUri: lambda_apigtw_to_dynamodb/
       Handler: app.postMessage
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref IotDemoTable
+            TableName: "DemoTable"
       Events:
         postMessage:
           Type: Api
           Properties:
             Path: /message
             Method: post
-            RestApiId: !Ref IotServerlessApi
+            RestApiId: "DemoServerlessApi"
   PutMessageFunction:
     Type: AWS::Serverless::Function
-    Description: Update IoT message item in DynamoDB table
+    Description: Update message item in DynamoDB table
     Properties:
-      Description: Update IoT message item in DynamoDB table
-      CodeUri: iot_api_to_dynamodb/
+      Description: Update message item in DynamoDB table
+      CodeUri: lambda_apigtw_to_dynamodb/
       Handler: app.putMessage
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref IotDemoTable
+            TableName: "DemoTable"
       Events:
         putMessage:
           Type: Api
           Properties:
             Path: /message/{date}
             Method: put
-            RestApiId: !Ref IotServerlessApi
+            RestApiId: "DemoServerlessApi"
   DeleteMessageFunction:
     Type: AWS::Serverless::Function
-    Description: Delete IoT message item in DynamoDB table
+    Description: Delete message item in DynamoDB table
     Properties:
-      Description: Delete IoT message item in DynamoDB table
-      CodeUri: iot_api_to_dynamodb/
+      Description: Delete message item in DynamoDB table
+      CodeUri: lambda_apigtw_to_dynamodb/
       Handler: app.deleteMessage
       Runtime: nodejs10.x
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref IotDemoTable
+            TableName: "DemoTable"
       Events:
         deleteMessage:
           Type: Api
           Properties:
             Path: /message/{date}
             Method: delete
-            RestApiId: !Ref IotServerlessApi
+            RestApiId: "DemoServerlessApi"
   SqsToDynamoDbFunction:
     Type: AWS::Serverless::Function
     Description: Responds to SQS Event - Sends to Dynamodb
     Properties:
-      Description: Post new IoT message to SQS
-      CodeUri: iot_sqs_to_dynamodb/
+      Description: Post new message to SQS
+      CodeUri: lambda_sqs_to_dynamodb/
       Handler: app.lambda_handler
       Runtime: python3.7
       MemorySize: 128
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref IotDemoTable
+            TableName: "DemoTable"
       Events:
         SqsToDynamoDb:
           Type: SQS
           Properties:
-            Queue: !GetAtt IotDemoQueue.Arn
+            Queue: "DemoQueue"
             BatchSize: 10
             Enabled: true
-  IotDataBucket:
+  DemoDataBucket:
     Type: AWS::S3::Bucket
     DependsOn:
       - S3ToSQSFunctionPermission
     Properties:
-      BucketName: !Ref IotBucketName
+      BucketName: "DataBucketName"
       NotificationConfiguration:
         LambdaConfigurations:
           - Event: s3:ObjectCreated:*
@@ -164,7 +168,7 @@ Resources:
       Action: 'lambda:InvokeFunction'
       FunctionName: !Ref S3ToSQSFunction
       Principal: s3.amazonaws.com
-      SourceArn: !Sub 'arn:aws:s3:::${IotBucketName}'
+      SourceArn: !Sub 'arn:aws:s3:::${DataBucketName}'
       SourceAccount: !Ref AWS::AccountId
   S3ToSQSFunctionExecutionRole:
     Type: AWS::IAM::Role
@@ -194,7 +198,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - s3:GetObject
-                Resource: !Sub 'arn:aws:s3:::${IotBucketName}/*'
+                Resource: !Sub 'arn:aws:s3:::${DataBucketName}/*'
         - PolicyName: produceToQueue
           PolicyDocument:
             Version: '2012-10-17'
@@ -202,18 +206,18 @@ Resources:
               - Effect: Allow
                 Action:
                   - sqs:SendMessage
-                Resource: !GetAtt IotDemoQueue.Arn
+                Resource: "DemoQueue"
   S3ToSQSFunction:
     Type: AWS::Serverless::Function
     Description: Respond to S3 Events
     Properties:
       Description: Responds to S3 Event - Sends to SQS
-      CodeUri: iot_s3_to_sqs/
+      CodeUri: lambda_s3_to_sqs/
       Handler: app.lambda_handler
       Runtime: python3.7
       MemorySize: 128
       Role: !GetAtt S3ToSQSFunctionExecutionRole.Arn
-  IotDemoTable:
+  DemoTable:
     Type: AWS::DynamoDB::Table
     Properties:
       BillingMode: PAY_PER_REQUEST
@@ -227,7 +231,7 @@ Resources:
           KeyType: HASH
         - AttributeName: time
           KeyType: RANGE
-  IotDemoQueue:
+  DemoQueue:
     Type: AWS::SQS::Queue
     Properties:
       RedrivePolicy:
@@ -241,36 +245,36 @@ Resources:
   ApiMapping:
     Type: AWS::ApiGateway::BasePathMapping
     Properties:
-      DomainName: !Ref DomainName
-      RestApiId: !Ref IotServerlessApi
+      DomainName: "SubdomainName"
+      RestApiId: "DemoServerlessApi"
       Stage: Prod
-    DependsOn: IotServerlessApiProdStage # logical id of API GW stage created by SAM
+    DependsOn: DemoServerlessApiProdStage # logical id of API GW stage created by SAM
   APIDomain:
     Type: AWS::Route53::RecordSetGroup
     Properties:
       HostedZoneName: !Ref HostedZoneName
       RecordSets:
-        - Name: !Ref DomainName
+        - Name: "SubdomainName"
           Type: A
           AliasTarget:
             DNSName: !GetAtt ApiDomainName.DistributionDomainName
             HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
 Outputs:
   MyStacksRegion:
-    Description: 'Region stack is located in'
+    Description: 'Region where cfn stack is located'
     Value: !Ref AWS::Region
-  IotBucketName:
-    Description: 'Name of S3 Bucket where CSV files are uploaded'
-    Value: !Ref IotBucketName
-  IotDemoTable:
+  DemoBucket:
+    Description: 'S3 bucket where CSV files are placed'
+    Value: "DataBucketName"
+  DemoTable:
     Description: 'Name of DynamoDB table'
-    Value: !Ref IotDemoTable
-  IotDemoQueueArn:
+    Value: "DemoTable"
+  DemoQueueArn:
     Description: 'Arn of SQS Queue'
-    Value: !GetAtt IotDemoQueue.Arn
-  IotDemoQueueUrl:
+    Value: "DemoQueue"
+  DemoQueueUrl:
     Description: 'URL of SQS Queue'
-    Value: !Ref IotDemoQueue
+    Value: "DemoQueue"
   GetMessagesApi:
     Description: 'Example API Gateway endpoint: GetMessagesFunction'
-    Value: !Sub "https://${IotServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"
+    Value: !Sub "https://${DemoServerlessApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getMessages/"

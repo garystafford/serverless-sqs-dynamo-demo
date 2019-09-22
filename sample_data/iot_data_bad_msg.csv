@@ -1,0 +1,2 @@
+timestamp,location,source,local_dest,local_avg,remote_dest,remote_avg
+not_a_timestamp!,location-03,wireless,router-1,not_a_number,device-1

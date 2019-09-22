@@ -55,8 +55,34 @@ python3 ./util_scripts/send_message_sqs.py
 
 # write to s3
 aws sqs purge-queue --queue-url $QUEUE_URL
-aws s3 cp util_scripts/iot_data.csv s3://$S3_BUCKET
+aws s3 cp sample_data/iot_data.csv s3://$S3_BUCKET
 
 # delete stack
 aws cloudformation delete-stack --stack-name iot-dynamodb
+```
+```text
+.
+├── README.md
+├── iot_api_to_dynamodb
+│   ├── app.js
+│   ├── events
+│   ├── node_modules
+│   ├── package.json
+│   └── tests
+├── iot_s3_to_sqs
+│   ├── __init__.py
+│   ├── app.py
+│   ├── requirements.txt
+│   └── tests
+├── iot_sqs_to_dynamodb
+│   ├── __init__.py
+│   ├── app.py
+│   ├── requirements.txt
+│   └── tests
+├── requirements.txt
+├── template.yaml
+└── sample_data
+    ├── iot_data.csv
+    ├── iot_data_bad_msg.csv
+    └── iot_data_good_msg.csv
 ```
