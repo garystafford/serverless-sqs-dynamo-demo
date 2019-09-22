@@ -10,6 +10,9 @@ aws ssm put-parameter \
   --description "DynamoDB Table name" \
   --overwrite
 
+S3_BUCKET_BUILD="gstafford-sam-demo"
+STACK_NAME="serverless-sqs-dynamo-demo"
+
 # validate
 sam validate --template template.yaml
 aws cloudformation validate-template \
@@ -18,33 +21,36 @@ aws cloudformation validate-template \
 # build, package, deploy
 time sam build
 
+# package
 time sam package \
     --output-template-file packaged.yaml \
-    --s3-bucket gstafford-sam-demo
+  --s3-bucket "${S3_BUCKET_BUILD}"
 
+# deploy
 time sam deploy --template-file packaged.yaml \
-  --stack-name serverless-sam-demo \
-  --capabilities CAPABILITY_IAM
+  --stack-name "${STACK_NAME}" \
+  --capabilities CAPABILITY_IAM \
+  --debug
 
 export AWS_REGION=us-east-1
-export S3_BUCKET=gstafford-iot-data
+export S3_BUCKET=gstafford-demo-data
 export TABLE_NAME=iot-dynamodb-IotDemoTable-1096ZA2SMLFQC
 export SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:iot-dynamodb-IotDemoQueue-1WY8QV5BPVQF9
 export SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/iot-dynamodb-IotDemoQueue-13GR2RRF67YD0
 
 # local testing (All CRUD functions)
 sam local invoke PostMessageFunction \
-  --event iot_dynamodb_messages/event_postMessage.json
+  --event lambda_apigtw_to_dynamodb/event/event_postMessage.json
 sam local invoke GetMessageFunction \
-  --event iot_dynamodb_messages/event_getMessage.json
+  --event lambda_apigtw_to_dynamodb/event/event_getMessage.json
 sam local invoke GetMessagesFunction \
-  --event iot_dynamodb_messages/event_getMessages.json
+  --event lambda_apigtw_to_dynamodb/event/event_getMessages.json
 sam local invoke PutMessageFunction \
-  --event iot_dynamodb_messages/event_putMessage.json
+  --event lambda_apigtw_to_dynamodb/event/event_putMessage.json
 sam local invoke DeleteMessageFunction \
-  --event iot_dynamodb_messages/event_deleteMessage.json
+  --event lambda_apigtw_to_dynamodb/event/event_deleteMessage.json
 
-cd iot_sqs_to_dynamodb/tests/unit
+cd lambda_sqs_to_dynamodb/tests/unit
 pytest test_handler.py \
   --disable-warnings  --log-level debug \
   --log-file=./log.txt  --verbose
@@ -55,7 +61,7 @@ python3 ./util_scripts/send_message_sqs.py
 
 # write to s3
 aws sqs purge-queue --queue-url $QUEUE_URL
-aws s3 cp sample_data/iot_data.csv s3://$S3_BUCKET
+aws s3 cp sample_data/data.csv s3://$S3_BUCKET
 
 # delete stack
 aws cloudformation delete-stack --stack-name iot-dynamodb
