@@ -237,19 +237,12 @@ Resources:
       RedrivePolicy:
         deadLetterTargetArn:
           Fn::GetAtt:
-            - "DeadLetterQueue"
-            - "Arn"
+            - DeadLetterQueue
+            - Arn
         maxReceiveCount: 5
   DeadLetterQueue:
     Type: AWS::SQS::Queue
-  ApiMapping:
-    Type: AWS::ApiGateway::BasePathMapping
-    Properties:
-      DomainName: !Ref SubdomainName
-      RestApiId: !Ref DemoServerlessApi
-      Stage: Prod
-    DependsOn: DemoServerlessApiProdStage # logical id of API GW stage created by SAM
-  APIDomain:
+  ApiDomain:
     Type: AWS::Route53::RecordSetGroup
     Properties:
       HostedZoneName: !Ref HostedZoneName
@@ -266,27 +259,35 @@ Resources:
 #      Description: Prod Stage
 #      RestApiId: !Ref DemoServerlessApi
 #      DeploymentId: !Ref ApiGatewayDeployment
-  ApiGatewayDeployment:
-    Type: AWS::ApiGateway::Deployment
-    Properties:
-      RestApiId: !Ref DemoServerlessApi
-      StageName: Prod
+#  ApiGatewayDeployment:
+#    Type: AWS::ApiGateway::Deployment
+#    DependsOn: DemoServerlessApi
+#    Properties:
+#      RestApiId: !Ref DemoServerlessApi
+#      StageName: Prod
   ApiKey:
-    Type: 'AWS::ApiGateway::ApiKey'
-    DependsOn:
-      - DemoServerlessApi
+    Type: AWS::ApiGateway::ApiKey
+    DependsOn: ApiDomain
     Properties:
       Name: TestApiKey
       Enabled: 'true'
       StageKeys:
         - RestApiId: !Ref DemoServerlessApi
           StageName: Prod
+  ApiMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    DependsOn: ApiDomain
+    Properties:
+      DomainName: !Ref SubdomainName
+      RestApiId: !Ref DemoServerlessApi
+      Stage: DemoServerlessApiProdStage  # logical id of API GW stage created by SAM
   UsagePlan:
-    Type: 'AWS::ApiGateway::UsagePlan'
+    Type: AWS::ApiGateway::UsagePlan
+    DependsOn: ApiDomain
     Properties:
       ApiStages:
         - ApiId: !Ref DemoServerlessApi
-          Stage: 'Prod' #!Ref DeploymentStageProd
+          Stage: DemoServerlessApiProdStage  # logical id of API GW stage created by SAM
       Quota:
         Limit: 5000
         Period: MONTH
@@ -295,7 +296,7 @@ Resources:
         RateLimit: 100
       UsagePlanName: DemoUsagePlan
   UsagePlanKey:
-    Type: 'AWS::ApiGateway::UsagePlanKey'
+    Type: AWS::ApiGateway::UsagePlanKey
     Properties:
       KeyId: !Ref ApiKey
       KeyType: API_KEY
