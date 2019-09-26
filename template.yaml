@@ -32,6 +32,8 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
+      Auth:
+        ApiKeyRequired: true
   ApiDomainName:
     Type: AWS::ApiGateway::DomainName
     Properties:
@@ -280,14 +282,14 @@ Resources:
     Properties:
       DomainName: !Ref SubdomainName
       RestApiId: !Ref DemoServerlessApi
-      Stage: DemoServerlessApiProdStage  # logical id of API GW stage created by SAM
+      Stage: !Sub '${DemoServerlessApiProdStage}' # logical id of API GW stage created by SAM
   UsagePlan:
     Type: AWS::ApiGateway::UsagePlan
     DependsOn: ApiDomain
     Properties:
       ApiStages:
         - ApiId: !Ref DemoServerlessApi
-          Stage: DemoServerlessApiProdStage  # logical id of API GW stage created by SAM
+          Stage: !Sub '${DemoServerlessApiProdStage}'  # logical id of API GW stage created by SAM
       Quota:
         Limit: 5000
         Period: MONTH
