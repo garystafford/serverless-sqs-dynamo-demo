@@ -3,7 +3,7 @@ import os
 import pytest
 
 TABLE_NAME = os.getenv('TABLE_NAME')
-S3_DATA_BUCKET = os.getenv('S3_BUCKET')
+S3_DATA_BUCKET = os.getenv('S3_DATA_BUCKET')
 
 CVS_FILE_NAME = 'data_good_msg.csv'
 

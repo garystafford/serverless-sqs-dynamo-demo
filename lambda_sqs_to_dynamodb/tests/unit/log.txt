@@ -1,0 +1,206 @@
+INFO     root:app.py:10 Loading function
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from before-call.apigateway to before-call.api-gateway
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+DEBUG    botocore.hooks:hooks.py:417 Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+DEBUG    botocore.credentials:credentials.py:1933 Looking for credentials via: env
+DEBUG    botocore.credentials:credentials.py:1933 Looking for credentials via: assume-role
+DEBUG    botocore.credentials:credentials.py:1933 Looking for credentials via: assume-role-with-web-identity
+DEBUG    botocore.credentials:credentials.py:1933 Looking for credentials via: shared-credentials-file
+INFO     botocore.credentials:credentials.py:1182 Found credentials in shared credentials file: ~/.aws/credentials
+DEBUG    botocore.loaders:loaders.py:174 Loading JSON file: /usr/local/lib/python3.7/site-packages/botocore/data/endpoints.json
+DEBUG    botocore.hooks:hooks.py:210 Event choose-service-name: calling handler <function handle_service_name_alias at 0x110068200>
+DEBUG    botocore.loaders:loaders.py:174 Loading JSON file: /usr/local/lib/python3.7/site-packages/botocore/data/dynamodb/2012-08-10/service-2.json
+DEBUG    botocore.hooks:hooks.py:210 Event creating-client-class.dynamodb: calling handler <function add_generate_presigned_url at 0x11004fcb0>
+DEBUG    botocore.args:args.py:169 The s3 config key is not a dictionary type, ignoring its value of: None
+DEBUG    botocore.endpoint:endpoint.py:266 Setting dynamodb timeout as (60, 60)
+DEBUG    botocore.loaders:loaders.py:174 Loading JSON file: /usr/local/lib/python3.7/site-packages/botocore/data/_retry.json
+DEBUG    botocore.client:client.py:139 Registering retry handlers for service: dynamodb
+DEBUG    root:app.py:16 Received event: {'Records': [{'body': '{"TableName":"serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4","Item":{"date": {"S": "2001-01-01"}, "time": {"S": "01:01:07"},"location": {"S": "location-03"}, "source": {"S":"wireless"}, "local_dest": {"S": "router-1"}, "local_avg": {"N": "5.32"}, "remote_dest": {"S": "device-1"}, "remote_avg": {"N": "11.01"}}}', 'messageAttributes': {'Method': {'stringValue': 'POST', 'stringListValues': [], 'binaryListValues': [], 'dataType': 'String'}, 'eventSource': 'aws:sqs', 'eventSourceARN': 'arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE', 'awsRegion': 'us-east-1'}}]}
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function generate_idempotent_uuid at 0x110081950>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.PutItem: calling handler <function block_endpoint_discovery_required_operations at 0x110016dd0>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.PutItem: calling handler <function inject_api_version_header_if_needed at 0x110087440>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=PutItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.PutItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213'}, 'body': b'{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4", "Item": {"date": {"S": "2001-01-01"}, "time": {"S": "01:01:07"}, "location": {"S": "location-03"}, "source": {"S": "wireless"}, "local_dest": {"S": "router-1"}, "local_avg": {"N": "5.32"}, "remote_dest": {"S": "device-1"}, "remote_avg": {"N": "11.01"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x110e0ba50>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.PutItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x110e0ba10>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.PutItem: calling handler <function set_operation_specific_signer at 0x110081830>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190930T061525Z
+x-amz-target:DynamoDB_20120810.PutItem
+
+content-type;host;x-amz-date;x-amz-target
+878cbeca1cff420c6b736148f9ecc0459059397313ce7b66bca636871146e74a
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190930T061525Z
+20190930/us-east-1/dynamodb/aws4_request
+b0c829be783d92a9b0f2e0774a7c2abf63046757959d1f577dc75f0317989d6e
+DEBUG    botocore.auth:auth.py:369 Signature:
+33c267291c6211a97baaa1f3e41f9a15c26d6a12a60018cc30cfb7240a8d8ae0
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.PutItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213', 'X-Amz-Date': b'20190930T061525Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190930/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=33c267291c6211a97baaa1f3e41f9a15c26d6a12a60018cc30cfb7240a8d8ae0', 'Content-Length': '321'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:813 Starting new HTTPS connection (1): dynamodb.us-east-1.amazonaws.com:443
+DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Mon, 30 Sep 2019 06:15:26 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': '5BHN52E4GM9F1QCCTN25VRD247VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
+DEBUG    botocore.parsers:parsers.py:235 Response body:
+b'{}'
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.PutItem: calling handler <botocore.retryhandler.RetryHandler object at 0x110e0bdd0>
+DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
+INFO     root:app.py:32 POST method successful
+DEBUG    root:app.py:33 Event payload: {'TableName': 'serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4', 'Item': {'date': {'S': '2001-01-01'}, 'time': {'S': '01:01:07'}, 'location': {'S': 'location-03'}, 'source': {'S': 'wireless'}, 'local_dest': {'S': 'router-1'}, 'local_avg': {'N': '5.32'}, 'remote_dest': {'S': 'device-1'}, 'remote_avg': {'N': '11.01'}}}
+DEBUG    root:app.py:16 Received event: {'Records': [{'body': '{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4", "Key": {"date": {"S": "2001-01-01"},"time": {"S": "01:01:07"}}, "UpdateExpression": "set remote_avg = :val1", "ExpressionAttributeValues": {":val1": {"N": "9.00"}}}', 'messageAttributes': {'Method': {'stringValue': 'PUT', 'stringListValues': [], 'binaryListValues': [], 'dataType': 'String'}, 'eventSource': 'aws:sqs', 'eventSourceARN': 'arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE', 'awsRegion': 'us-east-1'}}]}
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function generate_idempotent_uuid at 0x110081950>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.UpdateItem: calling handler <function block_endpoint_discovery_required_operations at 0x110016dd0>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.UpdateItem: calling handler <function inject_api_version_header_if_needed at 0x110087440>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=UpdateItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.UpdateItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213'}, 'body': b'{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4", "Key": {"date": {"S": "2001-01-01"}, "time": {"S": "01:01:07"}}, "UpdateExpression": "set remote_avg = :val1", "ExpressionAttributeValues": {":val1": {"N": "9.00"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x110e0ba50>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.UpdateItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x110e0ba10>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.UpdateItem: calling handler <function set_operation_specific_signer at 0x110081830>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190930T061526Z
+x-amz-target:DynamoDB_20120810.UpdateItem
+
+content-type;host;x-amz-date;x-amz-target
+f52d80eb38f755b8850676f016dc9f978656bb7183234b7a027e5da374526887
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190930T061526Z
+20190930/us-east-1/dynamodb/aws4_request
+c2b385778cd984cfa6f7a694a3eb8d006e0b47b4f8d55b6777b731ced0b8fb9a
+DEBUG    botocore.auth:auth.py:369 Signature:
+b1103854886c26b7806706ad9896948dc9fa05634af581ff9df4a4cc5ac93cec
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.UpdateItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213', 'X-Amz-Date': b'20190930T061526Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190930/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=b1103854886c26b7806706ad9896948dc9fa05634af581ff9df4a4cc5ac93cec', 'Content-Length': '233'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Mon, 30 Sep 2019 06:15:26 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'FO5B89840TSHNQ4G9FGA104FR3VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
+DEBUG    botocore.parsers:parsers.py:235 Response body:
+b'{}'
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.UpdateItem: calling handler <botocore.retryhandler.RetryHandler object at 0x110e0bdd0>
+DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
+INFO     root:app.py:32 PUT method successful
+DEBUG    root:app.py:33 Event payload: {'TableName': 'serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4', 'Key': {'date': {'S': '2001-01-01'}, 'time': {'S': '01:01:07'}}, 'UpdateExpression': 'set remote_avg = :val1', 'ExpressionAttributeValues': {':val1': {'N': '9.00'}}}
+DEBUG    root:app.py:16 Received event: {'Records': [{'body': '{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4", "Key": {"date": {"S": "2001-01-01"}, "time": {"S": "01:01:07"}}}', 'messageAttributes': {'Method': {'stringValue': 'GET', 'stringListValues': [], 'binaryListValues': [], 'dataType': 'String'}, 'eventSource': 'aws:sqs', 'eventSourceARN': 'arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE', 'awsRegion': 'us-east-1'}}]}
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function generate_idempotent_uuid at 0x110081950>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.GetItem: calling handler <function block_endpoint_discovery_required_operations at 0x110016dd0>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.GetItem: calling handler <function inject_api_version_header_if_needed at 0x110087440>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=GetItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.GetItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213'}, 'body': b'{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4", "Key": {"date": {"S": "2001-01-01"}, "time": {"S": "01:01:07"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x110e0ba50>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.GetItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x110e0ba10>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.GetItem: calling handler <function set_operation_specific_signer at 0x110081830>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190930T061526Z
+x-amz-target:DynamoDB_20120810.GetItem
+
+content-type;host;x-amz-date;x-amz-target
+45789d1e385321e6c5bcfad99094fff0eb0d40e4711ce735123e39398b60e2eb
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190930T061526Z
+20190930/us-east-1/dynamodb/aws4_request
+d537c395b505cc91a284af3be14e20e5091fff51a7a2fd43019a49b8fefcfe71
+DEBUG    botocore.auth:auth.py:369 Signature:
+93232dc4687f31fd279d3da59333ef31a605e829e0a918d270256700cda1bd52
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.GetItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213', 'X-Amz-Date': b'20190930T061526Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190930/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=93232dc4687f31fd279d3da59333ef31a605e829e0a918d270256700cda1bd52', 'Content-Length': '132'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 226
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Mon, 30 Sep 2019 06:15:27 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '226', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'N2A74M7OB9GSOHB7UL0LE9KU1RVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2866688463'}
+DEBUG    botocore.parsers:parsers.py:235 Response body:
+b'{"Item":{"remote_avg":{"N":"9"},"date":{"S":"2001-01-01"},"location":{"S":"location-03"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"5.32"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"01:01:07"}}}'
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.GetItem: calling handler <botocore.retryhandler.RetryHandler object at 0x110e0bdd0>
+DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
+INFO     root:app.py:32 GET method successful
+DEBUG    root:app.py:33 Event payload: {'TableName': 'serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4', 'Key': {'date': {'S': '2001-01-01'}, 'time': {'S': '01:01:07'}}}
+DEBUG    root:app.py:16 Received event: {'Records': [{'body': '{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4"}', 'messageAttributes': {'Method': {'stringValue': 'GET_ALL', 'stringListValues': [], 'binaryListValues': [], 'dataType': 'String'}, 'eventSource': 'aws:sqs', 'eventSourceARN': 'arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE', 'awsRegion': 'us-east-1'}}]}
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.Scan: calling handler <function generate_idempotent_uuid at 0x110081950>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.Scan: calling handler <function block_endpoint_discovery_required_operations at 0x110016dd0>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.Scan: calling handler <function inject_api_version_header_if_needed at 0x110087440>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=Scan) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.Scan', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213'}, 'body': b'{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4"}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x110e0ba50>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.Scan: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x110e0ba10>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.Scan: calling handler <function set_operation_specific_signer at 0x110081830>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190930T061526Z
+x-amz-target:DynamoDB_20120810.Scan
+
+content-type;host;x-amz-date;x-amz-target
+9b4fe955c5656791bac89f17270d0ed34dc37d30b2a44e6eff3ef551b1fbfcc4
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190930T061526Z
+20190930/us-east-1/dynamodb/aws4_request
+a00af45dea24380c89c840b4384b2662efc762e74ccba6d8216a29bb9c3c7af8
+DEBUG    botocore.auth:auth.py:369 Signature:
+cca3c579b900c9ff66778c4325305bfc465bdc47728a0ac3786e832b3289d352
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.Scan', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213', 'X-Amz-Date': b'20190930T061526Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190930/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=cca3c579b900c9ff66778c4325305bfc465bdc47728a0ac3786e832b3289d352', 'Content-Length': '67'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 256
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Mon, 30 Sep 2019 06:15:27 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '256', 'Connection': 'keep-alive', 'x-amzn-RequestId': 'SN1FUMOV1NSOSES1G4VISB94HFVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '1033204806'}
+DEBUG    botocore.parsers:parsers.py:235 Response body:
+b'{"Count":1,"Items":[{"remote_avg":{"N":"9"},"date":{"S":"2001-01-01"},"location":{"S":"location-03"},"remote_dest":{"S":"device-1"},"local_avg":{"N":"5.32"},"local_dest":{"S":"router-1"},"source":{"S":"wireless"},"time":{"S":"01:01:07"}}],"ScannedCount":1}'
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.Scan: calling handler <botocore.retryhandler.RetryHandler object at 0x110e0bdd0>
+DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
+INFO     root:app.py:32 GET_ALL method successful
+DEBUG    root:app.py:33 Event payload: {'TableName': 'serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4'}
+DEBUG    root:app.py:16 Received event: {'Records': [{'body': '{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4", "Key": {"date": {"S": "2001-01-01"}, "time": {"S": "01:01:07"}}}', 'messageAttributes': {'Method': {'stringValue': 'DELETE', 'stringListValues': [], 'binaryListValues': [], 'dataType': 'String'}, 'eventSource': 'aws:sqs', 'eventSourceARN': 'arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE', 'awsRegion': 'us-east-1'}}]}
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function generate_idempotent_uuid at 0x110081950>
+DEBUG    botocore.hooks:hooks.py:210 Event before-parameter-build.dynamodb.DeleteItem: calling handler <function block_endpoint_discovery_required_operations at 0x110016dd0>
+DEBUG    botocore.hooks:hooks.py:210 Event before-call.dynamodb.DeleteItem: calling handler <function inject_api_version_header_if_needed at 0x110087440>
+DEBUG    botocore.endpoint:endpoint.py:101 Making request for OperationModel(name=DeleteItem) with params: {'url_path': '/', 'query_string': '', 'method': 'POST', 'headers': {'X-Amz-Target': 'DynamoDB_20120810.DeleteItem', 'Content-Type': 'application/x-amz-json-1.0', 'User-Agent': 'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213'}, 'body': b'{"TableName": "serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4", "Key": {"date": {"S": "2001-01-01"}, "time": {"S": "01:01:07"}}}', 'url': 'https://dynamodb.us-east-1.amazonaws.com/', 'context': {'client_region': 'us-east-1', 'client_config': <botocore.config.Config object at 0x110e0ba50>, 'has_streaming_input': False, 'auth_type': None}}
+DEBUG    botocore.hooks:hooks.py:210 Event request-created.dynamodb.DeleteItem: calling handler <bound method RequestSigner.handler of <botocore.signers.RequestSigner object at 0x110e0ba10>>
+DEBUG    botocore.hooks:hooks.py:210 Event choose-signer.dynamodb.DeleteItem: calling handler <function set_operation_specific_signer at 0x110081830>
+DEBUG    botocore.auth:auth.py:364 Calculating signature using v4 auth.
+DEBUG    botocore.auth:auth.py:365 CanonicalRequest:
+POST
+/
+
+content-type:application/x-amz-json-1.0
+host:dynamodb.us-east-1.amazonaws.com
+x-amz-date:20190930T061526Z
+x-amz-target:DynamoDB_20120810.DeleteItem
+
+content-type;host;x-amz-date;x-amz-target
+45789d1e385321e6c5bcfad99094fff0eb0d40e4711ce735123e39398b60e2eb
+DEBUG    botocore.auth:auth.py:367 StringToSign:
+AWS4-HMAC-SHA256
+20190930T061526Z
+20190930/us-east-1/dynamodb/aws4_request
+f24c8b836a84c17c788a772a8e701b144526afe3f737378aa7fc1482bf4ee89c
+DEBUG    botocore.auth:auth.py:369 Signature:
+b015939c372868ca9e2a1f3162c13103ee690d9d566bc5659dbd16b57b5a0306
+DEBUG    botocore.endpoint:endpoint.py:187 Sending http request: <AWSPreparedRequest stream_output=False, method=POST, url=https://dynamodb.us-east-1.amazonaws.com/, headers={'X-Amz-Target': b'DynamoDB_20120810.DeleteItem', 'Content-Type': b'application/x-amz-json-1.0', 'User-Agent': b'Boto3/1.9.213 Python/3.7.4 Darwin/18.7.0 Botocore/1.12.213', 'X-Amz-Date': b'20190930T061526Z', 'Authorization': b'AWS4-HMAC-SHA256 Credential=AKIAIOLQ5TSPFGTYHRIA/20190930/us-east-1/dynamodb/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=b015939c372868ca9e2a1f3162c13103ee690d9d566bc5659dbd16b57b5a0306', 'Content-Length': '132'}>
+DEBUG    urllib3.util.retry:retry.py:210 Converted retries value: False -> Retry(total=False, connect=None, read=None, redirect=0, status=None)
+DEBUG    urllib3.connectionpool:connectionpool.py:393 https://dynamodb.us-east-1.amazonaws.com:443 "POST / HTTP/1.1" 200 2
+DEBUG    botocore.parsers:parsers.py:234 Response headers: {'Server': 'Server', 'Date': 'Mon, 30 Sep 2019 06:15:27 GMT', 'Content-Type': 'application/x-amz-json-1.0', 'Content-Length': '2', 'Connection': 'keep-alive', 'x-amzn-RequestId': '11RQLEF30D2GMF4A5TL4AAI64BVV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}
+DEBUG    botocore.parsers:parsers.py:235 Response body:
+b'{}'
+DEBUG    botocore.hooks:hooks.py:210 Event needs-retry.dynamodb.DeleteItem: calling handler <botocore.retryhandler.RetryHandler object at 0x110e0bdd0>
+DEBUG    botocore.retryhandler:retryhandler.py:187 No retry needed.
+INFO     root:app.py:32 DELETE method successful
+DEBUG    root:app.py:33 Event payload: {'TableName': 'serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4', 'Key': {'date': {'S': '2001-01-01'}, 'time': {'S': '01:01:07'}}}

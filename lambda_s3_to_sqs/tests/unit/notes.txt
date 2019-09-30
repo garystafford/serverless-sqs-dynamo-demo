@@ -1,6 +1,6 @@
 # export variables
-S3_DATA_BUCKET=gstafford-demo-data
-TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4
+export S3_DATA_BUCKET=gstafford-demo-data
+export TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4
 
 # setup tests
 aws s3 cp data_good_msg.csv s3://$S3_DATA_BUCKET

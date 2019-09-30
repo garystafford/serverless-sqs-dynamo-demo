@@ -118,7 +118,6 @@ Resources:
       CodeUri: lambda_sqs_to_dynamodb/
       Handler: app.lambda_handler
       Runtime: python3.7
-      MemorySize: 128
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DemoTable
@@ -197,7 +196,6 @@ Resources:
       CodeUri: lambda_s3_to_sqs/
       Handler: app.lambda_handler
       Runtime: python3.7
-      MemorySize: 128
       Role: !GetAtt S3ToSQSFunctionExecutionRole.Arn
   DemoTable:
     Type: AWS::DynamoDB::Table
