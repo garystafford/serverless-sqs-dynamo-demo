@@ -26,7 +26,3 @@ def test_convert_message_returns_correct_table(message_string):
 def test_send_sqs_message_returns_none(message_json):
     ret = app.send_sqs_message(message_json)
     assert ret is not None
-
-
-
-

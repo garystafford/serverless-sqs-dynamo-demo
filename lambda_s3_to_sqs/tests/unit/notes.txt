@@ -7,8 +7,7 @@ aws s3 cp data_good_msg.csv s3://$S3_DATA_BUCKET
 
 # run tests
 pytest test_handler.py \
-  --disable-warnings  --log-level debug \
-  --log-file=./log.txt  --verbose
+  --disable-warnings  --log-level debug
 
 # tear down tests
 aws s3 rm s3://$S3_DATA_BUCKET/data_good_msg.csv
