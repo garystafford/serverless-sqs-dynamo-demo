@@ -118,6 +118,7 @@ Resources:
       CodeUri: lambda_sqs_to_dynamodb/
       Handler: app.lambda_handler
       Runtime: python3.7
+      MemorySize: 128
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DemoTable
@@ -151,6 +152,43 @@ Resources:
       Principal: s3.amazonaws.com
       SourceArn: !Sub 'arn:aws:s3:::${DataBucketName}'
       SourceAccount: !Ref AWS::AccountId
+  S3ToSQSFunctionExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: allowLogging
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:*
+                Resource: arn:aws:logs:*:*:*
+        - PolicyName: getObjects
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub 'arn:aws:s3:::${DataBucketName}/*'
+        - PolicyName: produceToQueue
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sqs:SendMessage
+                Resource: !GetAtt DemoQueue.Arn
   S3ToSQSFunction:
     Type: AWS::Serverless::Function
     Description: Respond to S3 Events
@@ -159,11 +197,8 @@ Resources:
       CodeUri: lambda_s3_to_sqs/
       Handler: app.lambda_handler
       Runtime: python3.7
-      Policies:
-        - S3ReadPolicy:
-            BucketName: !Ref DataBucketName
-        - SQSSendMessagePolicy:
-            QueueName: !Ref DemoQueue
+      MemorySize: 128
+      Role: !GetAtt S3ToSQSFunctionExecutionRole.Arn
   DemoTable:
     Type: AWS::DynamoDB::Table
     Properties:
