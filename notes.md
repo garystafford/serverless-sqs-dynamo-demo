@@ -15,13 +15,13 @@ S3_BUILD_BUCKET="gstafford-sam-demo"
 STACK_NAME="serverless-sqs-dynamo-demo"
 
 # validate
-sam validate --template template_simple.yaml
+sam validate --template template.yaml
 
 aws cloudformation validate-template \
   --template-body file://template.yaml
 
 # build
-time sam build --template template_simple.yaml
+time sam build --template template.yaml
 
 # package
 time sam package \

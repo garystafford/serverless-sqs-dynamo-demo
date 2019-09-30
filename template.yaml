@@ -15,31 +15,11 @@ Parameters:
     Type: String
     Description: S3 bucket where CSV files are placed
     Default: gstafford-demo-data
-  SubdomainName:
-    Type: String
-    Description: Domain or subdomain name referenced by the API
-    Default: api.example-api.com
-  CertificateArn:
-    Type: String
-    Description: Arn of domain's public wildcard TLS certificate
-    Default: arn:aws:acm:us-east-1:931066906971:certificate/57fd98d2-a4ee-410a-9d5c-a755192f0fe6
-  HostedZoneName:
-    Type: String
-    Description: Route53's Hosted Zone name
-    Default: example-api.com. # don't miss the dot at the end
 Resources:
   DemoServerlessApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-      Auth:
-        ApiKeyRequired: true
-  ApiDomainName:
-    Type: AWS::ApiGateway::DomainName
-    Properties:
-      DomainName: !Ref SubdomainName
-      CertificateArn: !Ref CertificateArn
-    DependsOn: DemoServerlessApi
   GetMessagesFunction:
     Type: AWS::Serverless::Function
     Description: Get all messages in DynamoDB table (scan)
@@ -244,52 +224,6 @@ Resources:
         maxReceiveCount: 5
   DeadLetterQueue:
     Type: AWS::SQS::Queue
-  ApiDomain:
-    Type: AWS::Route53::RecordSetGroup
-    Properties:
-      HostedZoneName: !Ref HostedZoneName
-      RecordSets:
-        - Name: !Ref SubdomainName
-          Type: A
-          AliasTarget:
-            DNSName: !GetAtt ApiDomainName.DistributionDomainName
-            HostedZoneId: Z2FDTNDATAQYW2 # static ID for CloudFront aliases
-  ApiKey:
-    Type: AWS::ApiGateway::ApiKey
-    DependsOn: ApiDomain
-    Properties:
-      Name: TestApiKey
-      Enabled: 'true'
-      StageKeys:
-        - RestApiId: !Ref DemoServerlessApi
-          StageName: Prod
-  ApiMapping:
-    Type: AWS::ApiGateway::BasePathMapping
-    DependsOn: ApiDomain
-    Properties:
-      DomainName: !Ref SubdomainName
-      RestApiId: !Ref DemoServerlessApi
-      Stage: !Sub '${DemoServerlessApiProdStage}' # logical id of API GW stage created by SAM
-  UsagePlan:
-    Type: AWS::ApiGateway::UsagePlan
-    DependsOn: ApiDomain
-    Properties:
-      ApiStages:
-        - ApiId: !Ref DemoServerlessApi
-          Stage: !Sub '${DemoServerlessApiProdStage}'  # logical id of API GW stage created by SAM
-      Quota:
-        Limit: 5000
-        Period: MONTH
-      Throttle:
-        BurstLimit: 200
-        RateLimit: 100
-      UsagePlanName: DemoUsagePlan
-  UsagePlanKey:
-    Type: AWS::ApiGateway::UsagePlanKey
-    Properties:
-      KeyId: !Ref ApiKey
-      KeyType: API_KEY
-      UsagePlanId: !Ref UsagePlan
 Outputs:
   MyStacksRegion:
     Description: 'Region where cfn stack is located'

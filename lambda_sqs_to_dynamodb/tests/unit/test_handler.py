@@ -21,6 +21,6 @@ def test_lambda_handler_get_all(get_all_event):
     assert ret == 0
 
 
-# def test_lambda_handler_delete(delete_event):
-#     ret = app.lambda_handler(delete_event, None)
-#     assert ret == 0
+def test_lambda_handler_delete(delete_event):
+    ret = app.lambda_handler(delete_event, None)
+    assert ret == 0
