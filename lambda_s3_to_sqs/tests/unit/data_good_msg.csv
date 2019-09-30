@@ -1,0 +1,2 @@
+timestamp,location,source,local_dest,local_avg,remote_dest,remote_avg
+978339665,location-03,wireless,router-1,5.55,device-1,10.10

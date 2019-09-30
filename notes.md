@@ -15,13 +15,13 @@ S3_BUILD_BUCKET="gstafford-sam-demo"
 STACK_NAME="serverless-sqs-dynamo-demo"
 
 # validate
-sam validate --template template.yaml
+sam validate --template template_simple.yaml
 
 aws cloudformation validate-template \
   --template-body file://template.yaml
 
 # build
-time sam build
+time sam build --template template_simple.yaml
 
 # package
 time sam package \
@@ -36,9 +36,9 @@ time sam deploy --template-file packaged.yaml \
 
 AWS_REGION=us-east-1
 S3_DATA_BUCKET=gstafford-demo-data
-TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1HGKBQ124XYPI
-SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-9V2C8VA32UBA
-SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/serverless-sqs-dynamo-demo-DemoQueue-9V2C8VA32UBA
+TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4
+SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE
+SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE
 
 # local testing (All CRUD functions)
 sam local invoke PostMessageFunction \

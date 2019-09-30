@@ -14,7 +14,7 @@ date_time = datetime.date
 def post_event():
     """ Generates SQS event containing POST"""
     post_body = "{\"TableName\":\"" + TABLE_NAME + "\",\"Item\":{\"date\": " + \
-                "{\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"},\"location\": {\"S\": \"location-03\"}, " + \
+                "{\"S\": \"2001-01-01\"}, \"time\": {\"S\": \"01:01:07\"},\"location\": {\"S\": \"location-03\"}, " + \
                 "\"source\": {\"S\":\"wireless\"}, \"local_dest\": {\"S\": \"router-1\"}, \"local_avg\": " + \
                 "{\"N\": \"5.32\"}, \"remote_dest\": {\"S\": \"device-1\"}, \"remote_avg\": {\"N\": \"11.01\"}}}"
     return {
@@ -41,7 +41,7 @@ def post_event():
 def put_event():
     """ Generates SQS event containing PUT"""
     put_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
-               "\"Key\": {\"date\": {\"S\": \"2000-01-01\"},\"time\": {\"S\": \"06:45:43\"}}, " + \
+               "\"Key\": {\"date\": {\"S\": \"2001-01-01\"},\"time\": {\"S\": \"01:01:07\"}}, " + \
                "\"UpdateExpression\": \"set remote_avg = :val1\", " + \
                "\"ExpressionAttributeValues\": {\":val1\": {\"N\": \"9.00\"}}}"
     return {
@@ -68,7 +68,7 @@ def put_event():
 def delete_event():
     """ Generates SQS event containing DELETE"""
     delete_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
-                  "\"Key\": {\"date\": {\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"}}}"
+                  "\"Key\": {\"date\": {\"S\": \"2001-01-01\"}, \"time\": {\"S\": \"01:01:07\"}}}"
     return {
         "Records": [
             {
@@ -93,7 +93,7 @@ def delete_event():
 def get_event():
     """ Generates SQS event containing GET"""
     get_body = "{\"TableName\": \"" + TABLE_NAME + "\", " + \
-               "\"Key\": {\"date\": {\"S\": \"2000-01-01\"}, \"time\": {\"S\": \"06:45:43\"}}}"
+               "\"Key\": {\"date\": {\"S\": \"2001-01-01\"}, \"time\": {\"S\": \"01:01:07\"}}}"
     return {
         "Records": [
             {

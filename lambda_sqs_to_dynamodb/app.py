@@ -30,6 +30,7 @@ def lambda_handler(event, context):
             try:
                 operations[operation](dynamo_client, payload)
                 logger.info('{} method successful'.format(operation))
+                logger.debug('Event payload: {}'.format(payload))
             except Exception as e:
                 logger.error(e)
                 # return -1

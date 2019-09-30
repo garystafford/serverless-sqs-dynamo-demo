@@ -3,9 +3,9 @@ import os
 import pytest
 
 TABLE_NAME = os.getenv('TABLE_NAME')
-S3_BUCKET = os.getenv('S3_BUCKET')
+S3_DATA_BUCKET = os.getenv('S3_BUCKET')
 
-cvs_file_name = 'iot_data.csv'
+CVS_FILE_NAME = 'data_good_msg.csv'
 
 
 @pytest.fixture(scope='module')
@@ -37,10 +37,10 @@ def post_event():
             {
                 "s3": {
                     "bucket": {
-                        "name": S3_BUCKET,
+                        "name": S3_DATA_BUCKET,
                     },
                     "object": {
-                        "key": cvs_file_name,
+                        "key": CVS_FILE_NAME,
                     }
                 }
             }
