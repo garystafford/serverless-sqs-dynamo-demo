@@ -1,10 +1,9 @@
+import boto3
 import datetime
 import json
 import logging
 import os
 import urllib.parse
-
-import boto3
 from botocore.exceptions import ClientError
 
 # Set up logging
@@ -25,9 +24,11 @@ s3_client = boto3.client('s3')
 def lambda_handler(event, context):
     logger.debug('Received event: {}'.format(event))
 
-    # Get the object from the event and show its content type
     bucket = event['Records'][0]['s3']['bucket']['name']
-    key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+    key = urllib.parse.unquote_plus(
+        event['Records'][0]['s3']['object']['key'],
+        encoding='utf-8'
+    )
     messages = read_csv_file(bucket, key)
     process_messages(messages)
     return 0
