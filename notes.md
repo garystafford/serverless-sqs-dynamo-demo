@@ -36,9 +36,11 @@ time sam deploy --template-file packaged.yaml \
 
 AWS_REGION=us-east-1
 S3_DATA_BUCKET=gstafford-demo-data
-TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1AFWJE2O1N0IR
 SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-10Q1K9DRH7510
 SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/serverless-sqs-dynamo-demo-DemoQueue-10Q1K9DRH7510
+
+# variables (required by local lambda functions)
+TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1AFWJE2O1N0IR
 
 # local testing (All CRUD functions)
 sam local invoke PostMessageFunction \
