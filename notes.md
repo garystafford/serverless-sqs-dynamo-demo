@@ -36,21 +36,21 @@ time sam deploy --template-file packaged.yaml \
 
 AWS_REGION=us-east-1
 S3_DATA_BUCKET=gstafford-demo-data
-TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1JPDL7VGU0TC4
-SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE
-SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/serverless-sqs-dynamo-demo-DemoQueue-W00DO4L1I6NE
+TABLE_NAME=serverless-sqs-dynamo-demo-DemoTable-1AFWJE2O1N0IR
+SQS_QUEUE_ARN=arn:aws:sqs:us-east-1:931066906971:serverless-sqs-dynamo-demo-DemoQueue-10Q1K9DRH7510
+SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/931066906971/serverless-sqs-dynamo-demo-DemoQueue-10Q1K9DRH7510
 
 # local testing (All CRUD functions)
 sam local invoke PostMessageFunction \
-  --event lambda_apigtw_to_dynamodb/event/event_postMessage.json
+  --event lambda_apigtw_to_dynamodb/events/event_postMessage.json
 sam local invoke GetMessageFunction \
-  --event lambda_apigtw_to_dynamodb/event/event_getMessage.json
+  --event lambda_apigtw_to_dynamodb/events/event_getMessage.json
 sam local invoke GetMessagesFunction \
-  --event lambda_apigtw_to_dynamodb/event/event_getMessages.json
+  --event lambda_apigtw_to_dynamodb/events/event_getMessages.json
 sam local invoke PutMessageFunction \
-  --event lambda_apigtw_to_dynamodb/event/event_putMessage.json
+  --event lambda_apigtw_to_dynamodb/events/event_putMessage.json
 sam local invoke DeleteMessageFunction \
-  --event lambda_apigtw_to_dynamodb/event/event_deleteMessage.json
+  --event lambda_apigtw_to_dynamodb/events/event_deleteMessage.json
 
 cd lambda_sqs_to_dynamodb/tests/unit
 pytest test_handler.py \
